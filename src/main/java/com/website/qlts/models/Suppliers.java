@@ -14,7 +14,7 @@ public class Suppliers implements Serializable {
     private String phoneNumber;
     private long supplierCategoryId;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     public Suppliers() {

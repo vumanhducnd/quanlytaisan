@@ -11,17 +11,17 @@ import java.util.Date;
 public class Staffs implements Serializable {
     private static final long serialVersionUID = 1L;
     private  String name;
-    private Date dateOfBirht;
+    private Date dateOfBirth;
     private String address;
     private String phoneNumber;
     private long departmentId;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     public Staffs(String name, Date dateOfBirht, String address, String phoneNumber, long departmentId) {
         this.name = name;
-        this.dateOfBirht = dateOfBirht;
+        this.dateOfBirth = dateOfBirht;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.departmentId = departmentId;
@@ -38,12 +38,12 @@ public class Staffs implements Serializable {
         this.name = name;
     }
 
-    public Date getDateOfBirht() {
-        return dateOfBirht;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDateOfBirht(Date dateOfBirht) {
-        this.dateOfBirht = dateOfBirht;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getAddress() {

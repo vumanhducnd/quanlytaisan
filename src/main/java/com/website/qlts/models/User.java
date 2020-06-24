@@ -19,7 +19,7 @@ public class User implements Serializable {
     private String permission;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     public User(String userName, String passWord, String rePassword, long staffId, String role, int status, String permission) {

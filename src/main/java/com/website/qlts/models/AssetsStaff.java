@@ -14,7 +14,7 @@ public class AssetsStaff implements Serializable {
     private String reason;
     private int isHistory;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     public AssetsStaff(long assetId, long staffId, String reason, int isHistory) {

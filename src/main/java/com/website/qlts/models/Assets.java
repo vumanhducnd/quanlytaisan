@@ -24,7 +24,7 @@ public class Assets implements Serializable {
     private long updatedById;
     private long deletedById;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long departmentId, long assetCategoryId, long groupAssetId, long supplierId) {

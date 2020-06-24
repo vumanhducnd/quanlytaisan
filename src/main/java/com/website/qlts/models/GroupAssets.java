@@ -11,7 +11,7 @@ public class GroupAssets implements Serializable {
     private static final long serialVersionUID = 1L;
     private String groupName;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     public GroupAssets(String groupName) {

@@ -15,7 +15,7 @@ public class TransferHistory implements Serializable {
     private long newStaff;
     private long assetId;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     public TransferHistory(String oldPosition, String newPosition, String reason, long oldStaff, long newStaff, long assetId) {
