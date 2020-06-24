@@ -18,14 +18,13 @@ public class TransferHistory implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public TransferHistory(String oldPosition, String newPosition, String reason, long oldStaff, long newStaff, long assetId, long id) {
+    public TransferHistory(String oldPosition, String newPosition, String reason, long oldStaff, long newStaff, long assetId) {
         this.oldPosition = oldPosition;
         this.newPosition = newPosition;
         this.reason = reason;
         this.oldStaff = oldStaff;
         this.newStaff = newStaff;
         this.assetId = assetId;
-        this.id = id;
     }
 
     public TransferHistory() {

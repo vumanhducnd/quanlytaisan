@@ -17,9 +17,8 @@ public class CategoriesSupplier implements Serializable {
     public CategoriesSupplier() {
     }
 
-    public CategoriesSupplier(String name, long id) {
+    public CategoriesSupplier(String name) {
         this.name = name;
-        this.id = id;
     }
 
     public String getName() {

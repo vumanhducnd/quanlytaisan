@@ -19,13 +19,12 @@ public class Staffs implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public Staffs(String name, Date dateOfBirht, String address, String phoneNumber, long departmentId, long id) {
+    public Staffs(String name, Date dateOfBirht, String address, String phoneNumber, long departmentId) {
         this.name = name;
         this.dateOfBirht = dateOfBirht;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.departmentId = departmentId;
-        this.id = id;
     }
 
     public Staffs() {

@@ -14,9 +14,8 @@ public class GroupAssets implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public GroupAssets(String groupName, long id) {
+    public GroupAssets(String groupName) {
         this.groupName = groupName;
-        this.id = id;
     }
 
     public GroupAssets() {

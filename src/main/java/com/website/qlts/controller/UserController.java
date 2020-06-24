@@ -1,61 +1,47 @@
 package com.website.qlts.controller;
 
-import com.website.qlts.models.Accounts;
-import com.website.qlts.service.AccountService;
-import com.website.qlts.service.SecurityService;
-import com.website.qlts.validator.AccountValidator;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.website.qlts.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class UserController {
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private SecurityService securityService;
-
-    @Autowired
-    private AccountValidator userValidator;
-
-    @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("userForm", new Accounts());
-
-        return "registration";
+    @RequestMapping(value = "/")
+    public String home() {
+        return "index";
     }
 
-    @PostMapping("/registration")
-    public String registration(@ModelAttribute("userForm") Accounts userForm, BindingResult bindingResult) {
-        userValidator.validate(userForm, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
-
-        accountService.save(userForm);
-
-        securityService.autoLogin(userForm.getUserName(), userForm.getPasswordConfirm());
-
-        return "redirect:/welcome";
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginPage(Model model) {
+        model.addAttribute("user", new User());
+        return "pages/user/login";
     }
 
-    @GetMapping("/login")
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-        return "login";
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginPage(@ModelAttribute User user, Model model) {
+        model.addAttribute("user", new User());
+        return "pages/user/login";
     }
 
-    @GetMapping({"/", "/welcome"})
-    public String welcome(Model model) {
-        return "welcome";
+    @RequestMapping(value = "/logout")
+    public String logoutPage() {
+        return "pages/user/logout";
     }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String registerPage(Model model) {
+        model.addAttribute("user", new User());
+        return "pages/user/register";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String registerPage(@ModelAttribute User user, Model model) {
+        model.addAttribute("user", new User());
+        return "pages/user/register";
+    }
+
+
 }

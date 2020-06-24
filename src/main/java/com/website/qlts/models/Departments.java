@@ -14,9 +14,8 @@ public class Departments implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public Departments(String departmentName, long id) {
+    public Departments(String departmentName) {
         this.departmentName = departmentName;
-        this.id = id;
     }
 
     public Departments() {

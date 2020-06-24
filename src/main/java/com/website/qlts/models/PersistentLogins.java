@@ -16,12 +16,11 @@ public class PersistentLogins implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public PersistentLogins(String userName, String series, String token, String lastUsed, long id) {
+    public PersistentLogins(String userName, String series, String token, String lastUsed) {
         this.userName = userName;
         this.series = series;
         this.token = token;
         this.lastUsed = lastUsed;
-        this.id = id;
     }
 
     public PersistentLogins() {

@@ -27,7 +27,7 @@ public class Assets implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long departmentId, long assetCategoryId, long groupAssetId, long supplierId, long id) {
+    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long departmentId, long assetCategoryId, long groupAssetId, long supplierId) {
         this.name = name;
         this.description = description;
         this.amount = amount;
@@ -39,7 +39,6 @@ public class Assets implements Serializable {
         this.assetCategoryId = assetCategoryId;
         this.groupAssetId = groupAssetId;
         this.supplierId = supplierId;
-        this.id = id;
     }
 
     public Assets() {

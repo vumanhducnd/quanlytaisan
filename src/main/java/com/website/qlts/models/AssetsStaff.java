@@ -17,12 +17,11 @@ public class AssetsStaff implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public AssetsStaff(long assetId, long staffId, String reason, int isHistory, long id) {
+    public AssetsStaff(long assetId, long staffId, String reason, int isHistory) {
         this.assetId = assetId;
         this.staffId = staffId;
         this.reason = reason;
         this.isHistory = isHistory;
-        this.id = id;
     }
 
     public AssetsStaff() {

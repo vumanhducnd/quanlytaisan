@@ -14,9 +14,8 @@ public class CategoryAssets implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public CategoryAssets(String name, long id) {
+    public CategoryAssets(String name) {
         this.name = name;
-        this.id = id;
     }
 
     public CategoryAssets() {

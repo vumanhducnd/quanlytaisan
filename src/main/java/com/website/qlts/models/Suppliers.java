@@ -20,12 +20,11 @@ public class Suppliers implements Serializable {
     public Suppliers() {
     }
 
-    public Suppliers(String name, String address, String phoneNumber, long supplierCategoryId, long id) {
+    public Suppliers(String name, String address, String phoneNumber, long supplierCategoryId) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.supplierCategoryId = supplierCategoryId;
-        this.id = id;
     }
 
     public String getName() {
