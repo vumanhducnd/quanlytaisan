@@ -2,10 +2,6 @@ package com.website.qlts.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 public class User implements Serializable {
@@ -21,7 +17,6 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     public User(String userName, String passWord, String rePassword, long staffId, String role, int status, String permission) {
         this.userName = userName;
         this.passWord = passWord;

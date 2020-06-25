@@ -1,9 +1,8 @@
 package com.website.qlts.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.boot.SpringApplication;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,10 +17,9 @@ public class Staffs implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-    public Staffs(String name, Date dateOfBirht, String address, String phoneNumber, long departmentId) {
+    public Staffs(String name, Date dateOfBirth, String address, String phoneNumber, long departmentId) {
         this.name = name;
-        this.dateOfBirth = dateOfBirht;
+        this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.departmentId = departmentId;
