@@ -1,6 +1,7 @@
 package com.website.qlts.controller;
 
 import com.website.qlts.config.MyUserDetails;
+import com.website.qlts.config.MyUserDetailsService;
 import com.website.qlts.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,6 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model) {
         model.addAttribute("user", new User());
-        return "pages/user/login";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginPage(@ModelAttribute User user, Model model, @RequestParam("userName") String userName) {
-        model.addAttribute("user", user);
         return "pages/user/login";
     }
 
