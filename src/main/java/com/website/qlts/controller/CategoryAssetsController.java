@@ -15,7 +15,7 @@ public class CategoryAssetsController {
     @Autowired
     CategoryAssetsService categoryAssetsService;
 
-    @RequestMapping("/")
+    @RequestMapping("")
     public String indexPage(Model model, String keyWord) {
         List<CategoryAssets> listAssets;
         if (keyWord != null) {
