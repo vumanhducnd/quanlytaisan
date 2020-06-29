@@ -14,6 +14,11 @@ public class CategoriesSupplier implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    public CategoriesSupplier(String name, long id) {
+        this.name = name;
+        this.id = id;
+    }
+
     public CategoriesSupplier() {
     }
 
@@ -36,4 +41,5 @@ public class CategoriesSupplier implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+
 }

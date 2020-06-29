@@ -1,9 +1,6 @@
 package com.website.qlts.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -12,19 +9,22 @@ public class Suppliers implements Serializable {
     private String name;
     private String address;
     private String phoneNumber;
-    private long supplierCategoryId;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @OneToOne
+    @JoinColumn(name = "supplier_category_id")
+    private CategoriesSupplier categoriesSupplier;
+
     public Suppliers() {
     }
 
-    public Suppliers(String name, String address, String phoneNumber, long supplierCategoryId) {
+    public Suppliers(String name, String address, String phoneNumber) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.supplierCategoryId = supplierCategoryId;
+//        this.categoriesSupplier.setId(); = categoriesSupplier.getId();
     }
 
     public String getName() {
@@ -51,19 +51,19 @@ public class Suppliers implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public long getSupplierCateogryId() {
-        return supplierCategoryId;
-    }
-
-    public void setSupplierCateogryId(long supplierCategoryId) {
-        this.supplierCategoryId = supplierCategoryId;
-    }
-
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public CategoriesSupplier getCategoriesSupplier() {
+        return categoriesSupplier;
+    }
+
+    public void setCategoriesSupplier(CategoriesSupplier categoriesSupplier) {
+        this.categoriesSupplier = categoriesSupplier;
     }
 }
