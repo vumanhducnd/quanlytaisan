@@ -13,6 +13,10 @@ public class SuppliersService {
     @Autowired
     SuppliersReposiotory suppliersReposiotory;
 
+    public List<Suppliers> getAll2(){
+        return suppliersReposiotory.findAll();
+    }
+
     public List<Suppliers> getAll(){
         return suppliersReposiotory.findAll();
     }
@@ -25,5 +29,9 @@ public class SuppliersService {
     public List<CategoriesSupplier> getCate() {
         List<CategoriesSupplier> categoriesSuppliers = suppliersReposiotory.getCate();
         return categoriesSuppliers;
+    }
+
+    public Suppliers create(String name,String address,String phoneNumber){
+        return  suppliersReposiotory.save(new Suppliers(name,address,phoneNumber));
     }
 }
