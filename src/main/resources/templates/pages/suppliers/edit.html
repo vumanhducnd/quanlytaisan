@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main-layout.html}"
+>
+<head>
+</head>
+<body id="page-top">
+<div id="wrapper">
+    <div class="container-fluid" layout:fragment="content">
+        <form class="user" th:action="@{/suppliers/create}" method="post" th:object="${listCate}">
+            <div class="form-group">
+                <input class="form-control form-control-user"
+                       th:field="*{suppliers.name}"
+                       placeholder="Tên danh mục tài sản">
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-user"
+                       th:field="*{suppliers.address}"
+                       placeholder="Tên danh mục tài sản">
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-user"
+                       th:field="*{suppliers.phoneNumber}"
+                       placeholder="Tên danh mục tài sản">
+            </div>
+            <div class="form-group">
+                Danh mục nhà cung cấp:
+                <select th:field="*{list}">
+                    <option th:each="country : ${listCate.list}"
+                            th:value="${country}"
+                            th:text="${country.name}"/>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-user btn-block">
+                Tạo danh mục
+            </button>
+        </form>
+    </div>
+</div>
+
+</div>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+</body>
+
+</html>

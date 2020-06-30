@@ -38,18 +38,19 @@ public class SuppliersController {
 
     @RequestMapping("/create")
     public String createPage(Model model) {
-//        List<CategoriesSupplier> listAssets;
-//        listAssets = categorySuppliersService.getAll();
-//        SuppliersCate suppliersCate = new SuppliersCate();
-//        suppliersCate.setList(listAssets);
-        model.addAttribute("sups", new Suppliers());
+        List<CategoriesSupplier> listAssets;
+        listAssets = categorySuppliersService.getAll();
+        SuppliersCate suppliersCate = new SuppliersCate();
+        suppliersCate.setList(listAssets);
+        suppliersCate.setSuppliers(new Suppliers());
+//        model.addAttribute("sups", new Suppliers());
+        model.addAttribute("listCate",suppliersCate);
         return "pages/suppliers/create";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createPage(@ModelAttribute Suppliers suppliers, Model model) {
-        model.addAttribute("sups", suppliers);
-        suppliersService.create(suppliers.getName(), suppliers.getAddress(), suppliers.getPhoneNumber());
+    public String createPage(@ModelAttribute SuppliersCate suppliers) {
+        suppliersService.create(suppliers.getSuppliers().getName(), suppliers.getSuppliers().getAddress(), suppliers.getSuppliers().getPhoneNumber(),suppliers.getList().get(0));
         return "redirect:/suppliers";
     }
 }

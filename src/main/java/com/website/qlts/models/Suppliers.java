@@ -9,6 +9,7 @@ public class Suppliers implements Serializable {
     private String name;
     private String address;
     private String phoneNumber;
+//    private long supplier_category_id;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -24,7 +25,7 @@ public class Suppliers implements Serializable {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
-//        this.categoriesSupplier.setId(); = categoriesSupplier.getId();
+//
     }
 
     public String getName() {
@@ -66,4 +67,12 @@ public class Suppliers implements Serializable {
     public void setCategoriesSupplier(CategoriesSupplier categoriesSupplier) {
         this.categoriesSupplier = categoriesSupplier;
     }
+
+//    public long getSupplier_category_id() {
+//        return supplier_category_id;
+//    }
+//
+//    public void setSupplier_category_id(long supplier_category_id) {
+//        this.supplier_category_id = supplier_category_id;
+//    }
 }

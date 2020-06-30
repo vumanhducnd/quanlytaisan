@@ -31,7 +31,9 @@ public class SuppliersService {
         return categoriesSuppliers;
     }
 
-    public Suppliers create(String name,String address,String phoneNumber){
-        return  suppliersReposiotory.save(new Suppliers(name,address,phoneNumber));
+    public Suppliers create(String name,String address,String phoneNumber,CategoriesSupplier categoriesSupplier){
+        Suppliers suppliers = new Suppliers(name,address,phoneNumber);
+        suppliers.setCategoriesSupplier(categoriesSupplier);
+        return  suppliersReposiotory.save(suppliers);
     }
 }
