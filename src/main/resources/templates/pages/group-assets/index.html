@@ -41,12 +41,12 @@
                             <th scope="row" th:text="${iterStat.count}"></th>
                             <td th:text="${empl.id}"></td>
                             <td th:text="${empl.groupName}"></td>
-                            <td><a th:href="@{/group-assets/edit/{id}(id=${empl.id})}"
+                            <td class=""><a th:href="@{/group-assets/edit/{id}(id=${empl.id})}"
                                    class="mr-sm-2 text-primary">
                                 Sửa<i class="fa fa-pencil"></i></a>
                             </td>
                             <td><a th:href="@{/group-assets/delete/{id}(id=${empl.id})}" class="text-danger">
-                                Xoá<i class="fa fa-trash"></i></a>
+                                <i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         </tbody>

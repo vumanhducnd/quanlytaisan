@@ -2,7 +2,7 @@ package com.website.qlts.controller;
 
 import com.website.qlts.entity.CategoriesSupplier;
 import com.website.qlts.entity.Suppliers;
-import com.website.qlts.entity.SuppliersCate;
+import com.website.qlts.view.SuppliersCate;
 import com.website.qlts.service.CategorySuppliersService;
 import com.website.qlts.service.SuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,6 @@ public class SuppliersController {
         SuppliersCate suppliersCate = new SuppliersCate();
         suppliersCate.setList(listAssets);
         suppliersCate.setSuppliers(new Suppliers());
-//        model.addAttribute("sups", new Suppliers());
         model.addAttribute("listCate",suppliersCate);
         return "pages/suppliers/create";
     }

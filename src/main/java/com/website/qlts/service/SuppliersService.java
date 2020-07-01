@@ -2,16 +2,10 @@ package com.website.qlts.service;
 
 import com.website.qlts.entity.CategoriesSupplier;
 import com.website.qlts.entity.Suppliers;
-import com.website.qlts.entity.SuppliersCate;
 import com.website.qlts.repository.SuppliersReposiotory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.datetime.standard.DateTimeContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.time.DateTimeException;
-import java.util.Date;
 import java.util.List;
 
 @Service

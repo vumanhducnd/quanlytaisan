@@ -1,4 +1,7 @@
-package com.website.qlts.entity;
+package com.website.qlts.view;
+
+import com.website.qlts.entity.CategoriesSupplier;
+import com.website.qlts.entity.Suppliers;
 
 import java.util.List;
 

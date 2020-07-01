@@ -1,9 +1,6 @@
 package com.website.qlts.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -16,10 +13,30 @@ public class Assets implements Serializable {
     private int status;
     private long price;
     private String position;
-    private long departmentId;
-    private long assetCategoryId;
-    private long groupAssetId;
-    private long supplierId;
+    @Column(name = "department_id", unique = false)
+    private long department_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id", updatable = false, insertable = false, unique = false)
+    private Departments departments;
+
+    @Column(name = "asset_category_id", unique = false)
+    private long asset_category_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "asset_category_id", updatable = false, insertable = false, unique = false)
+    private CategoryAssets categoryAssets;
+
+    @Column(name = "group_assets_id", unique = false)
+    private long group_assets_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_assets_id", updatable = false, insertable = false, unique = false)
+    private GroupAssets groupAssets;
+
+    @Column(name = "supplier_id", unique = false)
+    private long supplier_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supplier_id", updatable = false, insertable = false, unique = false)
+    private Suppliers suppliers;
+
     private long createdById;
     private long updatedById;
     private long deletedById;
@@ -27,7 +44,7 @@ public class Assets implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long departmentId, long assetCategoryId, long groupAssetId, long supplierId) {
+    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long department_id, long asset_category_id, long group_assets_id, long supplier_id) {
         this.name = name;
         this.description = description;
         this.amount = amount;
@@ -35,10 +52,26 @@ public class Assets implements Serializable {
         this.status = status;
         this.price = price;
         this.position = position;
-        this.departmentId = departmentId;
-        this.assetCategoryId = assetCategoryId;
-        this.groupAssetId = groupAssetId;
-        this.supplierId = supplierId;
+        this.department_id = department_id;
+        this.asset_category_id = asset_category_id;
+        this.group_assets_id = group_assets_id;
+        this.supplier_id = supplier_id;
+    }
+
+    public long getAsset_category_id() {
+        return asset_category_id;
+    }
+
+    public void setAsset_category_id(long asset_category_id) {
+        this.asset_category_id = asset_category_id;
+    }
+
+    public CategoryAssets getCategoryAssets() {
+        return categoryAssets;
+    }
+
+    public void setCategoryAssets(CategoryAssets categoryAssets) {
+        this.categoryAssets = categoryAssets;
     }
 
     public Assets() {
@@ -100,36 +133,61 @@ public class Assets implements Serializable {
         this.position = position;
     }
 
-    public long getDepartmentId() {
-        return departmentId;
+    public long getDepartment_id() {
+        return department_id;
     }
 
-    public void setDepartmentId(long departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment_id(long department_id) {
+        this.department_id = department_id;
     }
 
-    public long getAssetCategoryId() {
-        return assetCategoryId;
+    public Departments getDepartments() {
+        return departments;
     }
 
-    public void setAssetCategoryId(long assetCategoryId) {
-        this.assetCategoryId = assetCategoryId;
+    public void setDepartments(Departments departments) {
+        this.departments = departments;
     }
 
-    public long getGroupAssetId() {
-        return groupAssetId;
+    public long getAssets_id() {
+        return asset_category_id;
     }
 
-    public void setGroupAssetId(long groupAssetId) {
-        this.groupAssetId = groupAssetId;
+    public void setAssets_id(long assets_id) {
+        this.asset_category_id = assets_id;
     }
 
-    public long getSupplierId() {
-        return supplierId;
+
+    public long getGroup_assets_id() {
+        return group_assets_id;
     }
 
-    public void setSupplierId(long supplierId) {
-        this.supplierId = supplierId;
+    public void setGroup_assets_id(long group_assets_id) {
+        this.group_assets_id = group_assets_id;
+    }
+
+    public GroupAssets getGroupAssets() {
+        return groupAssets;
+    }
+
+    public void setGroupAssets(GroupAssets groupAssets) {
+        this.groupAssets = groupAssets;
+    }
+
+    public long getSupplier_id() {
+        return supplier_id;
+    }
+
+    public void setSupplier_id(long supplier_id) {
+        this.supplier_id = supplier_id;
+    }
+
+    public Suppliers getSuppliers() {
+        return suppliers;
+    }
+
+    public void setSuppliers(Suppliers suppliers) {
+        this.suppliers = suppliers;
     }
 
     public long getCreatedById() {
