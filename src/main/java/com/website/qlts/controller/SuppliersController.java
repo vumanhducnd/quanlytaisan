@@ -50,7 +50,7 @@ public class SuppliersController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createPage(@ModelAttribute SuppliersCate suppliers) {
-        suppliersService.insertWithQuery(suppliers.getSuppliers().getName(), suppliers.getSuppliers().getAddress(), suppliers.getSuppliers().getPhoneNumber(), Long.parseLong(suppliers.getList().get(0).getName()));
+        suppliersService.create(suppliers.getSuppliers().getName(), suppliers.getSuppliers().getAddress(), suppliers.getSuppliers().getPhoneNumber(), Long.parseLong(suppliers.getList().get(0).getName()) ) ;
         return "redirect:/suppliers";
     }
 }

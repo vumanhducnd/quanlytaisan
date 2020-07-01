@@ -13,19 +13,28 @@ public class Suppliers implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "supplier_category_id")
+    @Column(name = "supplier_category_id", unique = false)
+    private long supplier_category_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supplier_category_id",updatable = false,insertable = false, unique = false)
     private CategoriesSupplier categoriesSupplier;
 
     public Suppliers() {
     }
 
-    public Suppliers(String name, String address, String phoneNumber) {
+    public Suppliers(String name, String address, String phoneNumber, long supplier_category_id) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
-//
+        this.supplier_category_id = supplier_category_id;
+    }
+
+    public long getSupplier_category_id() {
+        return supplier_category_id;
+    }
+
+    public void setSupplier_category_id(long supplier_category_id) {
+        this.supplier_category_id = supplier_category_id;
     }
 
     public String getName() {

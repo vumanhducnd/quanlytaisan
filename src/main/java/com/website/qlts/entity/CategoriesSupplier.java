@@ -1,10 +1,8 @@
 package com.website.qlts.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class CategoriesSupplier implements Serializable {
@@ -13,7 +11,8 @@ public class CategoriesSupplier implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
+//    @OneToMany(mappedBy = "categoriesSupplier", targetEntity = Suppliers.class)
+//    private List<Suppliers> suppliersList;
     public CategoriesSupplier(String name, long id) {
         this.name = name;
         this.id = id;

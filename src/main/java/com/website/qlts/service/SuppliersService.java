@@ -37,20 +37,20 @@ public class SuppliersService {
         return categoriesSuppliers;
     }
 
-    public Suppliers create(String name, String address, String phoneNumber, CategoriesSupplier categoriesSupplier) {
-        Suppliers suppliers = new Suppliers(name, address, phoneNumber);
+    public Suppliers create(String name, String address, String phoneNumber, long id) {
+        Suppliers suppliers = new Suppliers(name, address, phoneNumber,id);
         return suppliersReposiotory.save(suppliers);
     }
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    public void insertWithQuery(String name,String address, String phoneNumber, long id) {
-        entityManager.createNativeQuery("INSERT INTO suppliers (name, address, phone_number,supplier_category_id) VALUES (?,?,?,?)")
-                .setParameter(1, name)
-                .setParameter(2, address)
-                .setParameter(3, phoneNumber)
-                .setParameter(4,id)
-                .executeUpdate();
-    }
+//    @PersistenceContext
+//    private EntityManager entityManager;
+//
+//    public void insertWithQuery(String name,String address, String phoneNumber, long id) {
+//        entityManager.createNativeQuery("INSERT INTO suppliers (name, address, phone_number,supplier_category_id) VALUES (?,?,?,?)")
+//                .setParameter(1, name)
+//                .setParameter(2, address)
+//                .setParameter(3, phoneNumber)
+//                .setParameter(4,id)
+//                .executeUpdate();
+//    }
 }
