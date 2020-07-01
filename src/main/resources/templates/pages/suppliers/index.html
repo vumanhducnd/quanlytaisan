@@ -21,7 +21,7 @@
                                 </form>
                             </div>
                             <div class="col-sm-3">
-                                <a href="/group-assets/create" class="btn btn-primary btn-user btn-block">Thêm
+                                <a href="/suppliers/create" class="btn btn-primary btn-user btn-block">Thêm
                                     mới</a>
                             </div>
                         </div>
@@ -40,13 +40,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="empl,iterStat : ${sup}">
+                        <tr th:each="empl,iterStat : ${sups}">
                             <th scope="row" th:text="${iterStat.count}"></th>
                             <td th:text="${empl.id}"></td>
                             <td th:text="${empl.name}"></td>
                             <td th:text="${empl.address}"></td>
                             <td th:text="${empl.phoneNumber}"></td>
-                            <td th:text="${empl.categoriesSupplier.getName()}"></td>
+                            <td th:text="${empl.categoriesSupplier.name}"></td>
                             <td><a th:href="@{/group-assets/edit/{id}(id=${empl.id})}"
                                    class="mr-sm-2 text-primary">
                                 Sửa<i class="fa fa-pencil"></i></a>

@@ -1,11 +1,17 @@
 package com.website.qlts.service;
 
-import com.website.qlts.models.CategoriesSupplier;
-import com.website.qlts.models.Suppliers;
+import com.website.qlts.entity.CategoriesSupplier;
+import com.website.qlts.entity.Suppliers;
+import com.website.qlts.entity.SuppliersCate;
 import com.website.qlts.repository.SuppliersReposiotory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.datetime.standard.DateTimeContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.time.DateTimeException;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -13,11 +19,11 @@ public class SuppliersService {
     @Autowired
     SuppliersReposiotory suppliersReposiotory;
 
-    public List<Suppliers> getAll2(){
+    public List<Suppliers> getAll2() {
         return suppliersReposiotory.findAll();
     }
 
-    public List<Suppliers> getAll(){
+    public List<Suppliers> getAll() {
         return suppliersReposiotory.findAll();
     }
 
@@ -31,9 +37,20 @@ public class SuppliersService {
         return categoriesSuppliers;
     }
 
-    public Suppliers create(String name,String address,String phoneNumber,CategoriesSupplier categoriesSupplier){
-        Suppliers suppliers = new Suppliers(name,address,phoneNumber);
-        suppliers.setCategoriesSupplier(categoriesSupplier);
-        return  suppliersReposiotory.save(suppliers);
+    public Suppliers create(String name, String address, String phoneNumber, CategoriesSupplier categoriesSupplier) {
+        Suppliers suppliers = new Suppliers(name, address, phoneNumber);
+        return suppliersReposiotory.save(suppliers);
+    }
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public void insertWithQuery(String name,String address, String phoneNumber, long id) {
+        entityManager.createNativeQuery("INSERT INTO suppliers (name, address, phone_number,supplier_category_id) VALUES (?,?,?,?)")
+                .setParameter(1, name)
+                .setParameter(2, address)
+                .setParameter(3, phoneNumber)
+                .setParameter(4,id)
+                .executeUpdate();
     }
 }

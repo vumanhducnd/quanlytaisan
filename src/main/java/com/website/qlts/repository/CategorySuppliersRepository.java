@@ -1,6 +1,6 @@
 package com.website.qlts.repository;
 
-import com.website.qlts.models.CategoriesSupplier;
+import com.website.qlts.entity.CategoriesSupplier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

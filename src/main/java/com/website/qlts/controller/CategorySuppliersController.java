@@ -1,6 +1,6 @@
 package com.website.qlts.controller;
 
-import com.website.qlts.models.CategoriesSupplier;
+import com.website.qlts.entity.CategoriesSupplier;
 import com.website.qlts.service.CategorySuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,6 @@
 package com.website.qlts.controller;
 
-import com.website.qlts.models.Assets;
+import com.website.qlts.entity.Assets;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

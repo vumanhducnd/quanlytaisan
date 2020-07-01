@@ -1,4 +1,4 @@
-package com.website.qlts.models;
+package com.website.qlts.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;

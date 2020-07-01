@@ -1,31 +1,31 @@
-package com.website.qlts.models;
-
-import org.springframework.boot.SpringApplication;
+package com.website.qlts.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
-public class Staffs implements Serializable {
+public class Suppliers implements Serializable {
     private static final long serialVersionUID = 1L;
-    private  String name;
-    private Date dateOfBirth;
+    private String name;
     private String address;
     private String phoneNumber;
-    private long departmentId;
+    //    private long supplier_category_id;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    public Staffs(String name, Date dateOfBirth, String address, String phoneNumber, long departmentId) {
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.departmentId = departmentId;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "supplier_category_id")
+    private CategoriesSupplier categoriesSupplier;
+
+    public Suppliers() {
     }
 
-    public Staffs() {
+    public Suppliers(String name, String address, String phoneNumber) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+//
     }
 
     public String getName() {
@@ -34,14 +34,6 @@ public class Staffs implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public String getAddress() {
@@ -60,14 +52,6 @@ public class Staffs implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public long getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(long departmentId) {
-        this.departmentId = departmentId;
-    }
-
     public long getId() {
         return id;
     }
@@ -75,4 +59,20 @@ public class Staffs implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+
+    public CategoriesSupplier getCategoriesSupplier() {
+        return categoriesSupplier;
+    }
+
+    public void setCategoriesSupplier(CategoriesSupplier categoriesSupplier) {
+        this.categoriesSupplier = categoriesSupplier;
+    }
+
+//    public long getSupplier_category_id() {
+//        return supplier_category_id;
+//    }
+//
+//    public void setSupplier_category_id(long supplier_category_id) {
+//        this.supplier_category_id = supplier_category_id;
+//    }
 }

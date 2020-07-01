@@ -1,11 +1,10 @@
 package com.website.qlts.repository;
 
-import com.website.qlts.models.User;
+import com.website.qlts.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import sun.print.resources.serviceui_zh_TW;
 
 import java.util.Optional;
 

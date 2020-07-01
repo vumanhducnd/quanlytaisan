@@ -1,6 +1,6 @@
 package com.website.qlts.service.impl;
 
-import com.website.qlts.models.User;
+import com.website.qlts.entity.User;
 import com.website.qlts.repository.UserRepository;
 import com.website.qlts.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

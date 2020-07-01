@@ -24,9 +24,9 @@
             <div class="form-group">
                 Danh mục nhà cung cấp:
                 <select th:field="*{list}">
-                    <option th:each="country : ${listCate.list}"
-                            th:value="${country}"
-                            th:text="${country.name}"/>
+                    <option th:each="li : ${listCate.list}"
+                            th:value="${li.id}"
+                            th:text="${li.name}"/>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary btn-user btn-block">

@@ -1,4 +1,4 @@
-package com.website.qlts.models;
+package com.website.qlts.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,23 +7,19 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class CategoriesSupplier implements Serializable {
+public class CategoryAssets implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public CategoriesSupplier(String name, long id) {
+    public CategoryAssets(String name) {
         this.name = name;
-        this.id = id;
     }
 
-    public CategoriesSupplier() {
-    }
-
-    public CategoriesSupplier(String name) {
-        this.name = name;
+    public CategoryAssets() {
+        this.id = 0;
     }
 
     public String getName() {
@@ -41,5 +37,4 @@ public class CategoriesSupplier implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
-
 }

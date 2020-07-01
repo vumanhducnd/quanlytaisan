@@ -1,17 +1,17 @@
 package com.website.qlts.controller;
 
-import com.website.qlts.models.CategoriesSupplier;
-import com.website.qlts.models.Suppliers;
-import com.website.qlts.models.SuppliersCate;
+import com.website.qlts.entity.CategoriesSupplier;
+import com.website.qlts.entity.Suppliers;
+import com.website.qlts.entity.SuppliersCate;
 import com.website.qlts.service.CategorySuppliersService;
 import com.website.qlts.service.SuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import java.util.List;
 
@@ -26,12 +26,12 @@ public class SuppliersController {
     @RequestMapping("")
     public String indexPage(Model model, String keyWord) {
         List<Suppliers> list;
-//        if(keyWord != null){
-//            list = suppliersService.getByName(keyWord);
-//        }
-//        else {
+        if(keyWord != null){
+            list = suppliersService.getByName(keyWord);
+        }
+        else {
         list = suppliersService.getAll2();
-//        }
+        }
         model.addAttribute("sups", list);
         return "pages/suppliers/index";
     }
@@ -50,7 +50,7 @@ public class SuppliersController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createPage(@ModelAttribute SuppliersCate suppliers) {
-        suppliersService.create(suppliers.getSuppliers().getName(), suppliers.getSuppliers().getAddress(), suppliers.getSuppliers().getPhoneNumber(),suppliers.getList().get(0));
+        suppliersService.insertWithQuery(suppliers.getSuppliers().getName(), suppliers.getSuppliers().getAddress(), suppliers.getSuppliers().getPhoneNumber(), Long.parseLong(suppliers.getList().get(0).getName()));
         return "redirect:/suppliers";
     }
 }

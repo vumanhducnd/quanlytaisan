@@ -1,6 +1,6 @@
 package com.website.qlts.controller;
 
-import com.website.qlts.models.User;
+import com.website.qlts.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

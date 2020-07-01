@@ -1,6 +1,6 @@
 package com.website.qlts.service;
 
-import com.website.qlts.models.GroupAssets;
+import com.website.qlts.entity.GroupAssets;
 import com.website.qlts.repository.GroupAssetsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

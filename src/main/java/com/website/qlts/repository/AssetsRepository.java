@@ -1,6 +1,6 @@
 package com.website.qlts.repository;
 
-import com.website.qlts.models.Assets;
+import com.website.qlts.entity.Assets;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
