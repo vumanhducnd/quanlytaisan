@@ -12,4 +12,8 @@ import java.util.List;
 public interface DepartmentsRepository extends JpaRepository<Departments, Long> {
     @Query(value = "SELECT * FROM departments c WHERE c.department_name LIKE %:name%", nativeQuery = true)
     public List<Departments> getByName(@Param("name") String name);
+
+//    public List<Departments> findByParentId(int parentId);
+//
+//    public List<Departments> findByChildId(int chilId);
 }

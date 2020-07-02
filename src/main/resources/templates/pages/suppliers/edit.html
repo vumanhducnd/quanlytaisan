@@ -8,33 +8,42 @@
 <body id="page-top">
 <div id="wrapper">
     <div class="container-fluid" layout:fragment="content">
-        <form class="user" th:action="@{/suppliers/create}" method="post" th:object="${listCate}">
-            <div class="form-group">
-                <input class="form-control form-control-user"
-                       th:field="*{suppliers.name}"
-                       placeholder="Tên danh mục tài sản">
+        <form class="user" th:action="@{/suppliers/update/{id}(id=${model.suppliers.id})}" method="post"
+              th:object="${model}">
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">Tên nhà cung cấp</label>
+                <div class="col-md-4">
+                    <input type="text" th:field="*{suppliers.name}" class="form-control">
+                </div>
             </div>
-            <div class="form-group">
-                <input class="form-control form-control-user"
-                       th:field="*{suppliers.address}"
-                       placeholder="Tên danh mục tài sản">
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">Địa chỉ</label>
+                <div class="col-md-4">
+                    <input type="text" th:field="*{suppliers.address}" class="form-control">
+                </div>
             </div>
-            <div class="form-group">
-                <input class="form-control form-control-user"
-                       th:field="*{suppliers.phoneNumber}"
-                       placeholder="Tên danh mục tài sản">
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">Số điện thoại</label>
+                <div class="col-md-4">
+                    <input type="text" th:field="*{suppliers.phoneNumber}" class="form-control">
+                </div>
             </div>
-            <div class="form-group">
-                Danh mục nhà cung cấp:
-                <select th:field="*{list}">
-                    <option th:each="country : ${listCate.list}"
-                            th:value="${country}"
-                            th:text="${country.name}"/>
-                </select>
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">Danh mục nhà cung cấp:</label>
+                <div class="col-md-4">
+                    <select class="form-control" th:field="*{suppliers.supplier_category_id}">
+                        <option th:each="li : ${model.list}"
+                                th:selected="(${li.id} == *{suppliers.supplier_category_id})"
+                                th:value="${li.id}"
+                                th:text="${li.name}"/>
+                    </select>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-user btn-block">
-                Tạo danh mục
-            </button>
+            <div class="col-md-6 offset-md-4">
+                <button type="submit" class="btn btn-primary">
+                    Tạo danh mục
+                </button>
+            </div>
         </form>
     </div>
 </div>

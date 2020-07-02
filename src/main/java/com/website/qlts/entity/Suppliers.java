@@ -6,8 +6,11 @@ import java.io.Serializable;
 @Entity
 public class Suppliers implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Column(nullable = true)
     private String name;
+    @Column(nullable = true)
     private String address;
+    @Column(nullable = true)
     private String phoneNumber;
     //    private long supplier_category_id;
     @Id
@@ -16,7 +19,7 @@ public class Suppliers implements Serializable {
     @Column(name = "supplier_category_id", unique = false)
     private long supplier_category_id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "supplier_category_id",updatable = false,insertable = false, unique = false)
+    @JoinColumn(name = "supplier_category_id", updatable = false, insertable = false, unique = false)
     private CategoriesSupplier categoriesSupplier;
 
     public Suppliers() {

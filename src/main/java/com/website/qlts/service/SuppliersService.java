@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SuppliersService {
@@ -36,15 +37,17 @@ public class SuppliersService {
         return suppliersReposiotory.save(suppliers);
     }
 
-//    @PersistenceContext
-//    private EntityManager entityManager;
-//
-//    public void insertWithQuery(String name,String address, String phoneNumber, long id) {
-//        entityManager.createNativeQuery("INSERT INTO suppliers (name, address, phone_number,supplier_category_id) VALUES (?,?,?,?)")
-//                .setParameter(1, name)
-//                .setParameter(2, address)
-//                .setParameter(3, phoneNumber)
-//                .setParameter(4,id)
-//                .executeUpdate();
-//    }
+    public void update(long id,Suppliers suppliers){
+        Suppliers suppliers1 = suppliersReposiotory.findById(id).orElse(null);
+        suppliers1.setName(suppliers.getName());
+        suppliers1.setAddress(suppliers.getAddress());
+        suppliers1.setPhoneNumber(suppliers.getPhoneNumber());
+        suppliers1.setSupplier_category_id(suppliers.getSupplier_category_id());
+        suppliersReposiotory.save(suppliers1);
+    }
+
+    public Suppliers getById(long id){
+        return suppliersReposiotory.findById(id).orElse(null);
+    }
+
 }

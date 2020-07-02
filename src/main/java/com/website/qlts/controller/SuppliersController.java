@@ -8,9 +8,7 @@ import com.website.qlts.service.SuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -26,11 +24,10 @@ public class SuppliersController {
     @RequestMapping("")
     public String indexPage(Model model, String keyWord) {
         List<Suppliers> list;
-        if(keyWord != null){
+        if (keyWord != null) {
             list = suppliersService.getByName(keyWord);
-        }
-        else {
-        list = suppliersService.getAll2();
+        } else {
+            list = suppliersService.getAll2();
         }
         model.addAttribute("sups", list);
         return "pages/suppliers/index";
@@ -43,13 +40,33 @@ public class SuppliersController {
         SuppliersCate suppliersCate = new SuppliersCate();
         suppliersCate.setList(listAssets);
         suppliersCate.setSuppliers(new Suppliers());
-        model.addAttribute("listCate",suppliersCate);
+        model.addAttribute("listCate", suppliersCate);
         return "pages/suppliers/create";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createPage(@ModelAttribute SuppliersCate suppliers) {
-        suppliersService.create(suppliers.getSuppliers().getName(), suppliers.getSuppliers().getAddress(), suppliers.getSuppliers().getPhoneNumber(), Long.parseLong(suppliers.getList().get(0).getName()) ) ;
+        suppliersService.create(suppliers.getSuppliers().getName(), suppliers.getSuppliers().getAddress(),
+                suppliers.getSuppliers().getPhoneNumber(), Long.parseLong(suppliers.getList().get(0).getName()));
         return "redirect:/suppliers";
+    }
+
+    @RequestMapping(value = "/edit/{id}")
+    public String editPage(@PathVariable("id") long id, Model model) {
+        Suppliers suppliers = suppliersService.getById(id);
+        List<CategoriesSupplier> listAssets;
+        listAssets = categorySuppliersService.getAll();
+        SuppliersCate suppliersCate = new SuppliersCate();
+        suppliersCate.setList(listAssets);
+        suppliersCate.setSuppliers(suppliers);
+        model.addAttribute("model", suppliersCate);
+        return "pages/suppliers/edit";
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(@ModelAttribute SuppliersCate suppliersCate, @PathVariable("id") long id, Model model) {
+        model.addAttribute("model", suppliersCate);
+        suppliersService.update(id, suppliersCate.getSuppliers());
+        return "redirect:/suppliers/";
     }
 }
