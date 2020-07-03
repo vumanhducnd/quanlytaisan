@@ -8,15 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DepartmentsService  {
-    @Autowired
-    DepartmentsRepository departmentsRepository;
+public interface DepartmentsService  {
+    public List<Departments> getAll();
 
-//    public List<Departments> getByParentId(int id){
-//        return departmentsRepository.findByParentId(id);
-//    }
-//
-//    public List<Departments> getByChildId(int id){
-//        return departmentsRepository.findByChildId(id);
-//    }
+    public List<Departments> getByParentId(int id);
+
+    public List<Departments> getByChildId(int id);
 }

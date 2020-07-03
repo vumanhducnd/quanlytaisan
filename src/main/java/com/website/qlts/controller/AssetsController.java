@@ -6,7 +6,7 @@ import com.website.qlts.repository.CategoryAssetsRepository;
 import com.website.qlts.repository.DepartmentsRepository;
 import com.website.qlts.repository.GroupAssetsRepository;
 import com.website.qlts.repository.SuppliersReposiotory;
-import com.website.qlts.service.AssetsService;
+import com.website.qlts.service.*;
 import com.website.qlts.view.AssetsView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,16 +20,19 @@ import java.util.List;
 @RequestMapping("/assets")
 public class AssetsController {
     @Autowired
-    GroupAssetsRepository groupAssetsRepository;
-    @Autowired
-    CategoryAssetsRepository categoryAssetsRepository;
-    @Autowired
-    SuppliersReposiotory suppliersReposiotory;
-    @Autowired
-    DepartmentsRepository departmentsRepository;
+    AssetsService assetsService;
 
     @Autowired
-    AssetsService assetsService;
+    CategoryAssetsService categoryAssetsService;
+
+    @Autowired
+    DepartmentsService departmentsService;
+
+    @Autowired
+    SuppliersService suppliersService;
+
+    @Autowired
+    GroupAssetsService groupAssetsService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String assetsPage(Model model) {
@@ -39,7 +42,7 @@ public class AssetsController {
 
     @RequestMapping(value = "/create")
     public String createPage(Model model) {
-        AssetsView assetsView = setAssetView();
+        AssetsView assetsView = setAssetView(new Assets());
         model.addAttribute("model", assetsView);
         return "pages/assets/create";
     }
@@ -59,9 +62,24 @@ public class AssetsController {
 
     @RequestMapping("/edit/{id}")
     public String editPage(Model model, @PathVariable("id") long id) {
-        Assets assets = assetsService.findById(id);
-        model.addAttribute("model",assets);
+        Assets asset = assetsService.findById(id);
+        AssetsView assetsView = setAssetView(asset);
+        model.addAttribute("model", assetsView);
         return "pages/assets/edit";
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(@ModelAttribute AssetsView assetsView, @PathVariable("id") long id,
+                         @RequestParam("suppliers") long suppliers, @RequestParam("departments") long departments,
+                         @RequestParam("groupAssets") long groupAssets, @RequestParam("categoryAssets") long categoryAssets) {
+        assetsService.update(id, assetsView, suppliers, departments, groupAssets, categoryAssets);
+        return "redirect:/assets";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String delete(@PathVariable("id") long id) {
+        assetsService.delete(id);
+        return "redirect:/assets";
     }
 
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
@@ -79,13 +97,42 @@ public class AssetsController {
         return "pages/assets/qr-code";
     }
 
-    public AssetsView setAssetView() {
+    @RequestMapping("/transfer")
+    public String transfer(){
+        return "pages/assets/transfer";
+    }
+
+    @RequestMapping("/revoke")
+    public String revoke(){
+        return "pages/assets/revoke";
+    }
+
+    @RequestMapping("/inventory")
+    public String inventory(){
+        return "pages/assets/inventory";
+    }
+
+    @RequestMapping("/sell")
+    public String sell(){
+        return "pages/assets/sell";
+    }
+
+    @RequestMapping("/used-history")
+    public String history(){
+        return "pages/assets/history";
+    }
+
+    public AssetsView setAssetView(Assets assets) {
         AssetsView assetsView = new AssetsView();
-        assetsView.setCategoryAssetsList(categoryAssetsRepository.findAll());
-        assetsView.setAssets(new Assets());
-        assetsView.setDepartmentsList(departmentsRepository.findAll());
-        assetsView.setSuppliersList(suppliersReposiotory.findAll());
-        assetsView.setGroupAssetsList(groupAssetsRepository.findAll());
+        if (assets != null) {
+            assetsView.setAssets(assets);
+        } else {
+            assetsView.setAssets(new Assets());
+        }
+        assetsView.setCategoryAssetsList(categoryAssetsService.getAll());
+        assetsView.setDepartmentsList(departmentsService.getAll());
+        assetsView.setSuppliersList(suppliersService.getAll());
+        assetsView.setGroupAssetsList(groupAssetsService.getAll());
         return assetsView;
     }
 }

@@ -1,8 +1,8 @@
 package com.website.qlts.service;
 
 import com.website.qlts.entity.Assets;
+import com.website.qlts.view.AssetsView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface AssetsService {
@@ -15,4 +15,7 @@ public interface AssetsService {
 
     public void makeUrl(String url, long id);
 
+    public void delete(long id);
+
+    public void update(long id, AssetsView assetsView, long suppliersId,long departmentsId, long groupAssetsId, long categoryAssetsId);
 }

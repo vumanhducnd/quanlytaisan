@@ -5,6 +5,13 @@
 >
 <div id="wrapper">
     <div class="container-fluid" layout:fragment="content">
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    ...
+                </div>
+            </div>
+        </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Danh sách tài sản</h6>
@@ -68,9 +75,14 @@
                             <td th:text="${empl.categoryAssets.name}"></td>
                             <td th:text="${empl.groupAssets.groupName}"></td>
                             <td th:text="${empl.suppliers.name}"></td>
-                            <td><a th:href="@{/assets/createQRCode/{id}(id=${empl.id})}"
-                                   class="mr-sm-2 text-primary">
-                                QRCode<i class="fa fa-pencil"></i></a>
+                            <td>
+<!--                                <a th:href="@{/assets/createQRCode/{id}(id=${empl.id})}"-->
+<!--                                   class="mr-sm-2 text-primary">-->
+<!--                                QRCode<i class="fa fa-pencil"></i></a>-->
+<!--                                <form th:action="@{/assets/createQRCode/{id}(id=${empl.id})}">-->
+<!--                                    <button type="submit" data-toggle="modal" data-target=".bd-example-modal-lg">submit</button>-->
+<!--                                </form>-->
+                                <a  th:href="@{/assets/createQRCode/{id}(id=${empl.id})}" class="eBtn"  data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</a>
                             </td>
                             <td><a th:href="@{/assets/edit/{id}(id=${empl.id})}"
                                    class="mr-sm-2 text-primary">
@@ -88,6 +100,7 @@
 
     </div>
     <!-- /.container-fluid -->
+
 
 </div>
 <a class="scroll-to-top rounded" href="#page-top">

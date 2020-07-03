@@ -43,7 +43,7 @@ public class CategoryAssetsController {
 
     @RequestMapping("/edit/{id}")
     public String editPage(@PathVariable("id") long id, Model model) {
-        CategoryAssets assets = categoryAssetsService.getById(id).get();
+        CategoryAssets assets = categoryAssetsService.getById(id);
         model.addAttribute("cate", assets);
         return "pages/category-assets/edit";
     }

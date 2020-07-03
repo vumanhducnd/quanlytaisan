@@ -27,7 +27,7 @@ public class SuppliersController {
         if (keyWord != null) {
             list = suppliersService.getByName(keyWord);
         } else {
-            list = suppliersService.getAll2();
+            list = suppliersService.getAll();
         }
         model.addAttribute("sups", list);
         return "pages/suppliers/index";
@@ -67,6 +67,12 @@ public class SuppliersController {
     public String update(@ModelAttribute SuppliersCate suppliersCate, @PathVariable("id") long id, Model model) {
         model.addAttribute("model", suppliersCate);
         suppliersService.update(id, suppliersCate.getSuppliers());
+        return "redirect:/suppliers/";
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    public String delete(@PathVariable("id") long id) {
+        suppliersService.delete(id);
         return "redirect:/suppliers/";
     }
 }

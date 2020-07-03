@@ -43,7 +43,7 @@ public class GroupAssetsController {
 
     @RequestMapping("/edit/{id}")
     public String editPage(@PathVariable("id") long id, Model model) {
-        GroupAssets assets = groupAssetsService.getById(id).get();
+        GroupAssets assets = groupAssetsService.getById(id);
         model.addAttribute("cate", assets);
         return "pages/group-assets/edit";
     }

@@ -15,7 +15,7 @@
 //    private String password;
 //    private int status;
 //    private List<GrantedAuthority> grantedAuthorities;
-//    private User user;
+//    private User user;`
 //    public MyUserDetails(User user) {
 //        this.userName = user.getUserName();
 //        this.password = user.getPassWord();

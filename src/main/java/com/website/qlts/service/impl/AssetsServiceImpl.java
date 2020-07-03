@@ -4,11 +4,10 @@ import com.website.qlts.config.CreateQRCodeConfig;
 import com.website.qlts.entity.Assets;
 import com.website.qlts.repository.AssetsRepository;
 import com.website.qlts.service.AssetsService;
+import com.website.qlts.view.AssetsView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -37,5 +36,32 @@ public class AssetsServiceImpl implements AssetsService {
         String[] listUrl = url.split("/assets/createQRCode/", url.length() - 1);
         CreateQRCodeConfig createQRCodeConfig = new CreateQRCodeConfig();
         createQRCodeConfig.createQrCodeAssets(listUrl[0] + "/assets/detail/" + id, id);
+    }
+
+    @Override
+    public void delete(long id) {
+        Assets assets = assetsRepository.findById(id).orElse(null);
+        if( assets != null){
+            assetsRepository.delete(assets);
+        }
+    }
+
+    @Override
+    public void update(long id, AssetsView assetsView, long suppliersId, long departmentsId, long groupAssetsId, long categoryAssetsId) {
+        Assets assets = assetsRepository.findById(id).orElse(null);
+        if(assets != null){
+            assets.setName(assetsView.getAssets().getName());
+            assets.setDescription(assetsView.getAssets().getDescription());
+            assets.setAmount(assetsView.getAssets().getAmount());
+            assets.setConditionAsset(assetsView.getAssets().getConditionAsset());
+            assets.setPosition(assetsView.getAssets().getPosition());
+            assets.setPrice(assetsView.getAssets().getPrice());
+            assets.setStatus(assetsView.getAssets().getStatus());
+            assets.setDepartment_id(departmentsId);
+            assets.setSupplier_id(suppliersId);
+            assets.setGroup_assets_id(groupAssetsId);
+            assets.setAsset_category_id(categoryAssetsId);
+        }
+        assetsRepository.save(assets);
     }
 }

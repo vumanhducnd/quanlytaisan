@@ -1,5 +1,7 @@
 package com.website.qlts.service;
 
-public interface UserService  {
+import com.website.qlts.entity.User;
 
+public interface UserService  {
+    public User createUser(User user);
 }

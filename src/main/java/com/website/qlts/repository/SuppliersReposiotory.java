@@ -19,5 +19,4 @@ public interface SuppliersReposiotory extends JpaRepository<Suppliers, Long> {
     @Query(value = "SELECT * FROM suppliers ", nativeQuery = true)
     public List<CategoriesSupplier> getCate();
 
-
 }

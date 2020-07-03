@@ -6,45 +6,38 @@
 <div id="wrapper">
     <div class="container-fluid" layout:fragment="content">
         <h2 class="title-header">Chỉnh sửa tài sản</h2>
-        <form  name="my-form" th:action="@{/assets/update/{id}(id=${model.id})}" method="post" th:object="${model}">
+        <form  name="my-form" th:action="@{/assets/update/{id}(id=${model.assets.id})}" method="post" th:object="${model}">
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Tên tài sản</label>
                 <div class="col-md-4">
                     <input class="form-control form-control-user"
-                           th:field="*{model.name}"
-                           placeholder="">
+                           th:field="*{assets.name}">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Chi tiết</label>
                 <div class="col-md-4">
                     <input class="form-control form-control-user"
-                           th:field="*{model.description}"
-                           placeholder="">
+                           th:field="*{assets.description}">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Số lượng</label>
                 <div class="col-md-4">
                     <input class="form-control form-control-user"
-                           th:field="*{model.amount}"
-                           placeholder="">
+                           th:field="*{assets.amount}" >
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Tình trạng</label>
                 <div class="col-md-4">
                     <input class="form-control form-control-user"
-                           th:field="*{model.conditionAsset}"
-                           placeholder="">
+                           th:field="*{assets.conditionAsset}" >
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Trạng thái</label>
                 <div class="col-md-4">
-                    <!--                    <input class="form-control form-control-user"-->
-                    <!--                           th:field="*{assets.status}"-->
-                    <!--                           placeholder="">-->
                     <select class="form-control" th:field="*{assets.status}">
                         <option value="1">Đang sử dụng</option>
                         <option value="2">Chưa sử dụng</option>
@@ -57,7 +50,7 @@
                 <div class="col-md-4">
                     <input class="form-control form-control-user"
                            th:field="*{assets.price}"
-                           placeholder="">
+                           >
                 </div>
             </div>
             <div class="form-group row">
@@ -65,7 +58,7 @@
                 <div class="col-md-4">
                     <input class="form-control form-control-user"
                            th:field="*{assets.position}"
-                           placeholder="">
+                           >
                 </div>
             </div>
             <div class="form-group row">
@@ -73,6 +66,7 @@
                 <div class="col-md-4">
                     <select class="form-control" name="departments" >
                         <option th:each="li : ${model.departmentsList}"
+                                th:selected="(${li.id} == *{assets.department_id})"
                                 th:value="${li.id}"
                                 th:text="${li.departmentName}"/>
                     </select>
@@ -83,6 +77,7 @@
                 <div class="col-md-4">
                     <select class="form-control" name="categoryAssets" >
                         <option th:each="li : ${model.categoryAssetsList}"
+                                th:selected="(${li.id} == *{assets.asset_category_id})"
                                 th:value="${li.id}"
                                 th:text="${li.name}"/>
                     </select>
@@ -93,6 +88,7 @@
                 <div class="col-md-4">
                     <select class="form-control" name="groupAssets" >
                         <option th:each="li : ${model.groupAssetsList}"
+                                th:selected="(${li.id} == *{assets.group_assets_id})"
                                 th:value="${li.id}"
                                 th:text="${li.groupName}"/>
                     </select>
@@ -103,6 +99,7 @@
                 <div class="col-md-4">
                     <select class="form-control" name="suppliers">
                         <option th:each="li : ${model.suppliersList}"
+                                th:selected="(${li.id} == *{assets.supplier_id})"
                                 th:value="${li.id}"
                                 th:text="${li.name}"/>
                     </select>
@@ -111,7 +108,7 @@
 
             <div class="col-md-6 offset-md-4">
                 <button type="submit" class="btn btn-primary">
-                    Tạo danh mục
+                    Cập nhật danh mục
                 </button>
             </div>
         </form>
