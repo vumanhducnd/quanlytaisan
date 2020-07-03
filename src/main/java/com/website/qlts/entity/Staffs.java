@@ -11,10 +11,18 @@ public class Staffs implements Serializable {
     private Date dateOfBirth;
     private String address;
     private String phoneNumber;
+
+    @Column(name = "department_id", unique = false)
     private long departmentId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id", updatable = false, insertable = false, unique = false)
+    private Departments departments;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     public Staffs(String name, Date dateOfBirth, String address, String phoneNumber, long departmentId) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -24,6 +32,10 @@ public class Staffs implements Serializable {
     }
 
     public Staffs() {
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public String getName() {
@@ -64,6 +76,14 @@ public class Staffs implements Serializable {
 
     public void setDepartmentId(long departmentId) {
         this.departmentId = departmentId;
+    }
+
+    public Departments getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(Departments departments) {
+        this.departments = departments;
     }
 
     public long getId() {
