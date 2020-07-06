@@ -14,4 +14,7 @@ import java.util.List;
 public interface StaffRepository extends JpaRepository<Staffs,Long> {
     @Query(value = "SELECT * FROM Staffs c WHERE c.name LIKE %:name%",nativeQuery=true)
     public List<Staffs> getByName(@Param("name") String name);
+
+    @Query(value = "SELECT * FROM Staffs c WHERE  c.is_deleted = 0", nativeQuery = true)
+    public List<Staffs> getAll();
 }

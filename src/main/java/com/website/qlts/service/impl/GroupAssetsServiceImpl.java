@@ -15,11 +15,11 @@ public class GroupAssetsServiceImpl implements GroupAssetsService {
     GroupAssetsRepository groupAssetsRepository;
 
     public GroupAssets create(String name) {
-        return groupAssetsRepository.save(new GroupAssets(name));
+        return groupAssetsRepository.save(new GroupAssets(name,0));
     }
 
     public List<GroupAssets> getAll() {
-        return groupAssetsRepository.findAll();
+        return groupAssetsRepository.getAll();
     }
 
     public GroupAssets getById(long id) {
@@ -33,8 +33,11 @@ public class GroupAssetsServiceImpl implements GroupAssetsService {
     }
 
     public void delete(long id) {
-        Optional<GroupAssets> categoryAssets = groupAssetsRepository.findById(id);
-        groupAssetsRepository.delete(categoryAssets.get());
+        GroupAssets categoryAssets = groupAssetsRepository.findById(id).orElse(null);
+        if(categoryAssets != null){
+            categoryAssets.setIs_deleted(1);
+        }
+        groupAssetsRepository.save(categoryAssets);
     }
 
     public List<GroupAssets> getByName(String name) {

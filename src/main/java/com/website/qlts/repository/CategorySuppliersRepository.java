@@ -12,4 +12,7 @@ import java.util.List;
 public interface CategorySuppliersRepository extends JpaRepository<CategoriesSupplier, Long> {
     @Query(value = "SELECT * FROM categories_supplier c WHERE c.name LIKE %:name%", nativeQuery = true)
     public List<CategoriesSupplier> getByName(@Param("name") String name);
+
+    @Query(value = "SELECT * FROM categories_supplier c WHERE  c.is_deleted = 0", nativeQuery = true)
+    public List<CategoriesSupplier> getAll();
 }

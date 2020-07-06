@@ -15,11 +15,11 @@ public class CategorySuppliersServiceImpl implements CategorySuppliersService {
     CategorySuppliersRepository categorySuppliersRepository;
 
     public CategoriesSupplier create(String name) {
-        return categorySuppliersRepository.save(new CategoriesSupplier(name));
+        return categorySuppliersRepository.save(new CategoriesSupplier(name,0));
     }
 
     public List<CategoriesSupplier> getAll() {
-        return categorySuppliersRepository.findAll();
+        return categorySuppliersRepository.getAll();
     }
 
     public CategoriesSupplier getById(long id) {
@@ -33,8 +33,12 @@ public class CategorySuppliersServiceImpl implements CategorySuppliersService {
     }
 
     public void delete(long id) {
-        Optional<CategoriesSupplier> categoryAssets = categorySuppliersRepository.findById(id);
-        categorySuppliersRepository.delete(categoryAssets.get());
+        CategoriesSupplier categoryAssets = categorySuppliersRepository.findById(id).orElse(null);
+        if(categoryAssets != null){
+            categoryAssets.setIs_deleted(1);
+            categorySuppliersRepository.save(categoryAssets);
+        }
+
     }
 
     public List<CategoriesSupplier> getByName(String name) {

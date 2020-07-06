@@ -14,22 +14,35 @@ public class History implements Serializable {
     private long staffId;
     private String reason;
     private int status;
+    private long price;
     private Date startDate;
     private Date endDate;
+    private int is_deleted;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public History(long assetId, long staffId, String reason, int status, Date startDate, Date endDate) {
+
+    public History(long assetId, long staffId, String reason, int status, long price, Date startDate, Date endDate, int is_deleted) {
         this.assetId = assetId;
         this.staffId = staffId;
         this.reason = reason;
         this.status = status;
+        this.price = price;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.is_deleted = is_deleted;
     }
 
     public History() {
+    }
+
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 
     public long getAssetId() {
@@ -86,5 +99,13 @@ public class History implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
     }
 }

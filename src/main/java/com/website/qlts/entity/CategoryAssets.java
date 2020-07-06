@@ -10,16 +10,26 @@ import java.io.Serializable;
 public class CategoryAssets implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
+    private int is_deleted;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public CategoryAssets(String name) {
+    public CategoryAssets(String name, int is_deleted) {
         this.name = name;
+        this.is_deleted = is_deleted;
     }
 
     public CategoryAssets() {
         this.id = 0;
+    }
+
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 
     public String getName() {

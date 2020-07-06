@@ -176,12 +176,27 @@
                     <!--                <h6 class="collapse-header">Custom Utilities:</h6>-->
                     <a class="collapse-item" th:href="@{/assets/create}">Thêm </a>
                     <a class="collapse-item" th:href="@{/assets}">Danh sách</a>
-                    <a class="collapse-item" th:href="@{/assets/transfer}">Điều chuyển</a>
                     <a class="collapse-item" th:href="@{/assets/}">Sửa chữa</a>
                     <a class="collapse-item" th:href="@{/assets/revoke}">Thu hồi</a>
                     <a class="collapse-item" th:href="@{/assets/inventory}">Kiểm kê</a>
                     <a class="collapse-item" th:href="@{/assets/sell}">Thanh lý</a>
                     <a class="collapse-item" th:href="@{/assets/used-history}">Lịch sử sử dụng</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiesw"
+               aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-flag"></i>
+                <span>Điều chuyển tài sản</span>
+            </a>
+            <div id="collapseUtilitieswz" class="collapse" aria-labelledby="headingUtilities"
+                 data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <!--                <h6 class="collapse-header">Custom Utilities:</h6>-->
+                    <a class="collapse-item" th:href="@{/transfer/department}">Phòng ban </a>
+                    <a class="collapse-item" th:href="@{/transfer/staff}">Nhân viên</a>
+                    <a class="collapse-item" th:href="@{/transfer/new}">Người dùng mới</a>
                 </div>
             </div>
         </li>

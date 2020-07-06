@@ -8,6 +8,7 @@ import com.website.qlts.view.AssetsView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,13 +17,74 @@ public class AssetsServiceImpl implements AssetsService {
     AssetsRepository assetsRepository;
 
     @Override
+    public void updateStatus(long id) {
+        Assets assets = findById(id);
+        assets.setStatus(4);
+        assetsRepository.save(assets);
+    }
+
+    @Override
+    public void assetSell() {
+        List<Assets> assetsList = new ArrayList<>();
+        for(Long x : listIntId){
+            updateStatus(x);
+        }
+    }
+
+    @Override
+    public List<Assets> getByName(String name) {
+        return assetsRepository.getByName(name);
+    }
+
+    @Override
+    public List<Assets> getByStatus(int status) {
+        return assetsRepository.getByStatus(status);
+    }
+
+    @Override
+    public List<Assets> getByDeparment(long id) {
+        return assetsRepository.getByDepartmentsId(id);
+    }
+
+    @Override
+    public List<Assets> getByGroupAsset(long id) {
+        return assetsRepository.getByGroupId(id);
+    }
+
+    @Override
+    public List<Assets> getByCateAsset(long id) {
+        return assetsRepository.getByCateId(id);
+    }
+
+    @Override
+    public List<Assets> sell(String listId,String price) {
+        String[] listStringId = listId.split(",");
+        String [] listStringPrice = price.split(",");
+        List<Assets> assetsList = new ArrayList<>();
+        for (String x : listStringPrice){
+            if(Long.parseLong(x) != 0){
+                listPrice.add(Long.parseLong(x));
+            }
+        }
+        for (String x : listStringId) {
+            listIntId.add(Long.parseLong(x));
+        }
+        for (int i = 0; i < listIntId.size(); i++) {
+            Assets assets = findById(listIntId.get(i));
+            assets.setSellPrice(listPrice.get(i));
+            assetsList.add(assets);
+        }
+        return assetsList;
+    }
+
+    @Override
     public List<Assets> getAll() {
-        return assetsRepository.findAll();
+        return assetsRepository.getAll();
     }
 
     @Override
     public Assets create(String name, String description, int amount, String condition, int status, long price, String position, long departmentId, long cateId, long groupId, long suppId) {
-        Assets assets = new Assets(name, description, amount, condition, status, price, position, departmentId, cateId, groupId, suppId);
+        Assets assets = new Assets(name, description, amount, condition, status, price, position, departmentId, cateId, groupId, suppId,0);
         return assetsRepository.save(assets);
     }
 
@@ -41,15 +103,16 @@ public class AssetsServiceImpl implements AssetsService {
     @Override
     public void delete(long id) {
         Assets assets = assetsRepository.findById(id).orElse(null);
-        if( assets != null){
-            assetsRepository.delete(assets);
+        if (assets != null) {
+            assets.setIs_deleted(1);
+            assetsRepository.save(assets);
         }
     }
 
     @Override
     public void update(long id, AssetsView assetsView, long suppliersId, long departmentsId, long groupAssetsId, long categoryAssetsId) {
         Assets assets = assetsRepository.findById(id).orElse(null);
-        if(assets != null){
+        if (assets != null) {
             assets.setName(assetsView.getAssets().getName());
             assets.setDescription(assetsView.getAssets().getDescription());
             assets.setAmount(assetsView.getAssets().getAmount());

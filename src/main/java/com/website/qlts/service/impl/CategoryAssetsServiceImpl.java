@@ -15,11 +15,11 @@ public class CategoryAssetsServiceImpl implements CategoryAssetsService {
     CategoryAssetsRepository categoryAssetsRepository;
 
     public CategoryAssets create(String name) {
-        return categoryAssetsRepository.save(new CategoryAssets(name));
+        return categoryAssetsRepository.save(new CategoryAssets(name, 0));
     }
 
     public List<CategoryAssets> getAll() {
-        return categoryAssetsRepository.findAll();
+        return categoryAssetsRepository.getAll();
     }
 
     public CategoryAssets getById(long id) {
@@ -33,8 +33,12 @@ public class CategoryAssetsServiceImpl implements CategoryAssetsService {
     }
 
     public void delete(long id) {
-        Optional<CategoryAssets> categoryAssets = categoryAssetsRepository.findById(id);
-        categoryAssetsRepository.delete(categoryAssets.get());
+        CategoryAssets categoryAssets = categoryAssetsRepository.findById(id).orElse(null);
+        if (categoryAssets != null){
+            categoryAssets.setIs_deleted(1);
+            categoryAssetsRepository.delete(categoryAssets);
+        }
+
     }
 
     public List<CategoryAssets> getByName(String name) {

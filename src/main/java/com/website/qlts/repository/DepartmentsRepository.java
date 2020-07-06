@@ -13,6 +13,8 @@ public interface DepartmentsRepository extends JpaRepository<Departments, Long> 
     @Query(value = "SELECT * FROM departments c WHERE c.department_name LIKE %:name%", nativeQuery = true)
     public List<Departments> getByName(@Param("name") String name);
 
+    @Query(value = "SELECT * FROM departments c WHERE  c.is_deleted = 0", nativeQuery = true)
+    public List<Departments> getAll();
 //    public List<Departments> findByParentId(int parentId);
 //
 //    public List<Departments> findByChildId(int chilId);

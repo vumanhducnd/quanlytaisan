@@ -37,14 +37,15 @@ public class Assets implements Serializable {
     @JoinColumn(name = "supplier_id", updatable = false, insertable = false, unique = false)
     private Suppliers suppliers;
 
-    private long createdById;
+    private long sellPrice;
     private long updatedById;
     private long deletedById;
+    private int is_deleted;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long department_id, long asset_category_id, long group_assets_id, long supplier_id) {
+    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long department_id, long asset_category_id, long group_assets_id, long supplier_id,int is_deleted) {
         this.name = name;
         this.description = description;
         this.amount = amount;
@@ -56,6 +57,7 @@ public class Assets implements Serializable {
         this.asset_category_id = asset_category_id;
         this.group_assets_id = group_assets_id;
         this.supplier_id = supplier_id;
+        this.is_deleted = is_deleted;
     }
 
     public long getAsset_category_id() {
@@ -190,12 +192,12 @@ public class Assets implements Serializable {
         this.suppliers = suppliers;
     }
 
-    public long getCreatedById() {
-        return createdById;
+    public long getSellPrice() {
+        return sellPrice;
     }
 
-    public void setCreatedById(long createdById) {
-        this.createdById = createdById;
+    public void setSellPrice(long sellPrice) {
+        this.sellPrice = sellPrice;
     }
 
     public long getUpdatedById() {
@@ -220,5 +222,13 @@ public class Assets implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 }

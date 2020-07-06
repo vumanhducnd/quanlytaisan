@@ -6,6 +6,7 @@ import java.util.List;
 
 public class AssetsView {
     private Assets assets;
+    private List<Assets> assetsList;
     private List<GroupAssets> groupAssetsList;
     private List<CategoryAssets> categoryAssetsList;
     private List<Departments> departmentsList;
@@ -60,5 +61,13 @@ public class AssetsView {
 
     public void setSuppliersList(List<Suppliers> suppliersList) {
         this.suppliersList = suppliersList;
+    }
+
+    public List<Assets> getAssetsList() {
+        return assetsList;
+    }
+
+    public void setAssetsList(List<Assets> assetsList) {
+        this.assetsList = assetsList;
     }
 }

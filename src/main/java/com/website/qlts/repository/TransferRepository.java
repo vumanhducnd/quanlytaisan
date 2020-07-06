@@ -1,0 +1,9 @@
+package com.website.qlts.repository;
+
+import com.website.qlts.entity.History;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TransferRepository  extends JpaRepository<History,Long> {
+}

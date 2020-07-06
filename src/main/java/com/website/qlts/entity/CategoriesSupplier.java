@@ -8,21 +8,28 @@ import java.util.List;
 public class CategoriesSupplier implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
+    private int is_deleted;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 //    @OneToMany(mappedBy = "categoriesSupplier", targetEntity = Suppliers.class)
 //    private List<Suppliers> suppliersList;
-    public CategoriesSupplier(String name, long id) {
+
+
+    public CategoriesSupplier(String name, int is_deleted) {
         this.name = name;
-        this.id = id;
+        this.is_deleted = is_deleted;
     }
 
     public CategoriesSupplier() {
     }
 
-    public CategoriesSupplier(String name) {
-        this.name = name;
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 
     public String getName() {
@@ -40,5 +47,6 @@ public class CategoriesSupplier implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+
 
 }

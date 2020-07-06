@@ -13,11 +13,13 @@ public class User implements Serializable {
     private String role;
     private int status;
     private String permission;
+    private int is_deleted;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    public User(String userName, String passWord, String rePassword, long staffId, String role, int status, String permission) {
+
+    public User(String userName, String passWord, String rePassword, long staffId, String role, int status, String permission, int is_deleted) {
         this.userName = userName;
         this.passWord = passWord;
         this.rePassword = rePassword;
@@ -25,9 +27,18 @@ public class User implements Serializable {
         this.role = role;
         this.status = status;
         this.permission = permission;
+        this.is_deleted = is_deleted;
     }
 
     public User() {
+    }
+
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 
     public String getUserName() {

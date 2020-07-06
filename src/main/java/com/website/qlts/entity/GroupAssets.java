@@ -10,12 +10,22 @@ import java.io.Serializable;
 public class GroupAssets implements Serializable {
     private static final long serialVersionUID = 1L;
     private String groupName;
+    private int is_deleted;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public GroupAssets(String groupName) {
+    public GroupAssets(String groupName, int is_deleted) {
         this.groupName = groupName;
+        this.is_deleted = is_deleted;
+    }
+
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 
     public GroupAssets() {

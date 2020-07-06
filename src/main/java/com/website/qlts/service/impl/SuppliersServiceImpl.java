@@ -15,7 +15,7 @@ public class SuppliersServiceImpl implements SuppliersService {
     SuppliersReposiotory suppliersReposiotory;
 
     public List<Suppliers> getAll() {
-        return suppliersReposiotory.findAll();
+        return suppliersReposiotory.getAll();
     }
 
     public List<Suppliers> getByName(String name) {
@@ -29,7 +29,7 @@ public class SuppliersServiceImpl implements SuppliersService {
     }
 
     public Suppliers create(String name, String address, String phoneNumber, long id) {
-        Suppliers suppliers = new Suppliers(name, address, phoneNumber, id);
+        Suppliers suppliers = new Suppliers(name, address, phoneNumber, id,0);
         return suppliersReposiotory.save(suppliers);
     }
 
@@ -50,7 +50,8 @@ public class SuppliersServiceImpl implements SuppliersService {
     public void delete(long id) {
         Suppliers suppliers = suppliersReposiotory.findById(id).orElse(null);
         if (suppliers != null) {
-            suppliersReposiotory.delete(suppliers);
+            suppliers.setIs_deleted(1);
+            suppliersReposiotory.save(suppliers);
         }
 
     }

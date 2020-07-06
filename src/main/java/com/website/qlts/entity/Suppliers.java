@@ -21,15 +21,25 @@ public class Suppliers implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_category_id", updatable = false, insertable = false, unique = false)
     private CategoriesSupplier categoriesSupplier;
+    private int is_deleted;
 
     public Suppliers() {
     }
 
-    public Suppliers(String name, String address, String phoneNumber, long supplier_category_id) {
+    public Suppliers(String name, String address, String phoneNumber, long supplier_category_id, int is_deleted) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.supplier_category_id = supplier_category_id;
+        this.is_deleted = is_deleted;
+    }
+
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 
     public long getSupplier_category_id() {

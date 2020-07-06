@@ -16,7 +16,11 @@ public interface SuppliersReposiotory extends JpaRepository<Suppliers, Long> {
     @Query(value = "SELECT * FROM suppliers c WHERE c.name LIKE %:name%", nativeQuery = true)
     public List<Suppliers> getByName(@Param("name") String name);
 
-    @Query(value = "SELECT * FROM suppliers ", nativeQuery = true)
+    @Query(value = "SELECT * FROM suppliers c WHERE  c.is_deleted = 0", nativeQuery = true)
     public List<CategoriesSupplier> getCate();
+
+    @Query(value = "SELECT * FROM suppliers c WHERE  c.is_deleted = 0", nativeQuery = true)
+    public List<Suppliers> getAll();
+
 
 }

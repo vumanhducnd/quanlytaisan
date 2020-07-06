@@ -11,6 +11,7 @@ public class Staffs implements Serializable {
     private Date dateOfBirth;
     private String address;
     private String phoneNumber;
+    private int is_deleted;
 
     @Column(name = "department_id", unique = false)
     private long departmentId;
@@ -23,15 +24,24 @@ public class Staffs implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public Staffs(String name, Date dateOfBirth, String address, String phoneNumber, long departmentId) {
+    public Staffs(String name, Date dateOfBirth, String address, String phoneNumber, int is_deleted, long departmentId, Departments departments) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.is_deleted = is_deleted;
         this.departmentId = departmentId;
     }
 
     public Staffs() {
+    }
+
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 
     public static long getSerialVersionUID() {

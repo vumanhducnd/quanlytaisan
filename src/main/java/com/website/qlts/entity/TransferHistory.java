@@ -14,17 +14,27 @@ public class TransferHistory implements Serializable {
     private long oldStaff;
     private long newStaff;
     private long assetId;
+    private int is_deleted;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public TransferHistory(String oldPosition, String newPosition, String reason, long oldStaff, long newStaff, long assetId) {
+    public TransferHistory(String oldPosition, String newPosition, String reason, long oldStaff, long newStaff, long assetId, int is_deleted) {
         this.oldPosition = oldPosition;
         this.newPosition = newPosition;
         this.reason = reason;
         this.oldStaff = oldStaff;
         this.newStaff = newStaff;
         this.assetId = assetId;
+        this.is_deleted = is_deleted;
+    }
+
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 
     public TransferHistory() {
