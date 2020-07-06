@@ -24,7 +24,7 @@ public class Staffs implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public Staffs(String name, Date dateOfBirth, String address, String phoneNumber, int is_deleted, long departmentId, Departments departments) {
+    public Staffs(String name, Date dateOfBirth, String address, String phoneNumber, int is_deleted, long departmentId) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
