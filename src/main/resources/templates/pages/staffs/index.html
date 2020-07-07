@@ -45,7 +45,8 @@
                             <th scope="row" th:text="${iterStat.count}"></th>
                             <td th:text="${empl.id}"></td>
                             <td th:text="${empl.name}"></td>
-                            <td th:text="${#calendars.format(empl.dateOfBirth,'dd MMMM yyyy')}"></td>
+                            <td th:text="${#calendars.format(empl.dateOfBirth,'dd MMMM yyyy')}"></td>\
+
                             <td th:text="${empl.phoneNumber}"></td>
                             <td th:text="${empl.address}"></td>
                             <td th:text="${empl.departments.departmentName}"></td>

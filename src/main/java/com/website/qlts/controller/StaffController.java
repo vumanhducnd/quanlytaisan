@@ -47,7 +47,7 @@ public class StaffController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createPage(@ModelAttribute StaffDepartments staffDepartments, @RequestParam("departmentsId") String departmentsId) {
         Staffs staffs = staffDepartments.getStaffs();
-        staffService.create(new Staffs(staffs.getName(), new Date(), staffs.getAddress(), staffs.getPhoneNumber(),0,Long.parseLong(departmentsId) ));
+        staffService.create(new Staffs(staffs.getName(), staffs.getDateOfBirth(), staffs.getAddress(), staffs.getPhoneNumber(),0,Long.parseLong(departmentsId) ));
         return "redirect:/staffs/";
     }
 
