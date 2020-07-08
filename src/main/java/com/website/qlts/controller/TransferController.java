@@ -1,6 +1,7 @@
 package com.website.qlts.controller;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.website.qlts.entity.Assets;
 import com.website.qlts.service.AssetsService;
 import com.website.qlts.service.DepartmentsService;
 import com.website.qlts.service.StaffService;
@@ -29,19 +30,21 @@ public class TransferController {
     AssetsService assetsService;
     @RequestMapping("")
     public String index(Model model){
-        model.addAttribute("model",transferService.getAll());
-        return "pages/transfer-history/index";
+        model.addAttribute("model", assetsService.getAllWithDepart());
+        return "pages/transfer-history/department-transfer";
     }
 
     @RequestMapping("/department")
     public String transferDepart(Model model){
-        model.addAttribute("model",transferService.getAllByDepartment());
+        model.addAttribute("model", assetsService.getAllWithDepart());
+//        model.addAttribute("model",transferService.getAllByDepartment());
         return "pages/transfer-history/department-transfer";
     }
 
     @RequestMapping("/action/{id}")
     public String action(Model model, @PathVariable("id") long id){
         TransferView transferView = new TransferView();
+        transferView.setAssets(assetsService.findById(id));
         transferView.setTransferHistory(transferService.getById(id));
         transferView.setDepartmentsListOld(departmentsService.getAll());
         transferView.setDepartmentsListNew(departmentsService.getAll());
@@ -50,15 +53,18 @@ public class TransferController {
     }
 
     @RequestMapping(value = "/action/{id}", method = RequestMethod.POST)
-    public String transferWithDepart( @PathVariable("id") long id,@RequestParam("reason") String reason, @RequestParam("newDepartment") long newDepartmentId,  @RequestParam("oldDepartment") long oldDepartmentId){
-        transferService.createAndUpdate(reason,id,oldDepartmentId,newDepartmentId,new Date(), new Date(),1);
-        return "redirect:/transfer";
+    public String transferWithDepart( @PathVariable("id") long id,@RequestParam("reason") String reason, @RequestParam("newDepartment") long newDepartmentId){
+        Assets assets = assetsService.findById(id);
+        transferService.createAndUpdate(reason,id,assets.getDepartment_id(),newDepartmentId,assets.getUpdatedDate(), new Date(),1);
+        assetsService.updateTransferDepart(id,newDepartmentId,new Date());
+        return "redirect:/transfer/department";
     }
 
     @RequestMapping("/staff")
     public String transferStaff(Model model){
-        model.addAttribute("model",transferService.getAllByStaff());
-        return "pages/transfer-history/department-transfer";
+        model.addAttribute("model", assetsService.getAllWithStaff());
+//        model.addAttribute("model",transferService.getAllByStaff());
+        return "pages/transfer-history/staff-transfer";
     }
 
     @RequestMapping("/staff-action/{id}")
@@ -71,9 +77,25 @@ public class TransferController {
         return "pages/transfer-history/staff";
     }
 
-    @RequestMapping(value = "/action/{id}", method = RequestMethod.POST)
-    public String transferWithStaff( @PathVariable("id") long id,@RequestParam("reason") String reason, @RequestParam("newDepartment") long newDepartmentId,  @RequestParam("oldDepartment") long oldDepartmentId){
-        transferService.createAndUpdate(reason,id,oldDepartmentId,newDepartmentId,new Date(), new Date(),1);
-        return "redirect:/transfer";
+    @RequestMapping(value = "/staff-action/{id}", method = RequestMethod.POST)
+    public String transferWithStaff( @PathVariable("id") long id,@RequestParam("reason") String reason, @RequestParam("newStaffId") long newStaffId,  @RequestParam("oldStaffId") long oldStaffId){
+        Assets assets = assetsService.findById(id);
+        transferService.createAndUpdate(reason,id,oldStaffId,newStaffId,assets.getUpdatedDate(), new Date(),1);
+        assetsService.updateTransferStaff(id,newStaffId,new Date());
+        return "redirect:/transfer/staff";
     }
+
+    @RequestMapping("/department/history")
+    public String departHistory(Model model){
+        model.addAttribute("model", transferService.getAllByDepartment());
+        return "pages/transfer-history/history-depart";
+    }
+
+    @RequestMapping("/staff/history")
+    public String staffHistory(Model model){
+        model.addAttribute("model", transferService.getAllByStaff());
+        return "pages/transfer-history/history-staff";
+    }
+
+
 }

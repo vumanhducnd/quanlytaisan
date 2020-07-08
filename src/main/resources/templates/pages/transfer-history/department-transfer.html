@@ -15,7 +15,7 @@
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Điều chuyển tài sản</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Danh sách tài sản</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -30,13 +30,16 @@
                                                    aria-controls="dataTable">
                                         </div>
                                         <button type="submit" class="btn-primary">Tìm kiếm</button>
-
-                                        <div class="col-sm-2">
-                                            <a href="/transfer/create" class="btn btn-primary btn-user btn-block">Thêm
-                                                mới</a>
-                                        </div>
                                     </div>
+
                                 </form>
+                            </div>
+                            <div class="col-sm-2">
+                                <a href="/assets/create" class="btn btn-primary btn-user btn-block">Thêm
+                                    mới</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a th:href="@{/transfer/department/history}" class="btn btn-primary btn-user btn-block">Lịch sử điều chuyển</a>
                             </div>
                         </div>
                     </div>
@@ -45,28 +48,42 @@
                         <tr>
                             <th>STT</th>
                             <th>Tên tài sản</th>
-                            <th>Chi tiết</th>
-                            <th>Phòng ban trước</th>
-                            <th>Phòng ban hiện tại</th>
-                            <th>Thời gian từ</th>
-                            <th>Đến</th>
+                            <th>Số lượng</th>
+                            <th>Tình trạng</th>
+                            <th>Trạng thái</th>
+                            <th>Giá</th>
+                            <th>Phòng ban</th>
+                            <th>Loại tài sản</th>
+                            <th>Nhóm tài sản</th>
+                            <th>Nhà sản xuất</th>
                             <th>Điều chuyển</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="empl,iterStat : ${model}">
                             <th scope="row" th:text="${iterStat.count}"></th>
-                            <td th:text="${empl.assets.name}"></td>
-                            <td th:text="${empl.reason}"></td>
-                            <td th:text="${empl.departments.departmentName}"></td>
-                            <td th:text="${empl.department.departmentName}"></td>
-                            <td th:text="${empl.startDate}"></td>
-                            <td th:text="${empl.endDate}"></td>
                             <td>
-                                <a th:href="@{/transfer/action/{id}(id=${empl.id})}"
+                                <a th:href="@{/assets/detail/{id}(id=${empl.id})}" th:text="${empl.name}"></a>
+                            </td>
+                            <!--                            <td th:text="${empl.description}"></td>-->
+                            <td th:text="${empl.amount}"></td>
+                            <td th:text="${empl.conditionAsset}"></td>
+                            <td>
+                                <div th:switch="${empl.status}">
+                                    <p th:case="1" class="text-primary">Đang sử dụng</p>
+                                    <p th:case="2" class="text-success">Chưa sử dụng</p>
+                                    <p th:case="3" class="text-danger">Đã thu hồi</p>
+                                </div>
+                            </td>
+                            <td th:text="${empl.price}"></td>
+                            <!--                            <td th:text="${empl.position}"></td>-->
+                            <td th:text="${empl.departments.departmentName}"></td>
+                            <td th:text="${empl.categoryAssets.name}"></td>
+                            <td th:text="${empl.groupAssets.groupName}"></td>
+                            <td th:text="${empl.suppliers.name}"></td>
+                            <td><a th:href="@{/transfer/action/{id}(id=${empl.id})}"
                                    class="mr-sm-2 text-primary">
-                                Điều chuyển<i class="fa fa-pencil"></i>
-                                </a>
+                                Điều chuyển<i class="fa fa-pencil"></i></a>
                             </td>
                         </tr>
                         </tbody>

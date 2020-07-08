@@ -14,6 +14,8 @@ public interface TransferService {
 
     public TransferHistory getById(long id);
 
+
+
     public void createAndUpdate(String reason,long assetId, long oldDepartmentId, long newDepartmentId, Date startDate, Date endDate, int status);
 
     public void createAndUpdateWithStaff(String reason,long assetId, long oldDepartmentId, long newDepartmentId, Date startDate, Date endDate, int status);

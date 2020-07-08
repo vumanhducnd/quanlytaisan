@@ -2,6 +2,7 @@ package com.website.qlts.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class Assets implements Serializable {
@@ -47,11 +48,14 @@ public class Assets implements Serializable {
     private long updatedById;
     private long deletedById;
     private int is_deleted;
+    private Date updatedDate;
+    private Date modifiedDate;
+    private Date createDate;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long department_id, long asset_category_id, long group_assets_id, long supplier_id,int is_deleted) {
+    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long department_id, long asset_category_id, long group_assets_id, long supplier_id,int is_deleted,Date updatedDate) {
         this.name = name;
         this.description = description;
         this.amount = amount;
@@ -64,10 +68,36 @@ public class Assets implements Serializable {
         this.group_assets_id = group_assets_id;
         this.supplier_id = supplier_id;
         this.is_deleted = is_deleted;
+        this.updatedDate = updatedDate;
+    }
+
+
+    public Date getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public long getAsset_category_id() {
         return asset_category_id;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
     public void setAsset_category_id(long asset_category_id) {

@@ -4,6 +4,7 @@ import com.website.qlts.entity.Assets;
 import com.website.qlts.view.AssetsView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public interface AssetsService {
@@ -30,6 +31,10 @@ public interface AssetsService {
 
     public List<Assets> getAll();
 
+    public List<Assets> getAllWithDepart();
+
+    public List<Assets> getAllWithStaff();
+
     public Assets create(String name, String description, int amount, String condition, int status, long price, String position, long departmentId, long cateId, long groupId, long suppId);
 
     public Assets findById(long id);
@@ -39,4 +44,8 @@ public interface AssetsService {
     public void delete(long id);
 
     public void update(long id, AssetsView assetsView, long suppliersId,long departmentsId, long groupAssetsId, long categoryAssetsId);
+
+    public void updateTransferDepart(long id,long departmentId, Date date);
+
+    public void updateTransferStaff(long id,long staffId, Date date);
 }
