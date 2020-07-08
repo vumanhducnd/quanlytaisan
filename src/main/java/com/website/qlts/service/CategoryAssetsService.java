@@ -1,45 +1,20 @@
 package com.website.qlts.service;
 
-import com.website.qlts.models.CategoryAssets;
-import com.website.qlts.repository.CategoryAssetsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Service;
+import com.website.qlts.entity.CategoryAssets;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class CategoryAssetsService {
-    @Autowired
-    CategoryAssetsRepository categoryAssetsRepository;
+public interface CategoryAssetsService {
+    public CategoryAssets create(String name);
 
-    public CategoryAssets create(String name) {
-        return categoryAssetsRepository.save(new CategoryAssets(name));
-    }
+    public List<CategoryAssets> getAll();
 
-    public List<CategoryAssets> getAll() {
-        return categoryAssetsRepository.findAll();
-    }
+    public CategoryAssets getById(long id);
 
-    public Optional<CategoryAssets> getById(long id) {
-        return categoryAssetsRepository.findById(id);
-    }
+    public void update(long id, String name);
 
-    public void update(long id, String name) {
-        Optional<CategoryAssets> categoryAssets = categoryAssetsRepository.findById(id);
-        categoryAssets.get().setName(name);
-        categoryAssetsRepository.save(categoryAssets.get());
-    }
+    public void delete(long id);
 
-    public  void delete(long id){
-        Optional<CategoryAssets> categoryAssets = categoryAssetsRepository.findById(id);
-        categoryAssetsRepository.delete(categoryAssets.get());
-    }
-    public  List<CategoryAssets> getByName(String name){
-        List<CategoryAssets> assetsList = categoryAssetsRepository.getByName(name);
-        return  assetsList;
-    }
+    public List<CategoryAssets> getByName(String name);
 
 }

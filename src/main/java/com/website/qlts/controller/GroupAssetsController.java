@@ -1,6 +1,6 @@
 package com.website.qlts.controller;
 
-import com.website.qlts.models.GroupAssets;
+import com.website.qlts.entity.GroupAssets;
 import com.website.qlts.service.GroupAssetsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +43,7 @@ public class GroupAssetsController {
 
     @RequestMapping("/edit/{id}")
     public String editPage(@PathVariable("id") long id, Model model) {
-        GroupAssets assets = groupAssetsService.getById(id).get();
+        GroupAssets assets = groupAssetsService.getById(id);
         model.addAttribute("cate", assets);
         return "pages/group-assets/edit";
     }

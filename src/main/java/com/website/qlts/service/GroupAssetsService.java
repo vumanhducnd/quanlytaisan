@@ -1,43 +1,20 @@
 package com.website.qlts.service;
 
-import com.website.qlts.models.GroupAssets;
-import com.website.qlts.repository.GroupAssetsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.website.qlts.entity.GroupAssets;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class GroupAssetsService {
-    @Autowired
-    GroupAssetsRepository groupAssetsRepository;
+public interface GroupAssetsService {
+    public GroupAssets create(String name);
 
-    public GroupAssets create(String name) {
-        return groupAssetsRepository.save(new GroupAssets(name));
-    }
+    public List<GroupAssets> getAll();
 
-    public List<GroupAssets> getAll() {
-        return groupAssetsRepository.findAll();
-    }
+    public GroupAssets getById(long id);
 
-    public Optional<GroupAssets> getById(long id) {
-        return groupAssetsRepository.findById(id);
-    }
+    public void update(long id, String name);
 
-    public void update(long id, String name) {
-        Optional<GroupAssets> groupAssets = groupAssetsRepository.findById(id);
-        groupAssets.get().setGroupName(name);
-        groupAssetsRepository.save(groupAssets.get());
-    }
+    public void delete(long id);
 
-    public void delete(long id) {
-        Optional<GroupAssets> categoryAssets = groupAssetsRepository.findById(id);
-        groupAssetsRepository.delete(categoryAssets.get());
-    }
-
-    public List<GroupAssets> getByName(String name) {
-        List<GroupAssets> groupAssets = groupAssetsRepository.getByName(name);
-        return groupAssets;
-    }
+    public List<GroupAssets> getByName(String name);
 }
