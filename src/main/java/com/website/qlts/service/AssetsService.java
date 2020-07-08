@@ -15,6 +15,8 @@ public interface AssetsService {
 
     public  void updateStatus(long id);
 
+    public void updateStatusRevoke(long id);
+
     public void assetSell();
 
     public  List<Assets> getByName(String name);

@@ -25,6 +25,13 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
+    public void updateStatusRevoke(long id) {
+        Assets assets = findById(id);
+        assets.setStatus(3);
+        assetsRepository.save(assets);
+    }
+
+    @Override
     public void assetSell() {
         List<Assets> assetsList = new ArrayList<>();
         for(Long x : listIntId){

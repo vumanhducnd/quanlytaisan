@@ -2,12 +2,14 @@ package com.website.qlts.controller;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
 import com.website.qlts.entity.Assets;
+import com.website.qlts.entity.RevokeHistory;
 import com.website.qlts.entity.Suppliers;
 import com.website.qlts.repository.CategoryAssetsRepository;
 import com.website.qlts.repository.DepartmentsRepository;
 import com.website.qlts.repository.GroupAssetsRepository;
 import com.website.qlts.repository.SuppliersReposiotory;
 import com.website.qlts.service.*;
+import com.website.qlts.view.AssetRevoke;
 import com.website.qlts.view.AssetsView;
 import com.website.qlts.view.SellView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,32 +43,31 @@ public class AssetsController {
     HistoryService historyService;
 
     @RequestMapping(value = "")
-    public String assetsPage(Model model,String keyWord, String status, String categoryAssets, String groupAssets) {
-        AssetsView assets ;
-        if(keyWord == null && status == null && categoryAssets == null && groupAssets == null){
+    public String assetsPage(Model model, String keyWord, String status, String categoryAssets, String groupAssets) {
+        AssetsView assets;
+        if (keyWord == null && status == null && categoryAssets == null && groupAssets == null) {
             assets = setAssetView(new Assets());
-            model.addAttribute("model",assets);
-        }
-        else {
-            if(keyWord != null){
+            model.addAttribute("model", assets);
+        } else {
+            if (keyWord != null) {
                 assets = setAssetView(new Assets());
                 assets.setAssetsList(assetsService.getByName(keyWord));
-                model.addAttribute("model",assets);
+                model.addAttribute("model", assets);
             }
-            if(!status.contains("-1")){
+            if (!status.contains("-1")) {
                 assets = setAssetView(new Assets());
                 assets.setAssetsList(assetsService.getByStatus(Integer.parseInt(status)));
-                model.addAttribute("model",assets);
+                model.addAttribute("model", assets);
             }
-            if(!categoryAssets.contains("-1")){
+            if (!categoryAssets.contains("-1")) {
                 assets = setAssetView(new Assets());
                 assets.setAssetsList(assetsService.getByCateAsset(Integer.parseInt(categoryAssets)));
-                model.addAttribute("model",assets);
+                model.addAttribute("model", assets);
             }
-            if(!groupAssets.contains("-1")){
+            if (!groupAssets.contains("-1")) {
                 assets = setAssetView(new Assets());
                 assets.setAssetsList(assetsService.getByGroupAsset(Integer.parseInt(groupAssets)));
-                model.addAttribute("model",assets);
+                model.addAttribute("model", assets);
             }
         }
 
@@ -130,13 +131,19 @@ public class AssetsController {
         return "pages/assets/qr-code";
     }
 
-    @RequestMapping("/revoke")
-    public String repair() {
+    @RequestMapping("/repair")
+    public String repair(Model model) {
         return "pages/assets/revoke";
     }
 
-    @RequestMapping("/revoke")
-    public String revoke() {
+    @RequestMapping(value = "/revoke")
+    public String revoke(Model model, @PathVariable("id") long id) {
+        Assets assets = assetsService.findById(id);
+        AssetRevoke assetRevoke = new AssetRevoke();
+        assetRevoke.setAssets(assets);
+        assetRevoke.setRevokeHistory(new RevokeHistory());
+        model.addAttribute("model",assetRevoke);
+//        assetsService.updateStatusRevoke(id);
         return "pages/assets/revoke";
     }
 
@@ -153,7 +160,7 @@ public class AssetsController {
     }
 
     @RequestMapping(value = "/sell-view", method = RequestMethod.POST)
-    public String sell(Model model, @RequestParam("checkBox") String checkBox,@RequestParam("priceNew") String price, @ModelAttribute Assets assets) {
+    public String sell(Model model, @RequestParam("checkBox") String checkBox, @RequestParam("priceNew") String price, @ModelAttribute Assets assets) {
         if (checkBox != null) {
             model.addAttribute("model", assetsService.sell(checkBox, price));
         }
@@ -161,8 +168,8 @@ public class AssetsController {
     }
 
     @RequestMapping("/action")
-    public String action(Model model){
-        model.addAttribute("model",assetsService.getAll());
+    public String action(Model model) {
+        model.addAttribute("model", assetsService.getAll());
         return "pages/assets/action";
     }
 
