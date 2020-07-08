@@ -31,9 +31,13 @@ public interface AssetsRepository extends JpaRepository<Assets, Long> {
     @Query(value = "SELECT * FROM assets c WHERE c.name like %:name% AND c.is_deleted = 0", nativeQuery = true)
     public List<Assets> getByName(@Param("name")String name);
 
-    @Query(value = "SELECT * FROM assets c WHERE c.staff_id = 0 AND c.is_deleted = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM assets c WHERE c.staff_id = 0 AND c.department_id != 0  AND c.is_deleted = 0", nativeQuery = true)
     public List<Assets> getAllWithDepart();
 
-    @Query(value = "SELECT * FROM assets c WHERE c.department_id = 0 AND c.is_deleted = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM assets c WHERE c.department_id = 0 AND c.staff_id != 0 AND c.is_deleted = 0", nativeQuery = true)
     public List<Assets> getAllWithStaff();
+
+    @Query(value = "SELECT * FROM assets c WHERE c.department_id = 0 AND c.staff_id = 0 AND c.is_deleted = 0", nativeQuery = true)
+    public List<Assets> getAssetsNoUse();
+
 }

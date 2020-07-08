@@ -38,14 +38,6 @@
                                             </select>
                                         </div>
                                         <div class="col-md-2">
-                                            <select class="form-control" name="departments">
-                                                <option value="-1">---Phòng ban---</option>
-                                                <option th:each="li : ${model.departmentsList}"
-                                                        th:value="${li.id}"
-                                                        th:text="${li.departmentName}"/>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2">
                                             <select class="form-control" name="categoryAssets">
                                                 <option value="-1">---Loại tài sản---</option>
                                                 <option th:each="li : ${model.categoryAssetsList}"
@@ -83,7 +75,6 @@
                             <th>Trạng thái</th>
                             <th>Giá</th>
                             <!--                            <th>Vị trí</th>-->
-                            <th>Phòng ban</th>
                             <th>Loại tài sản</th>
                             <th>Nhóm tài sản</th>
                             <th>Nhà sản xuất</th>
@@ -110,7 +101,6 @@
                             </td>
                             <td th:text="${empl.price}"></td>
                             <!--                            <td th:text="${empl.position}"></td>-->
-                            <td th:text="${empl.departments.departmentName}"></td>
                             <td th:text="${empl.categoryAssets.name}"></td>
                             <td th:text="${empl.groupAssets.groupName}"></td>
                             <td th:text="${empl.suppliers.name}"></td>

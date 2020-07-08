@@ -35,18 +35,12 @@
                         </div>
                     </div>
                     <form th:action="@{/assets/sell-view}" method="post" th:object="${model}">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table style="text-align:center;" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th>STT</th>
                                 <th>Tên tài sản</th>
-                                <!--                            <th>Chi tiết</th>-->
-                                <th>Số lượng</th>
-                                <th>Tình trạng</th>
-                                <th>Trạng thái</th>
-                                <th>Giá</th>
-                                <th>Giá bán</th>
-                                <th>Hành động</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,24 +49,19 @@
                                 <td>
                                     <a th:href="@{/assets/detail/{id}(id=${empl.id})}" th:text="${empl.name}"></a>
                                 </td>
-                                <!--                            <td th:text="${empl.description}"></td>-->
-                                <td th:text="${empl.amount}"></td>
-                                <td th:text="${empl.conditionAsset}"></td>
                                 <td>
-                                    <div th:switch="${empl.status}">
-                                        <p th:case="1" class="text-primary">Đang sử dụng</p>
-                                        <p th:case="2" class="text-success">Chưa sử dụng</p>
-                                        <p th:case="3" class="text-danger">Đã thu hồi</p>
-                                    </div>
-                                </td>
-                                <td th:text="${empl.price}"></td>
-                                <td><input type="text" name="priceNew"  th:value="${empl.sellPrice}"></td>
-                                <td><a th:href="@{/assets/sell/{id}(id=${empl.id})}"
-                                       class="mr-sm-2 text-primary">
-                                    Thanh lý<i class="fa fa-pencil"></i></a>
-                                    <input type="checkbox" name="checkBox"
-                                           th:value="${empl.id}"
-                                    />
+                                    <table class="table-bordered">
+                                        <tr>
+                                            <td><a th:href="@{/assets/sell/{id}(id=${empl.id})}"
+                                                   class="mr-sm-2 text-primary"> <i title=" Thanh lý" class="fa fa-truck" aria-hidden="true"></i></a>
+<!--                                                <input type="checkbox" name="checkBox"-->
+<!--                                                       th:value="${empl.id}" />-->
+                                            </td>
+                                            <td><a  th:href="@{/assets/repair/{id}(id=${empl.id})}" class="text-success"><i title="Sửa chữa" class="fa fa-cog"></i></a></td>
+                                            <td> <a th:href="@{/assets/revoke/{id}(id=${empl.id})}" class="text-danger"><i title="Thu hồi" class="fa fa-power-off"></i></a></td>
+                                        </tr>
+                                    </table>
+
                                 </td>
                             </tr>
                             </tbody>

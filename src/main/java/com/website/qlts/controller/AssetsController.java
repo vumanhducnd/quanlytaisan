@@ -41,9 +41,9 @@ public class AssetsController {
     HistoryService historyService;
 
     @RequestMapping(value = "")
-    public String assetsPage(Model model,String keyWord, String status,String departments, String categoryAssets, String groupAssets) {
+    public String assetsPage(Model model,String keyWord, String status, String categoryAssets, String groupAssets) {
         AssetsView assets ;
-        if(keyWord == null && status == null && departments == null && categoryAssets == null && groupAssets == null){
+        if(keyWord == null && status == null && categoryAssets == null && groupAssets == null){
             assets = setAssetView(new Assets());
             model.addAttribute("model",assets);
         }
@@ -61,11 +61,6 @@ public class AssetsController {
             if(!categoryAssets.contains("-1")){
                 assets = setAssetView(new Assets());
                 assets.setAssetsList(assetsService.getByCateAsset(Integer.parseInt(categoryAssets)));
-                model.addAttribute("model",assets);
-            }
-            if(!departments.contains("-1")){
-                assets = setAssetView(new Assets());
-                assets.setAssetsList(assetsService.getByDeparment(Integer.parseInt(departments)));
                 model.addAttribute("model",assets);
             }
             if(!groupAssets.contains("-1")){
@@ -91,7 +86,7 @@ public class AssetsController {
                              @RequestParam("categoryAssets") String categoryAssets) {
         assetsService.create(assetsView.getAssets().getName(), assetsView.getAssets().getDescription(), assetsView.getAssets().getAmount(),
                 assetsView.getAssets().getConditionAsset(), assetsView.getAssets().getStatus(), assetsView.getAssets().getPrice(),
-                assetsView.getAssets().getPosition(), Long.parseLong(departments),
+                assetsView.getAssets().getPosition(),
                 Long.parseLong(categoryAssets),
                 Long.parseLong(groupAssets),
                 Long.parseLong(suppliers));
@@ -135,9 +130,9 @@ public class AssetsController {
         return "pages/assets/qr-code";
     }
 
-    @RequestMapping("/transfer")
-    public String transfer() {
-        return "pages/assets/transfer";
+    @RequestMapping("/revoke")
+    public String repair() {
+        return "pages/assets/revoke";
     }
 
     @RequestMapping("/revoke")
@@ -165,11 +160,10 @@ public class AssetsController {
         return "pages/assets/sell-view";
     }
 
-    @RequestMapping(value = "/sell-assets", method = RequestMethod.POST)
-    public String sell(@ModelAttribute SellView assets) {
-        assetsService.assetSell();
-
-        return "redirect:/assets";
+    @RequestMapping("/action")
+    public String action(Model model){
+        model.addAttribute("model",assetsService.getAll());
+        return "pages/assets/action";
     }
 
     @RequestMapping("/used-history")

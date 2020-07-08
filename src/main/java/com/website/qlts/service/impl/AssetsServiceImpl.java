@@ -94,8 +94,13 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
-    public Assets create(String name, String description, int amount, String condition, int status, long price, String position, long departmentId, long cateId, long groupId, long suppId) {
-        Assets assets = new Assets(name, description, amount, condition, status, price, position, departmentId, cateId, groupId, suppId,0, new Date());
+    public List<Assets> getAssetsNoUse() {
+        return assetsRepository.getAssetsNoUse();
+    }
+
+    @Override
+    public Assets create(String name, String description, int amount, String condition, int status, long price, String position, long cateId, long groupId, long suppId) {
+        Assets assets = new Assets(name, description, amount, condition, status, price, position, cateId, groupId, suppId,0, new Date());
         return assetsRepository.save(assets);
     }
 

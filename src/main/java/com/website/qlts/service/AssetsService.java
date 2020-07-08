@@ -35,7 +35,9 @@ public interface AssetsService {
 
     public List<Assets> getAllWithStaff();
 
-    public Assets create(String name, String description, int amount, String condition, int status, long price, String position, long departmentId, long cateId, long groupId, long suppId);
+    public List<Assets> getAssetsNoUse();
+
+    public Assets create(String name, String description, int amount, String condition, int status, long price, String position,  long cateId, long groupId, long suppId);
 
     public Assets findById(long id);
 
