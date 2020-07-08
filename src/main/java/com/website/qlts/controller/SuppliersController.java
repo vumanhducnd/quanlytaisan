@@ -45,9 +45,9 @@ public class SuppliersController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createPage(@ModelAttribute SuppliersCate suppliers) {
+    public String createPage(@ModelAttribute SuppliersCate suppliers ,@RequestParam("supCateId") String supCateId) {
         suppliersService.create(suppliers.getSuppliers().getName(), suppliers.getSuppliers().getAddress(),
-                suppliers.getSuppliers().getPhoneNumber(), Long.parseLong(suppliers.getList().get(0).getName()));
+                suppliers.getSuppliers().getPhoneNumber(), Long.parseLong(supCateId));
         return "redirect:/suppliers";
     }
 

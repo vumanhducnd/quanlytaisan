@@ -1,59 +1,145 @@
 package com.website.qlts.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class TransferHistory implements Serializable {
-    private String oldPosition;
-    private String newPosition;
-    private String reason;
-    private long oldStaff;
-    private long newStaff;
+    private static final long serialVersionUID = 1L;
+    @Column(name = "asset_id", unique = false)
     private long assetId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "asset_id", updatable = false, insertable = false, unique = false)
+    private Assets assets;
+
+    @Column(name = "staff_id_old", unique = false)
+    private long staffIdOld;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id_old", updatable = false, insertable = false, unique = false)
+    private Staffs staffs;
+
+    @Column(name = "staff_id_new", unique = false)
+    private long staffIdNew;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id_new", updatable = false, insertable = false, unique = false)
+    private Staffs staff;
+
+    @Column(name = "department_id_old", unique = false)
+    private long departmentIdOld;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id_old", updatable = false, insertable = false, unique = false)
+    private Departments departments;
+
+    @Column(name = "department_id_new", unique = false)
+    private long departmentIdNew;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id_new", updatable = false, insertable = false, unique = false)
+    private Departments department;
+
+    private String reason;
+    private int status;
+    private Date startDate;
+    private Date endDate;
     private int is_deleted;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public TransferHistory(String oldPosition, String newPosition, String reason, long oldStaff, long newStaff, long assetId, int is_deleted) {
-        this.oldPosition = oldPosition;
-        this.newPosition = newPosition;
-        this.reason = reason;
-        this.oldStaff = oldStaff;
-        this.newStaff = newStaff;
-        this.assetId = assetId;
-        this.is_deleted = is_deleted;
-    }
-
-    public int getIs_deleted() {
-        return is_deleted;
-    }
-
-    public void setIs_deleted(int is_deleted) {
-        this.is_deleted = is_deleted;
-    }
-
     public TransferHistory() {
     }
 
-    public String getOldPosition() {
-        return oldPosition;
+    public TransferHistory(long assetId, long staffIdOld, long staffIdNew, long departmentIdOld, long departmentIdNew, String reason, int status, Date startDate, Date endDate, int is_deleted) {
+        this.assetId = assetId;
+        this.staffIdOld = staffIdOld;
+        this.staffIdNew = staffIdNew;
+        this.departmentIdOld = departmentIdOld;
+        this.departmentIdNew = departmentIdNew;
+        this.reason = reason;
+        this.status = status;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.is_deleted = is_deleted;
     }
 
-    public void setOldPosition(String oldPosition) {
-        this.oldPosition = oldPosition;
+    public long getAssetId() {
+        return assetId;
     }
 
-    public String getNewPosition() {
-        return newPosition;
+    public void setAssetId(long assetId) {
+        this.assetId = assetId;
     }
 
-    public void setNewPosition(String newPosition) {
-        this.newPosition = newPosition;
+    public Assets getAssets() {
+        return assets;
+    }
+
+    public void setAssets(Assets assets) {
+        this.assets = assets;
+    }
+
+    public long getStaffIdOld() {
+        return staffIdOld;
+    }
+
+    public void setStaffIdOld(long staffIdOld) {
+        this.staffIdOld = staffIdOld;
+    }
+
+    public Staffs getStaffs() {
+        return staffs;
+    }
+
+    public void setStaffs(Staffs staffs) {
+        this.staffs = staffs;
+    }
+
+    public long getStaffIdNew() {
+        return staffIdNew;
+    }
+
+    public void setStaffIdNew(long staffIdNew) {
+        this.staffIdNew = staffIdNew;
+    }
+
+    public Staffs getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staffs staff) {
+        this.staff = staff;
+    }
+
+    public long getDepartmentIdOld() {
+        return departmentIdOld;
+    }
+
+    public void setDepartmentIdOld(long departmentIdOld) {
+        this.departmentIdOld = departmentIdOld;
+    }
+
+    public Departments getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(Departments departments) {
+        this.departments = departments;
+    }
+
+    public long getDepartmentIdNew() {
+        return departmentIdNew;
+    }
+
+    public void setDepartmentIdNew(long departmentIdNew) {
+        this.departmentIdNew = departmentIdNew;
+    }
+
+    public Departments getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Departments department) {
+        this.department = department;
     }
 
     public String getReason() {
@@ -64,28 +150,36 @@ public class TransferHistory implements Serializable {
         this.reason = reason;
     }
 
-    public long getOldStaff() {
-        return oldStaff;
+    public int getStatus() {
+        return status;
     }
 
-    public void setOldStaff(long oldStaff) {
-        this.oldStaff = oldStaff;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public long getNewStaff() {
-        return newStaff;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setNewStaff(long newStaff) {
-        this.newStaff = newStaff;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public long getAssetId() {
-        return assetId;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setAssetId(long assetId) {
-        this.assetId = assetId;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 
     public long getId() {

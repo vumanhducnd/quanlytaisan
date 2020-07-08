@@ -37,6 +37,12 @@ public class Assets implements Serializable {
     @JoinColumn(name = "supplier_id", updatable = false, insertable = false, unique = false)
     private Suppliers suppliers;
 
+    @Column(name = "staff_id", unique = false)
+    private long staff_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id", updatable = false, insertable = false, unique = false)
+    private Staffs staffs;
+
     private long sellPrice;
     private long updatedById;
     private long deletedById;
@@ -230,5 +236,21 @@ public class Assets implements Serializable {
 
     public void setIs_deleted(int is_deleted) {
         this.is_deleted = is_deleted;
+    }
+
+    public long getStaff_id() {
+        return staff_id;
+    }
+
+    public void setStaff_id(long staff_id) {
+        this.staff_id = staff_id;
+    }
+
+    public Staffs getStaffs() {
+        return staffs;
+    }
+
+    public void setStaffs(Staffs staffs) {
+        this.staffs = staffs;
     }
 }

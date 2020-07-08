@@ -34,7 +34,7 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Tên loại nhà cung cấp</label>
                 <div class="col-md-4">
-                    <select th:field="*{list}">
+                    <select name="supCateId" >
                         <option th:each="li : ${listCate.list}"
                                 th:value="${li.id}"
                                 th:text="${li.name}"/>
