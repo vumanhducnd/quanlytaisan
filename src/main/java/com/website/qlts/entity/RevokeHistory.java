@@ -24,7 +24,6 @@ public class RevokeHistory implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", updatable = false, insertable = false, unique = false)
     private Departments departments;
-
     public RevokeHistory() {
     }
 
@@ -108,5 +107,29 @@ public class RevokeHistory implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Assets getAssets() {
+        return assets;
+    }
+
+    public void setAssets(Assets assets) {
+        this.assets = assets;
+    }
+
+    public Staffs getStaffs() {
+        return staffs;
+    }
+
+    public void setStaffs(Staffs staffs) {
+        this.staffs = staffs;
+    }
+
+    public Departments getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(Departments departments) {
+        this.departments = departments;
     }
 }

@@ -91,6 +91,11 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
+    public List<Assets> getAssetsNoRevoke() {
+        return assetsRepository.getAssetsNoRevoke();
+    }
+
+    @Override
     public List<Assets> getAllWithDepart() {
         return assetsRepository.getAllWithDepart();
     }
