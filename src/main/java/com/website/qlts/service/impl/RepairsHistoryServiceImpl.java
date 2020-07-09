@@ -6,6 +6,8 @@ import com.website.qlts.service.RepairsHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RepairsHistoryServiceImpl implements RepairsHistoryService {
 
@@ -15,5 +17,10 @@ public class RepairsHistoryServiceImpl implements RepairsHistoryService {
     @Override
     public void save(RepairHistory repairsHistory){
         repairsHistoryRepository.save(repairsHistory);
+    }
+
+    @Override
+    public List<RepairHistory> getAll(){
+        return repairsHistoryRepository.getAll();
     }
 }
