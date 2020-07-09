@@ -35,6 +35,7 @@
                                                 <option value="1">Đang sử dụng</option>
                                                 <option value="2">Chưa sử dụng</option>
                                                 <option value="3">Đã thu hồi</option>
+                                                <option value="4">Đang sửa chưa</option>
                                             </select>
                                         </div>
                                         <div class="col-md-2">
@@ -97,6 +98,7 @@
                                     <p th:case="1" class="text-primary">Đang sử dụng</p>
                                     <p th:case="2" class="text-success">Chưa sử dụng</p>
                                     <p th:case="3" class="text-danger">Đã thu hồi</p>
+                                    <p th:case="5" class="text-danger">Đang sửa chữa</p>
                                 </div>
                             </td>
                             <td th:text="${empl.price}"></td>

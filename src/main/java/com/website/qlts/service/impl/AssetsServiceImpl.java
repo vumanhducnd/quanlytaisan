@@ -18,6 +18,13 @@ public class AssetsServiceImpl implements AssetsService {
     AssetsRepository assetsRepository;
 
     @Override
+    public void updateRepair(long id) {
+        Assets assets = findById(id);
+        assets.setStatus(5);
+        assetsRepository.save(assets);
+    }
+
+    @Override
     public void updateStatus(long id) {
         Assets assets = findById(id);
         assets.setStatus(4);
@@ -171,4 +178,6 @@ public class AssetsServiceImpl implements AssetsService {
         assets.setUpdatedDate(date);
         assetsRepository.save(assets);
     }
+
+
 }

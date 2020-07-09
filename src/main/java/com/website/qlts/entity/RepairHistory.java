@@ -16,6 +16,12 @@ public class RepairHistory implements Serializable {
     @JoinColumn(name = "asset_id", updatable = false, insertable = false, unique = false)
     private Assets assets;
 
+    @Column(name = "department_id", unique = false)
+    private long departmentId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id", updatable = false, insertable = false, unique = false)
+    private Departments departments;
+
     @Column(name = "staff_id", unique = false)
     private long staffId;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,13 +29,20 @@ public class RepairHistory implements Serializable {
     private Staffs staffs;
 
     private Date endAt;
+
     private Date startAt;
-    public RepairHistory(long id, long assetId, Assets assets, long staffId, Staffs staffs) {
-        this.id = id;
+
+    private String description;
+
+    public RepairHistory(long assetId, Assets assets, long departmentId, Departments departments, long staffId, Staffs staffs, Date endAt, Date startAt) {
         this.assetId = assetId;
         this.assets = assets;
+        this.departmentId = departmentId;
+        this.departments = departments;
         this.staffId = staffId;
         this.staffs = staffs;
+        this.endAt = endAt;
+        this.startAt = startAt;
     }
 
     public RepairHistory() {
@@ -89,5 +102,29 @@ public class RepairHistory implements Serializable {
 
     public void setStaffs(Staffs staffs) {
         this.staffs = staffs;
+    }
+
+    public long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public Departments getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(Departments departments) {
+        this.departments = departments;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

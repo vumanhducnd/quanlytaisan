@@ -1,15 +1,9 @@
 package com.website.qlts.controller;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.website.qlts.entity.Assets;
+import com.website.qlts.entity.RepairHistory;
 import com.website.qlts.entity.RevokeHistory;
 import com.website.qlts.entity.SellAsset;
-import com.website.qlts.entity.Suppliers;
-import com.website.qlts.repository.CategoryAssetsRepository;
-import com.website.qlts.repository.DepartmentsRepository;
-import com.website.qlts.repository.GroupAssetsRepository;
-import com.website.qlts.repository.SuppliersReposiotory;
 import com.website.qlts.service.*;
 import com.website.qlts.view.AssetRevoke;
 import com.website.qlts.view.AssetsView;
@@ -19,13 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.WebParam;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 @Controller
 @RequestMapping("/assets")
 public class AssetsController {
@@ -46,6 +37,9 @@ public class AssetsController {
 
     @Autowired
     RevokeHistoryService revokeHistoryService;
+
+    @Autowired
+    RepairsHistoryService repairsHistoryService ;
 
     @Autowired
     SellAssetService sellAssetService;
@@ -138,9 +132,29 @@ public class AssetsController {
         return "pages/assets/qr-code";
     }
 
-    @RequestMapping("/repair")
-    public String repair(Model model) {
-        return "pages/assets/revoke";
+    @RequestMapping("/repair/{id}")
+    public String repair(Model model, @PathVariable("id") long id) {
+        Assets assets = assetsService.findById(id);
+        model.addAttribute("model",assets);
+        return "pages/assets/repair";
+    }
+
+    @RequestMapping(value ="/repair/{id}", method = RequestMethod.POST)
+    public String repair( Model model, @PathVariable("id") long id,
+                          @RequestParam("startAt") String startAt,
+                          @RequestParam("endAt") String endAt,
+                          @RequestParam("description") String description) {
+        RepairHistory repairHistory = new RepairHistory();
+        Assets assets = assetsService.findById(id);
+            repairHistory.setAssetId(id);
+            repairHistory.setDepartmentId(assets.getDepartment_id());
+            repairHistory.setStaffId(assets.getStaff_id());
+            repairHistory.setStartAt(convertStringToDate(startAt));
+            repairHistory.setEndAt(convertStringToDate(endAt));
+            repairHistory.setDescription(description);
+            repairsHistoryService.save(repairHistory);
+            assetsService.updateRepair(id);
+        return "redirect:/assets";
     }
 
     @RequestMapping(value = "/revoke/{id}")
@@ -150,7 +164,6 @@ public class AssetsController {
         assetRevoke.setAssets(assets);
         assetRevoke.setRevokeHistory(new RevokeHistory());
         model.addAttribute("model", assetRevoke);
-//        assetsService.updateStatusRevoke(id);
         return "pages/assets/revoke";
     }
 
@@ -229,5 +242,14 @@ public class AssetsController {
         assetsView.setSuppliersList(suppliersService.getAll());
         assetsView.setGroupAssetsList(groupAssetsService.getAll());
         return assetsView;
+    }
+
+    public Date convertStringToDate(String dateString){
+        Date date = new Date();
+        try {
+            date=new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
+        }catch (Exception ex){
+        }
+        return date;
     }
 }
