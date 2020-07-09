@@ -12,18 +12,41 @@ import java.util.List;
 public class DepartmentsServiceImpl implements DepartmentsService {
     @Autowired
     DepartmentsRepository departmentsRepository;
+
+    @Override
+    public Departments create(String name) {
+        Departments departments = new Departments();
+        departments.setDepartmentName(name);
+        return departmentsRepository.save(departments);
+    }
+
     @Override
     public List<Departments> getAll() {
         return departmentsRepository.getAll();
     }
 
     @Override
-    public List<Departments> getByParentId(int id) {
-        return null;
+    public Departments getById(long id) {
+        return departmentsRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List<Departments> getByChildId(int id) {
+    public void update(long id, String name) {
+        Departments departments = departmentsRepository.findById(id).orElse(null);
+        departments.setDepartmentName(name);
+        departmentsRepository.save(departments);
+    }
+
+    @Override
+    public void delete(long id) {
+        Departments departments = departmentsRepository.findById(id).orElse(null);
+        departments.setIs_deleted(1);
+        departmentsRepository.save(departments);
+    }
+
+    @Override
+    public List<Departments> getByName(String name) {
         return null;
     }
 }
+

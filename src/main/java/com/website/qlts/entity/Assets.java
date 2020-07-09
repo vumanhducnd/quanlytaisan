@@ -55,7 +55,7 @@ public class Assets implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long asset_category_id, long group_assets_id, long supplier_id,int is_deleted,Date updatedDate) {
+    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long asset_category_id, long group_assets_id, long supplier_id,int is_deleted,Date updatedDate,Date createDate) {
         this.name = name;
         this.description = description;
         this.amount = amount;
@@ -68,6 +68,7 @@ public class Assets implements Serializable {
         this.supplier_id = supplier_id;
         this.is_deleted = is_deleted;
         this.updatedDate = updatedDate;
+        this.createDate = createDate;
     }
 
 

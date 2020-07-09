@@ -13,11 +13,15 @@ public interface AssetsService {
 
     public  ArrayList<Long> listPrice = new ArrayList<>();
 
+    public  void updateRepair(long id);
+
     public  void updateStatus(long id);
 
     public void updateStatusRevoke(long id);
 
     public void assetSell();
+
+    public List<Assets> getAssetsNew(int month, int year);
 
     public  List<Assets> getByName(String name);
 
@@ -54,4 +58,5 @@ public interface AssetsService {
     public void updateTransferDepart(long id,long departmentId, Date date);
 
     public void updateTransferStaff(long id,long staffId, Date date);
+
 }

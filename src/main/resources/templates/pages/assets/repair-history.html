@@ -15,7 +15,7 @@
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Lịch sử thanh lý</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Lịch sử sửa chữa</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -40,24 +40,23 @@
                         <tr>
                             <th>STT</th>
                             <th>Tên tài sản</th>
-                            <th>Giá mua</th>
-                            <th>Giá bán</th>
-                            <th>Người mua</th>
-                            <th>Số điện thoại</th>
-                            <th>Ngày bán</th>
+                            <th>Phòng ban</th>
                             <th>Ghi chú</th>
+                            <th>Ngày bắt đầu sửa</th>
+                            <th>Ngày kết thúc sửa</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="empl,iterStat : ${model}">
                             <th scope="row" th:text="${iterStat.count}"></th>
                             <td th:text="${empl.assets.name}"></td>
-                            <td th:text="${empl.assets.price}"></td>
-                            <td th:text="${empl.priceSell}"></td>
-                            <td th:text="${empl.name}"></td>
-                            <td th:text="${empl.phoneNumber}"></td>
-                            <td th:text="${#calendars.format(empl.createdDate,'dd MMMM yyyy')}"></td>
-                            <td th:text="${empl.note}"></td>
+                            <td th:text="(${empl.departments.id == 0} ? ${empl.staffs.name} :  ${empl.departments.departmentName})">
+                            </td>
+<!--                            <td th:text="${empl.departments.name}"></td>-->
+<!--                            <td th:text="${empl.staffs.name}"></td>-->
+                            <td th:text="${empl.description}"></td>
+                            <td th:text="${#calendars.format(empl.startAt,'dd MMMM yyyy')}"></td>
+                            <td th:text="${#calendars.format(empl.endAt,'dd MMMM yyyy')}"></td>
                         </tr>
                         </tbody>
                     </table>

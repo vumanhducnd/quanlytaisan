@@ -20,23 +20,29 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 row">
-                            <div id="dataTable_filter" class="dataTables_filter col-sm-3">
+                        <div class="col-sm-12 col-md-12 row">
+                            <div id="dataTable_filter" class="dataTables_filter col-sm-2">
                                 <form th:action="@{/category-assets/}" method="get">
                                     <input type="search" class="form-control form-control-sm" placeholder="Tìm kiếm"
                                            id="txtSearch" name="keyWord"
                                            aria-controls="dataTable">
                                 </form>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <a href="/assets/create" class="btn btn-primary btn-user btn-block">Thêm
                                     mới</a>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <a class="btn btn-primary" th:href="@{/assets/sell/history}">Lịch sử thanh lý</a>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <a class="btn btn-primary" th:href="@{/assets/revoke/history}">Lịch sử thu hồi</a>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-primary" th:href="@{/assets/repair/history}">Lịch sử sửa chữa</a>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-primary" th:href="@{/assets/used-history}">Lịch sử sử dụng</a>
                             </div>
                         </div>
                     </div>
