@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +21,13 @@ public class AssetsServiceImpl implements AssetsService {
     public void updateStatus(long id) {
         Assets assets = findById(id);
         assets.setStatus(4);
+        assetsRepository.save(assets);
+    }
+
+    @Override
+    public void updateStatusRevoke(long id) {
+        Assets assets = findById(id);
+        assets.setStatus(3);
         assetsRepository.save(assets);
     }
 
@@ -83,8 +91,28 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
-    public Assets create(String name, String description, int amount, String condition, int status, long price, String position, long departmentId, long cateId, long groupId, long suppId) {
-        Assets assets = new Assets(name, description, amount, condition, status, price, position, departmentId, cateId, groupId, suppId,0);
+    public List<Assets> getAssetsNoRevoke() {
+        return assetsRepository.getAssetsNoRevoke();
+    }
+
+    @Override
+    public List<Assets> getAllWithDepart() {
+        return assetsRepository.getAllWithDepart();
+    }
+
+    @Override
+    public List<Assets> getAllWithStaff() {
+        return assetsRepository.getAllWithStaff();
+    }
+
+    @Override
+    public List<Assets> getAssetsNoUse() {
+        return assetsRepository.getAssetsNoUse();
+    }
+
+    @Override
+    public Assets create(String name, String description, int amount, String condition, int status, long price, String position, long cateId, long groupId, long suppId) {
+        Assets assets = new Assets(name, description, amount, condition, status, price, position, cateId, groupId, suppId,0, new Date());
         return assetsRepository.save(assets);
     }
 
@@ -125,6 +153,22 @@ public class AssetsServiceImpl implements AssetsService {
             assets.setGroup_assets_id(groupAssetsId);
             assets.setAsset_category_id(categoryAssetsId);
         }
+        assetsRepository.save(assets);
+    }
+
+    @Override
+    public void updateTransferDepart(long id, long departmentId, Date date) {
+        Assets assets = assetsRepository.findById(id).orElse(null);
+        assets.setDepartment_id(departmentId);
+        assets.setUpdatedDate(date);
+        assetsRepository.save(assets);
+    }
+
+    @Override
+    public void updateTransferStaff(long id, long staffId, Date date) {
+        Assets assets = assetsRepository.findById(id).orElse(null);
+        assets.setStaff_id(staffId);
+        assets.setUpdatedDate(date);
         assetsRepository.save(assets);
     }
 }

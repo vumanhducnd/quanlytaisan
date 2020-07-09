@@ -5,85 +5,54 @@
 >
 <div id="wrapper">
     <div class="container-fluid" layout:fragment="content">
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    ...
+        <h2 class="title-header">Thanh lý tài sản</h2>
+        <form th:action="@{/assets/sell/{id}(id=${model.asset.id})}" method="post" th:object="${model}">
+            <div class="form-group row">
+                <label  class="col-md-4 col-form-label text-md-right" >Tên tài sản</label>
+                <div class="col-md-4">
+                    <label type="text" th:text="${model.asset.name}" class="form-control"></label>
                 </div>
             </div>
-        </div>
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Danh sách tài sản</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6 row">
-                            <div id="dataTable_filter" class="dataTables_filter col-sm-3">
-                                <form th:action="@{/category-assets/}" method="get">
-                                    <input type="search" class="form-control form-control-sm" placeholder="Tìm kiếm"
-                                           id="txtSearch" name="keyWord"
-                                           aria-controls="dataTable">
-                                </form>
-                            </div>
-                            <div class="col-sm-3">
-                                <a href="/assets/create" class="btn btn-primary btn-user btn-block">Thêm
-                                    mới</a>
-                            </div>
-                        </div>
-                    </div>
-                    <form th:action="@{/assets/sell-view}" method="post" th:object="${model}">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Tên tài sản</th>
-                                <!--                            <th>Chi tiết</th>-->
-                                <th>Số lượng</th>
-                                <th>Tình trạng</th>
-                                <th>Trạng thái</th>
-                                <th>Giá</th>
-                                <th>Giá bán</th>
-                                <th>Hành động</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="empl,iterStat : ${model}">
-                                <th scope="row" th:text="${iterStat.count}"></th>
-                                <td>
-                                    <a th:href="@{/assets/detail/{id}(id=${empl.id})}" th:text="${empl.name}"></a>
-                                </td>
-                                <!--                            <td th:text="${empl.description}"></td>-->
-                                <td th:text="${empl.amount}"></td>
-                                <td th:text="${empl.conditionAsset}"></td>
-                                <td>
-                                    <div th:switch="${empl.status}">
-                                        <p th:case="1" class="text-primary">Đang sử dụng</p>
-                                        <p th:case="2" class="text-success">Chưa sử dụng</p>
-                                        <p th:case="3" class="text-danger">Đã thu hồi</p>
-                                    </div>
-                                </td>
-                                <td th:text="${empl.price}"></td>
-                                <td><input type="text" name="priceNew"  th:value="${empl.sellPrice}"></td>
-                                <td><a th:href="@{/assets/sell/{id}(id=${empl.id})}"
-                                       class="mr-sm-2 text-primary">
-                                    Thanh lý<i class="fa fa-pencil"></i></a>
-                                    <input type="checkbox" name="checkBox"
-                                           th:value="${empl.id}"
-                                    />
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <button type="submit">Thanh lý</button>
-                    </form>
+            <div class="form-group row">
+                <label  class="col-md-4 col-form-label text-md-right" >Giá mua</label>
+                <div class="col-md-4">
+                    <label type="text" th:text="${model.asset.price}" class="form-control"></label>
                 </div>
             </div>
-        </div>
+            <div class="form-group row">
+                <label  class="col-md-4 col-form-label text-md-right" >Giá bán</label>
+                <div class="col-md-4">
+                    <input type="text" name="newPrice" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-md-4 col-form-label text-md-right" >Ghi chú</label>
+                <div class="col-md-4">
+                    <input type="text" name="note" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-md-4 col-form-label text-md-right" >Người mua</label>
+                <div class="col-md-4">
+                    <input type="text" name="person" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-md-4 col-form-label text-md-right" >Số điện thoại</label>
+                <div class="col-md-4">
+                    <input type="text" id="full_name"  class="form-control" name="phoneNumber">
+                </div>
+            </div>
 
+            <div class="col-md-6 offset-md-4">
+                <button type="submit" class="btn btn-primary">
+                    Thanh lý
+                </button>
+            </div>
+        </form>
     </div>
+    <!-- /.container-fluid -->
+
 </div>
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
