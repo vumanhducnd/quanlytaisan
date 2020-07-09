@@ -47,6 +47,11 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
+    public List<Assets> getAssetsNew(int month, int year) {
+        return assetsRepository.getAssetsNew(month,year);
+    }
+
+    @Override
     public List<Assets> getByName(String name) {
         return assetsRepository.getByName(name);
     }
@@ -119,7 +124,7 @@ public class AssetsServiceImpl implements AssetsService {
 
     @Override
     public Assets create(String name, String description, int amount, String condition, int status, long price, String position, long cateId, long groupId, long suppId) {
-        Assets assets = new Assets(name, description, amount, condition, status, price, position, cateId, groupId, suppId,0, new Date());
+        Assets assets = new Assets(name, description, amount, condition, status, price, position, cateId, groupId, suppId,0, new Date(), new Date());
         return assetsRepository.save(assets);
     }
 
@@ -159,6 +164,7 @@ public class AssetsServiceImpl implements AssetsService {
             assets.setSupplier_id(suppliersId);
             assets.setGroup_assets_id(groupAssetsId);
             assets.setAsset_category_id(categoryAssetsId);
+            assets.setUpdatedDate(new Date());
         }
         assetsRepository.save(assets);
     }

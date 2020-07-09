@@ -213,17 +213,17 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                aria-expanded="true"
                aria-controls="collapsePages">
-                <i class="fa fa-bar-chart"></i>
+                <i class="fa fa-folder-open"></i>
                 <span>Báo cáo thống kê</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="login.html">Báo cáo sao kê</a>
-                    <a class="collapse-item" href="register.html">Báo cáo tình hình sử dụng</a>
-                    <a class="collapse-item" href="forgot-password.html">Báo cáo danh sách tài sản cố định đăng ký mới</a>
-                    <a class="collapse-item" href="404.html">Báo cáo lịch sử điều chuyển tài sản</a>
-                    <a class="collapse-item" href="blank.html">Báo cáo lịch sử thu hồi tài sản</a>
-                    <a class="collapse-item" href="blank.html">Báo cáo danh mục thu hồi vào kho</a>
+                    <a class="collapse-item" th:href="@{/report-statement}">Báo cáo sao kê</a>
+                    <a class="collapse-item" th:href="@{/report-use}">Báo cáo tình hình sử dụng</a>
+                    <a class="collapse-item" th:href="@{/report-new}">Báo cáo danh sách tài sản cố định đăng ký mới</a>
+                    <a class="collapse-item" th:href="@{/report-transfer}">Báo cáo lịch sử điều chuyển tài sản</a>
+                    <a class="collapse-item" th:href="@{/report-revoke}">Báo cáo lịch sử thu hồi tài sản</a>
+                    <a class="collapse-item" th:href="@{/report-revoke-poached}">Báo cáo danh mục thu hồi vào kho</a>
                 </div>
             </div>
         </li>

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -42,5 +43,8 @@ public interface AssetsRepository extends JpaRepository<Assets, Long> {
 
     @Query(value = "SELECT * FROM assets c WHERE  c.status != 3 AND c.status != 4 AND c.is_deleted = 0", nativeQuery = true)
     public List<Assets> getAssetsNoRevoke();
+
+    @Query(value = "SELECT * FROM assets as r WHERE MONTH(r.create_date) = ? AND YEAR(r.create_date) = ? AND  r.status = 2 AND r.is_deleted = 0", nativeQuery = true)
+    public List<Assets> getAssetsNew(int month, int year);
 
 }

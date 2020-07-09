@@ -42,12 +42,9 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Trạng thái</label>
                 <div class="col-md-4">
-<!--                    <input class="form-control form-control-user"-->
-<!--                           th:field="*{assets.status}"-->
-<!--                           placeholder="">-->
                     <select class="form-control" th:field="*{assets.status}">
-                        <option value="1">Đang sử dụng</option>
                         <option value="2">Chưa sử dụng</option>
+                        <option value="1">Đang sử dụng</option>
                         <option value="3">Đã thu hồi</option>
                     </select>
                 </div>

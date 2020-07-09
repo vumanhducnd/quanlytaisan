@@ -21,6 +21,8 @@ public interface AssetsService {
 
     public void assetSell();
 
+    public List<Assets> getAssetsNew(int month, int year);
+
     public  List<Assets> getByName(String name);
 
     public List<Assets> getByStatus(int status);
