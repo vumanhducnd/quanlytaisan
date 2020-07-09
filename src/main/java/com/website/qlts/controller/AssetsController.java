@@ -3,6 +3,7 @@ package com.website.qlts.controller;
 import com.website.qlts.entity.Assets;
 import com.website.qlts.entity.RepairHistory;
 import com.website.qlts.entity.RevokeHistory;
+import com.website.qlts.entity.SellAsset;
 import com.website.qlts.service.*;
 import com.website.qlts.view.AssetRevoke;
 import com.website.qlts.view.AssetsView;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.List;
 @Controller
 @RequestMapping("/assets")
 public class AssetsController {
@@ -35,11 +36,13 @@ public class AssetsController {
     GroupAssetsService groupAssetsService;
 
     @Autowired
-    HistoryService historyService;
+    RevokeHistoryService revokeHistoryService;
 
     @Autowired
     RepairsHistoryService repairsHistoryService ;
 
+    @Autowired
+    SellAssetService sellAssetService;
     @RequestMapping(value = "")
     public String assetsPage(Model model, String keyWord, String status, String categoryAssets, String groupAssets) {
         AssetsView assets;
@@ -154,15 +157,22 @@ public class AssetsController {
         return "redirect:/assets";
     }
 
-    @RequestMapping(value = "/revoke")
+    @RequestMapping(value = "/revoke/{id}")
     public String revoke(Model model, @PathVariable("id") long id) {
         Assets assets = assetsService.findById(id);
         AssetRevoke assetRevoke = new AssetRevoke();
         assetRevoke.setAssets(assets);
         assetRevoke.setRevokeHistory(new RevokeHistory());
-        model.addAttribute("model",assetRevoke);
-//        assetsService.updateStatusRevoke(id);
+        model.addAttribute("model", assetRevoke);
         return "pages/assets/revoke";
+    }
+
+    @RequestMapping(value = "/revoke/{id}", method = RequestMethod.POST)
+    public String revoke(@PathVariable("id") long id, @RequestParam("reason") String reason) {
+        assetsService.updateStatusRevoke(id);
+        Assets assets = assetsService.findById(id);
+        revokeHistoryService.createHistory(id, assets.getStaff_id(), assets.getDepartment_id(), reason, new Date());
+        return "redirect:/assets/action";
     }
 
     @RequestMapping("/inventory")
@@ -170,24 +180,47 @@ public class AssetsController {
         return "pages/assets/inventory";
     }
 
-    @RequestMapping("/sell")
-    public String sell(Model model) {
+    @RequestMapping("/sell/{id}")
+    public String sell(Model model, @PathVariable("id") long id) {
         SellView sellView = new SellView();
-        model.addAttribute("model", assetsService.getAll());
+        sellView.setAsset(assetsService.findById(id));
+        sellView.setSellAsset(new SellAsset());
+        model.addAttribute("model", sellView);
         return "pages/assets/sell";
     }
 
-    @RequestMapping(value = "/sell-view", method = RequestMethod.POST)
-    public String sell(Model model, @RequestParam("checkBox") String checkBox, @RequestParam("priceNew") String price, @ModelAttribute Assets assets) {
-        if (checkBox != null) {
-            model.addAttribute("model", assetsService.sell(checkBox, price));
-        }
-        return "pages/assets/sell-view";
+    @RequestMapping(value = "/sell/{id}", method = RequestMethod.POST)
+    public String sell(@PathVariable("id") long id,@RequestParam("newPrice") String newPrice, @RequestParam("note") String note,
+                       @RequestParam("person") String person, @RequestParam("phoneNumber") String phoneNumber) {
+        SellAsset sellAsset = new SellAsset();
+        sellAsset.setAssetId(id);
+        sellAsset.setPriceSell(Long.parseLong(newPrice.trim()));
+        sellAsset.setName(person);
+        sellAsset.setNote(note);
+        sellAsset.setPhoneNumber(phoneNumber);
+        sellAsset.setCreatedDate(new Date());
+        sellAssetService.createSellAsset(sellAsset);
+        assetsService.updateStatus(id);
+        return "pages/assets/sell-history";
+    }
+
+    @RequestMapping("/revoke/history")
+    public String revokePage(Model model){
+        List<RevokeHistory> revokeHistories;
+        revokeHistories = revokeHistoryService.getAll();
+        model.addAttribute("model", revokeHistories);
+        return "pages/assets/revoke-history";
+    }
+
+    @RequestMapping("/sell/history")
+    public String assetSellPage(Model model){
+        model.addAttribute("model",sellAssetService.getAll());
+        return "pages/assets/sell-history";
     }
 
     @RequestMapping("/action")
     public String action(Model model) {
-        model.addAttribute("model", assetsService.getAll());
+        model.addAttribute("model", assetsService.getAssetsNoRevoke());
         return "pages/assets/action";
     }
 

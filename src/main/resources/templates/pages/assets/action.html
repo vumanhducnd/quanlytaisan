@@ -32,6 +32,12 @@
                                 <a href="/assets/create" class="btn btn-primary btn-user btn-block">Thêm
                                     mới</a>
                             </div>
+                            <div class="col-md-4">
+                                <a class="btn btn-primary" th:href="@{/assets/sell/history}">Lịch sử thanh lý</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="btn btn-primary" th:href="@{/assets/revoke/history}">Lịch sử thu hồi</a>
+                            </div>
                         </div>
                     </div>
                     <form th:action="@{/assets/sell-view}" method="post" th:object="${model}">

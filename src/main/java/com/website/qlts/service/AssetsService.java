@@ -35,6 +35,8 @@ public interface AssetsService {
 
     public List<Assets> getAll();
 
+    public List<Assets> getAssetsNoRevoke();
+
     public List<Assets> getAllWithDepart();
 
     public List<Assets> getAllWithStaff();

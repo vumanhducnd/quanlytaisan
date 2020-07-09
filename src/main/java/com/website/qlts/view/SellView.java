@@ -1,43 +1,27 @@
 package com.website.qlts.view;
 
 import com.website.qlts.entity.Assets;
+import com.website.qlts.entity.SellAsset;
 
 import java.util.List;
 
 public class SellView {
-    private List<Assets> assetsList;
-//    private History history;
-    private long newPrice;
+    private Assets asset;
+    private SellAsset sellAsset;
 
-//    public SellView(List<Assets> assetsList, History history) {
-//        this.assetsList = assetsList;
-//        this.history = history;
-//    }
-
-    public SellView() {
+    public Assets getAsset() {
+        return asset;
     }
 
-    public List<Assets> getAssetsList() {
-        return assetsList;
+    public void setAsset(Assets asset) {
+        this.asset = asset;
     }
 
-    public void setAssetsList(List<Assets> assetsList) {
-        this.assetsList = assetsList;
+    public SellAsset getSellAsset() {
+        return sellAsset;
     }
 
-//    public History getHistory() {
-//        return history;
-//    }
-//
-//    public void setHistory(History history) {
-//        this.history = history;
-//    }
-
-    public long getNewPrice() {
-        return newPrice;
-    }
-
-    public void setNewPrice(long newPrice) {
-        this.newPrice = newPrice;
+    public void setSellAsset(SellAsset sellAsset) {
+        this.sellAsset = sellAsset;
     }
 }
