@@ -17,8 +17,7 @@ public class DepartmentsServiceImpl implements DepartmentsService {
     public Departments create(String name) {
         Departments departments = new Departments();
         departments.setDepartmentName(name);
-        departmentsRepository.save(departments);
-        return null;
+        return departmentsRepository.save(departments);
     }
 
     @Override
@@ -28,17 +27,21 @@ public class DepartmentsServiceImpl implements DepartmentsService {
 
     @Override
     public Departments getById(long id) {
-        return null;
+        return departmentsRepository.findById(id).orElse(null);
     }
 
     @Override
     public void update(long id, String name) {
-
+        Departments departments = departmentsRepository.findById(id).orElse(null);
+        departments.setDepartmentName(name);
+        departmentsRepository.save(departments);
     }
 
     @Override
     public void delete(long id) {
-
+        Departments departments = departmentsRepository.findById(id).orElse(null);
+        departments.setIs_deleted(1);
+        departmentsRepository.save(departments);
     }
 
     @Override

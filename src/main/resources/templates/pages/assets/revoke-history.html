@@ -52,7 +52,7 @@
                             <td th:text="(${empl.status == 1} ? ${empl.departments.departmentName} :  ${empl.staffs.name})">
                             </td>
                             <td th:text="${empl.reason}"></td>
-                            <td th:text="${empl.revokeDate}"></td>
+                            <td th:text="${#calendars.format(empl.revokeDate,'dd MMMM yyyy')}"></td>
                         </tr>
                         </tbody>
                     </table>
