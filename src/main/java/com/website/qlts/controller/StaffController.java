@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -45,9 +46,11 @@ public class StaffController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createPage(@ModelAttribute StaffDepartments staffDepartments, @RequestParam("departmentsId") String departmentsId) {
+    public String createPage(@ModelAttribute StaffDepartments staffDepartments,
+                             @RequestParam("departmentsId") String departmentsId,
+                             @RequestParam("dateOfBirth") String dateOfBirth) {
         Staffs staffs = staffDepartments.getStaffs();
-        staffService.create(new Staffs(staffs.getName(), staffs.getDateOfBirth(), staffs.getAddress(), staffs.getPhoneNumber(),0,Long.parseLong(departmentsId) ));
+        staffService.create(new Staffs(staffs.getName(), convertStringToDate(dateOfBirth), staffs.getAddress(), staffs.getPhoneNumber(),0,Long.parseLong(departmentsId) ));
         return "redirect:/staffs/";
     }
 
@@ -63,5 +66,14 @@ public class StaffController {
         List<Staffs> staffsList = staffService.getByName(name);
         model.addAttribute("staffs",staffsList);
         return "redirect:/staffs/";
+    }
+
+    public Date convertStringToDate(String dateString){
+        Date date = new Date();
+        try {
+            date=new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
+        }catch (Exception ex){
+        }
+        return date;
     }
 }
