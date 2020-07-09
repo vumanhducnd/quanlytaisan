@@ -43,6 +43,9 @@ public class AssetsController {
 
     @Autowired
     SellAssetService sellAssetService;
+
+    @Autowired
+    TransferService transferService;
     @RequestMapping(value = "")
     public String assetsPage(Model model, String keyWord, String status, String categoryAssets, String groupAssets) {
         AssetsView assets;
@@ -225,8 +228,9 @@ public class AssetsController {
     }
 
     @RequestMapping("/used-history")
-    public String history() {
-        return "pages/assets/history";
+    public String history(Model model) {
+        model.addAttribute("model",transferService.getAll());
+        return "pages/assets/used-history";
     }
 
     public AssetsView setAssetView(Assets assets) {

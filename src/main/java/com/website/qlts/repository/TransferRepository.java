@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface TransferRepository  extends JpaRepository<TransferHistory,Long> {
-    @Query(value = "SELECT * FROM transfer_history c WHERE  c.is_deleted = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM transfer_history c WHERE  c.is_deleted = 0 ORDER BY c.asset_id", nativeQuery = true)
     public List<TransferHistory> getAll();
 
     @Query(value = "SELECT * FROM transfer_history c WHERE  c.is_deleted = 0 AND c.status = 1", nativeQuery = true)
