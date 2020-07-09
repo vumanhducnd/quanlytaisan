@@ -157,6 +157,12 @@ public class AssetsController {
         return "redirect:/assets";
     }
 
+    @RequestMapping("/repair/history")
+    public String repairHistory(Model model){
+        model.addAttribute("model",repairsHistoryService.getAll());
+        return "pages/assets/repair-history";
+    }
+
     @RequestMapping(value = "/revoke/{id}")
     public String revoke(Model model, @PathVariable("id") long id) {
         Assets assets = assetsService.findById(id);

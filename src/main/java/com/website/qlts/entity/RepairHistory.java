@@ -34,6 +34,9 @@ public class RepairHistory implements Serializable {
 
     private String description;
 
+    @Column(name = "isDeleted")
+    private int is_deleted;
+
     public RepairHistory(long assetId, Assets assets, long departmentId, Departments departments, long staffId, Staffs staffs, Date endAt, Date startAt) {
         this.assetId = assetId;
         this.assets = assets;
@@ -126,5 +129,13 @@ public class RepairHistory implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 }
