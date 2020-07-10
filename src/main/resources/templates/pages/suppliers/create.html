@@ -11,24 +11,30 @@
                 <label class="col-md-4 col-form-label text-md-right">Tên cung cấp</label>
                 <div class="col-md-4">
                     <input class="form-control form-control-user"
-                           th:field="*{suppliers.name}"
+                           th:field="*{suppliers.name}" maxlength="255"
                            placeholder="">
+                    <span th:if="${#fields.hasErrors('suppliers.name')}" th:errors="*{suppliers.name}"
+                          class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Địa chỉ</label>
                 <div class="col-md-4">
                     <input class="form-control form-control-user"
-                           th:field="*{suppliers.address}"
+                           th:field="*{suppliers.address}" maxlength="255"
                            placeholder="">
+                    <span th:if="${#fields.hasErrors('suppliers.address')}" th:errors="*{suppliers.address}"
+                          class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Số điện thoại</label>
                 <div class="col-md-4">
                     <input class="form-control form-control-user"
-                           th:field="*{suppliers.phoneNumber}"
+                           th:field="*{suppliers.phoneNumber}" maxlength="255"
                            placeholder="">
+                    <span th:if="${#fields.hasErrors('suppliers.phoneNumber')}" th:errors="*{suppliers.phoneNumber}"
+                          class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">

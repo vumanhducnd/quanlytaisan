@@ -1,6 +1,8 @@
 package com.website.qlts.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -32,6 +34,8 @@ public class RepairHistory implements Serializable {
 
     private Date startAt;
 
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String description;
 
     @Column(name = "isDeleted")

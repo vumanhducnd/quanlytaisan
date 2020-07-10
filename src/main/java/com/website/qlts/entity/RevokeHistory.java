@@ -1,6 +1,8 @@
 package com.website.qlts.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -36,11 +38,14 @@ public class RevokeHistory implements Serializable {
         this.revokeDate = revokeDate;
         this.is_deleted = is_deleted;
     }
-
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String reason;
+
     private int status;
     private Date revokeDate;
     private int is_deleted;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

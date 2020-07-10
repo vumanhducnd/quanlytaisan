@@ -1,14 +1,21 @@
 package com.website.qlts.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 public class CategoriesSupplier implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String name;
+
     private int is_deleted;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

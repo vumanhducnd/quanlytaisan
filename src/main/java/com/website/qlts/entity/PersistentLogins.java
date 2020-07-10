@@ -4,14 +4,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
 public class PersistentLogins implements Serializable {
+    @Size(min = 6, max = 255)
     private String userName;
+
+    @Size(min = 6, max = 255)
     private String series;
+
+    @Size(min = 6, max = 255)
     private String token;
+
+    @Size(min = 6, max = 255)
     private String lastUsed;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

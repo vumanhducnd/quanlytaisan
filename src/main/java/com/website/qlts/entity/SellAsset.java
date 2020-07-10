@@ -1,6 +1,8 @@
 package com.website.qlts.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -13,9 +15,17 @@ public class SellAsset {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "asset_id", updatable = false, insertable = false, unique = false)
     private Assets assets;
+
+    @Size(min = 6, max = 255)
     private String name;
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 11)
     private String phoneNumber;
     private long priceSell;
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String note;
     private Date createdDate;
     private int isDeleted;

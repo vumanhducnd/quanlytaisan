@@ -13,6 +13,8 @@
                     <input class="form-control form-control-user"
                            th:field="*{staffs.name}"
                            placeholder="">
+                    <span th:if="${#fields.hasErrors('staffs.name')}" th:errors="*{staffs.name}"
+                          class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">

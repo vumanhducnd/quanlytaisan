@@ -1,17 +1,24 @@
 package com.website.qlts.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "suppliers")
 public class Suppliers implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Column(nullable = true)
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String name;
-    @Column(nullable = true)
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String address;
-    @Column(nullable = true)
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String phoneNumber;
     //    private long supplier_category_id;
     @Id

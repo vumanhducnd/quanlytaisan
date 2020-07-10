@@ -11,9 +11,11 @@ import com.website.qlts.view.SellView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -86,9 +88,11 @@ public class AssetsController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createPage(@ModelAttribute AssetsView assetsView, @RequestParam("suppliers") String suppliers,
-                             @RequestParam("departments") String departments, @RequestParam("groupAssets") String groupAssets,
-                             @RequestParam("categoryAssets") String categoryAssets) {
+    public String createPage( @RequestParam("suppliers") String suppliers, @RequestParam("groupAssets") String groupAssets,
+                             @RequestParam("categoryAssets") String categoryAssets, @Valid @ModelAttribute("model") AssetsView assetsView, BindingResult result) {
+        if(result.hasErrors()){
+            return "pages/assets/create";
+        }
         assetsService.create(assetsView.getAssets().getName(), assetsView.getAssets().getDescription(), assetsView.getAssets().getAmount(),
                 assetsView.getAssets().getConditionAsset(), assetsView.getAssets().getStatus(), assetsView.getAssets().getPrice(),
                 assetsView.getAssets().getPosition(),

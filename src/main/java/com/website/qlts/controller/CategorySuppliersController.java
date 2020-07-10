@@ -1,12 +1,15 @@
 package com.website.qlts.controller;
 
 import com.website.qlts.entity.CategoriesSupplier;
+import com.website.qlts.entity.CategoryAssets;
 import com.website.qlts.service.CategorySuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -35,7 +38,10 @@ public class CategorySuppliersController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createPage(@ModelAttribute CategoriesSupplier categoriesSupplier, Model model) {
+    public String createPage(Model model, @Valid @ModelAttribute("cate") CategoriesSupplier categoriesSupplier, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "pages/category-suppliers/create";
+        }
         model.addAttribute("cate", categoriesSupplier);
         categorySuppliersService.create(categoriesSupplier.getName());
         return "redirect:/category-suppliers/";
@@ -49,7 +55,10 @@ public class CategorySuppliersController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String editPage(@RequestParam String name, @PathVariable("id") long id, Model model, @ModelAttribute CategoriesSupplier categoriesSupplier) {
+    public String editPage(@RequestParam String name, @PathVariable("id") long id, Model model, @Valid @ModelAttribute("cate") CategoriesSupplier categoriesSupplier, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "pages/category-suppliers/edit";
+        }
         model.addAttribute("cate", categoriesSupplier);
         categorySuppliersService.update(id, name);
         return "redirect:/category-suppliers/";

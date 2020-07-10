@@ -1,18 +1,35 @@
 package com.website.qlts.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String userName;
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String passWord;
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String rePassword;
     private long staffId;
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String role;
     private int status;
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String permission;
+
     private int is_deleted;
 
     @Id

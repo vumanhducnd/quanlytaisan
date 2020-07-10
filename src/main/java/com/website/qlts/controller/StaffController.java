@@ -8,8 +8,10 @@ import com.website.qlts.view.StaffDepartments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +50,10 @@ public class StaffController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createPage(@ModelAttribute StaffDepartments staffDepartments,
                              @RequestParam("departmentsId") String departmentsId,
-                             @RequestParam("dateOfBirth") String dateOfBirth) {
+                             @RequestParam("dateOfBirth") String dateOfBirth, @Valid @ModelAttribute("staffDepartments") Staffs staff, BindingResult result) {
+        if(result.hasErrors()){
+            return "pages/staffs/create";
+        }
         Staffs staffs = staffDepartments.getStaffs();
         staffService.create(new Staffs(staffs.getName(), convertStringToDate(dateOfBirth), staffs.getAddress(), staffs.getPhoneNumber(),0,Long.parseLong(departmentsId) ));
         return "redirect:/staffs/";

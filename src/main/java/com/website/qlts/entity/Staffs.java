@@ -1,6 +1,8 @@
 package com.website.qlts.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,10 +10,21 @@ import java.util.Date;
 @Table(name = "staffs")
 public class Staffs implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private  String name;
+
     private Date dateOfBirth;
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String address;
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String phoneNumber;
+
     private int is_deleted;
 
     @Column(name = "department_id", unique = false)

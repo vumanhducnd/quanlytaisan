@@ -1,6 +1,8 @@
 package com.website.qlts.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -37,7 +39,10 @@ public class TransferHistory implements Serializable {
     @JoinColumn(name = "department_id_new", updatable = false, insertable = false, unique = false)
     private Departments department;
 
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String reason;
+
     private int status;
     private Date startDate;
     private Date endDate;
