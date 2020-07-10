@@ -5,10 +5,11 @@ import com.website.qlts.service.DepartmentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 @Controller
 @RequestMapping("/departments")
@@ -30,7 +31,10 @@ public class DeparmentsController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@RequestParam("departmentName") String departmentName) {
+    public String create(@RequestParam("departmentName") String departmentName, @Valid @ModelAttribute("model") Departments departments, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "pages/departments/create";
+        }
         departmentsService.create(departmentName);
         return "redirect:/departments";
     }
@@ -42,13 +46,17 @@ public class DeparmentsController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public String edit(@PathVariable("id") long id, @RequestParam("departmentName") String departmentName) {
+    public String edit(@PathVariable("id") long id, @RequestParam("departmentName") String departmentName,
+                       @Valid @ModelAttribute("model") Departments departments, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "pages/departments/edit";
+        }
         departmentsService.update(id, departmentName);
         return "redirect:/departments";
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String delete(@PathVariable("id") long id){
+    public String delete(@PathVariable("id") long id) {
         departmentsService.delete(id);
         return "redirect:/departments";
     }

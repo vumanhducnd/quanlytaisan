@@ -8,9 +8,11 @@ import com.website.qlts.service.SuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -45,7 +47,10 @@ public class SuppliersController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createPage(@ModelAttribute SuppliersCate suppliers ,@RequestParam("supCateId") String supCateId) {
+    public String createPage(@ModelAttribute SuppliersCate suppliers , @RequestParam("supCateId") String supCateId, @Valid @ModelAttribute() SuppliersCate suppliersCate, BindingResult result) {
+        if(result.hasErrors()){
+            return "pages/suppliers/create";
+        }
         suppliersService.create(suppliers.getSuppliers().getName(), suppliers.getSuppliers().getAddress(),
                 suppliers.getSuppliers().getPhoneNumber(), Long.parseLong(supCateId));
         return "redirect:/suppliers";
@@ -64,7 +69,10 @@ public class SuppliersController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String update(@ModelAttribute SuppliersCate suppliersCate, @PathVariable("id") long id, Model model) {
+    public String update( @PathVariable("id") long id, Model model, @Valid @ModelAttribute() SuppliersCate suppliersCate, BindingResult result) {
+        if(result.hasErrors()){
+            return "pages/suppliers/edit";
+        }
         model.addAttribute("model", suppliersCate);
         suppliersService.update(id, suppliersCate.getSuppliers());
         return "redirect:/suppliers/";

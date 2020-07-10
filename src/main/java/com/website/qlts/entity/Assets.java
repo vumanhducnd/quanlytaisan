@@ -1,19 +1,37 @@
 package com.website.qlts.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 public class Assets implements Serializable {
     private static final long serialVersionUID = 1L;
+
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String name;
+
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String description;
+
     private int amount;
+
+    @Size(min = 6, max = 255)
     private String conditionAsset;
     private int status;
     private long price;
+
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String position;
+
     @Column(name = "department_id", unique = false)
     private long department_id;
     @ManyToOne(fetch = FetchType.LAZY)

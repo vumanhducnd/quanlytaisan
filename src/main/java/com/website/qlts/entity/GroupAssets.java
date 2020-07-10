@@ -4,12 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
 public class GroupAssets implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
     private String groupName;
+
     private int is_deleted;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
