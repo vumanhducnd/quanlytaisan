@@ -62,6 +62,7 @@ public class Assets implements Serializable {
     @JoinColumn(name = "staff_id", updatable = false, insertable = false, unique = false)
     private Staffs staffs;
 
+    private int cateMoney;
     private long sellPrice;
     private long updatedById;
     private long deletedById;
@@ -73,7 +74,7 @@ public class Assets implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long asset_category_id, long group_assets_id, long supplier_id,int is_deleted,Date updatedDate,Date createDate) {
+    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long asset_category_id, long group_assets_id, long supplier_id,int is_deleted,Date updatedDate,Date createDate, int cateMoney) {
         this.name = name;
         this.description = description;
         this.amount = amount;
@@ -87,6 +88,7 @@ public class Assets implements Serializable {
         this.is_deleted = is_deleted;
         this.updatedDate = updatedDate;
         this.createDate = createDate;
+        this.cateMoney = cateMoney;
     }
 
 
@@ -300,5 +302,13 @@ public class Assets implements Serializable {
 
     public void setStaffs(Staffs staffs) {
         this.staffs = staffs;
+    }
+
+    public int getCateMoney() {
+        return cateMoney;
+    }
+
+    public void setCateMoney(int cateMoney) {
+        this.cateMoney = cateMoney;
     }
 }

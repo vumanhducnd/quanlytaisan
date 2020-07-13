@@ -30,20 +30,18 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>STT</th>
-                            <th>ID</th>
+                            <th class="column-stt" >STT</th>
                             <th>Tên nhà cung cấp</th>
                             <th>Địa chỉ</th>
                             <th>SĐT</th>
                             <th>Loại nhà cung cấp</th>
-                            <th>Sửa</th>
-                            <th>Xoá</th>
+                            <th class="column-stt">Sửa</th>
+                            <th class="column-stt">Xoá</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="empl,iterStat : ${sups}">
                             <th scope="row" th:text="${iterStat.count}"></th>
-                            <td th:text="${empl.id}"></td>
                             <td th:text="${empl.name}"></td>
                             <td th:text="${empl.address}"></td>
                             <td th:text="${empl.phoneNumber}"></td>
@@ -53,7 +51,7 @@
                                 Sửa<i class="fa fa-pencil"></i></a>
                             </td>
                             <td><a th:href="@{/suppliers/delete/{id}(id=${empl.id})}" class="text-danger">
-                                Xoá<i class="fa fa-trash"></i></a>
+                                <i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         </tbody>

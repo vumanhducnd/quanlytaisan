@@ -30,7 +30,7 @@
                                                    aria-controls="dataTable">
                                         </div>
                                         <div class="col-md-2">
-                                            <select class="form-control" name="status" >
+                                            <select class="form-control" name="status">
                                                 <option value="-1">---Trạng thái---</option>
                                                 <option value="1">Đang sử dụng</option>
                                                 <option value="2">Chưa sử dụng</option>
@@ -68,10 +68,8 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>STT</th>
+                            <th class="column-stt">STT</th>
                             <th>Tên tài sản</th>
-                            <!--                            <th>Chi tiết</th>-->
-                            <th>Số lượng</th>
                             <th>Tình trạng</th>
                             <th>Trạng thái</th>
                             <th>Giá</th>
@@ -80,8 +78,8 @@
                             <th>Nhóm tài sản</th>
                             <th>Nhà sản xuất</th>
                             <th>QRCode</th>
-                            <th>Sửa</th>
-                            <th>Xoá</th>
+                            <th class="column-stt">Sửa</th>
+                            <th class="column-stt">Xoá</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -89,9 +87,6 @@
                             <th scope="row" th:text="${iterStat.count}"></th>
                             <td>
                                 <a th:href="@{/assets/detail/{id}(id=${empl.id})}" th:text="${empl.name}"></a>
-                            </td>
-                            <!--                            <td th:text="${empl.description}"></td>-->
-                            <td th:text="${empl.amount}"></td>
                             <td th:text="${empl.conditionAsset}"></td>
                             <td>
                                 <div th:switch="${empl.status}">
@@ -101,23 +96,22 @@
                                     <p th:case="5" class="text-danger">Đang sửa chữa</p>
                                 </div>
                             </td>
-                            <td th:text="${empl.price}"></td>
-                            <!--                            <td th:text="${empl.position}"></td>-->
+                            <td>
+                                <span th:text="${#numbers.formatDecimal(empl.price, 0, 'DEFAULT', 0, 'DEFAULT')}"></span>
+                                <span th:text="(${empl.cateMoney == 1} ? 'VNĐ':  'USD')"></span>
+                            </td>
                             <td th:text="${empl.categoryAssets.name}"></td>
                             <td th:text="${empl.groupAssets.groupName}"></td>
                             <td th:text="${empl.suppliers.name}"></td>
                             <td>
-                                <!--                                <a th:href="@{/assets/createQRCode/{id}(id=${empl.id})}"-->
-                                <!--                                   class="mr-sm-2 text-primary">-->
-                                <!--                                QRCode<i class="fa fa-pencil"></i></a>-->
-                                <!--                                <form th:action="@{/assets/createQRCode/{id}(id=${empl.id})}">-->
-                                <!--                                    <button type="submit" data-toggle="modal" data-target=".bd-example-modal-lg">submit</button>-->
-                                <!--                                </form>-->
-                                <a th:href="@{/assets/createQRCode/{id}(id=${empl.id})}" class="eBtn" data-target=".bd-example-modal-lg">QR Code</a>
+                                <a th:onclick="'alert(\'' + ${empl.id} + '\');'">
+                                Share Page
+                            </a>
+                                <a th:href="@{/assets/createQRCode/{id}(id=${empl.id})}" class="eBtn"
+                                   data-target=".bd-example-modal-lg"><i class="fa fa-qrcode"></i></a>
                             </td>
                             <td><a th:href="@{/assets/edit/{id}(id=${empl.id})}"
-                                   class="mr-sm-2 text-primary">
-                                Sửa<i class="fa fa-pencil"></i></a>
+                                   class="mr-sm-2 text-primary">Sửa</a>
                             </td>
                             <td><a th:href="@{/assets/delete/{id}(id=${empl.id})}" class="text-danger">
                                 <i class="fa fa-trash"></i></a>
@@ -137,4 +131,5 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
+
 </html>

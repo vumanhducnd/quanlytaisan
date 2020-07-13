@@ -123,8 +123,8 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
-    public Assets create(String name, String description, int amount, String condition, int status, long price, String position, long cateId, long groupId, long suppId) {
-        Assets assets = new Assets(name, description, amount, condition, status, price, position, cateId, groupId, suppId,0, new Date(), new Date());
+    public Assets create(String name, String description, int amount, String condition, int status, long price, String position, long cateId, long groupId, long suppId, int cateMoney) {
+        Assets assets = new Assets(name, description, amount, condition, status, price, position, cateId, groupId, suppId,0, new Date(), new Date(), cateMoney);
         return assetsRepository.save(assets);
     }
 
@@ -165,6 +165,7 @@ public class AssetsServiceImpl implements AssetsService {
             assets.setGroup_assets_id(groupAssetsId);
             assets.setAsset_category_id(categoryAssetsId);
             assets.setUpdatedDate(new Date());
+            assets.setCateMoney(assetsView.getAssets().getStatus());
         }
         assetsRepository.save(assets);
     }
