@@ -50,9 +50,11 @@
                         <table style="text-align:center;" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>STT</th>
+                                <th style="width:20px;">STT</th>
                                 <th>Tên tài sản</th>
-                                <th></th>
+                                <th>Loại tài sản</th>
+                                <th>Giá</th>
+                                <th style="width:100px;"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -60,6 +62,11 @@
                                 <th scope="row" th:text="${iterStat.count}"></th>
                                 <td>
                                     <a th:href="@{/assets/detail/{id}(id=${empl.id})}" th:text="${empl.name}"></a>
+                                </td>
+                                <td th:text="${empl.categoryAssets.name}"></td>
+                                <td  >
+                                    <span th:text="${#numbers.formatDecimal(empl.price, 0, 'DEFAULT', 0, 'DEFAULT')}" ></span>
+                                    <span th:text="(${empl.cateMoney == 1} ? 'VNĐ':  'USD')" ></span>
                                 </td>
                                 <td>
                                     <table class="table-bordered">

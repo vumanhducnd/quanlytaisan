@@ -10,7 +10,7 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Tên tài sản</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user"
+                    <input class="form-control form-control-user" min="6"
                            th:field="*{assets.name}" maxlength="255">
                     <span th:if="${#fields.hasErrors('assets.name')}" th:errors="*{assets.name}"
                           class="text-danger"></span>
@@ -18,10 +18,9 @@
             </div>
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Chi tiết</label>
-                <div class="col-md-4">
-                    <input class="form-control form-control-user"
-                           th:field="*{assets.description}"
-                           placeholder="">
+                <div class="col-md-8">
+                    <textarea th:field="*{assets.description}" minlength="6">
+                    </textarea>
                 </div>
             </div>
             <div class="form-group row">
@@ -35,7 +34,7 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Tình trạng</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user"
+                    <input class="form-control form-control-user" minlength="6"
                            th:field="*{assets.conditionAsset}"
                            placeholder="">
                 </div>
@@ -53,15 +52,24 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Giá</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user"
+                    <input class="form-control form-control-user" minlength="1"
                            th:field="*{assets.price}"
                            placeholder="">
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">Loại tiền tệ</label>
+                <div class="col-md-4">
+                    <select class="form-control" th:field="*{assets.cateMoney}">
+                        <option value="1">VNĐ</option>
+                        <option value="2">USD</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Vị trí</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user"
+                    <input class="form-control form-control-user" minlength="6"
                            th:field="*{assets.position}"
                            placeholder="">
                 </div>

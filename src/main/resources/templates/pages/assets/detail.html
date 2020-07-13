@@ -41,17 +41,23 @@
             <div class="form-group row">
                 <label class="col-md-6  text-md-right">Trạng thái :</label>
                 <div class="col-md-4">
-                    <label 
-                           th:text="*{model.status}"
-                    ></label>
+                    <label >
+                        <div th:switch="*{model.status}">
+                            <p th:case="1" class="text-primary">Đang sử dụng</p>
+                            <p th:case="2" class="text-success">Chưa sử dụng</p>
+                            <p th:case="3" class="text-danger">Đã thu hồi</p>
+                            <p th:case="5" class="text-danger">Đang sửa chữa</p>
+                        </div>
+                    </label>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-6  text-md-right">Giá :</label>
                 <div class="col-md-4">
-                    <label 
-                           th:text="*{model.price}"
-                    ></label>
+                    <label >
+                        <span th:text="*{#numbers.formatDecimal(model.price, 0, 'DEFAULT', 0, 'DEFAULT')}" ></span>
+                        <span th:text="(*{model.cateMoney == 1} ? 'VNĐ':  'USD')" ></span>
+                    </label>
                 </div>
             </div>
             <div class="form-group row">
@@ -62,11 +68,11 @@
                     ></label>
                 </div>
             </div>
-            <div class="form-group row">
+            <div th:if="*{model.status == 1}" class="form-group row">
                 <label class="col-md-6  text-md-right">Phòng ban :</label>
                 <div class="col-md-4">
                     <label 
-                           th:text="*{model.departments.departmentName}"
+                           th:text="*{model.departments.departmentName } "
                     ></label>
                 </div>
             </div>
