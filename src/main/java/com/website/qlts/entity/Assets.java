@@ -10,6 +10,9 @@ import java.util.Date;
 public class Assets implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @NotEmpty(message = "Không được để trống")
+    @Size(max = 255)
+    private String codeAsset;
 
     @NotEmpty(message = "Không được để trống")
     @Size(max = 255)
@@ -22,7 +25,7 @@ public class Assets implements Serializable {
 
     private int amount;
 
-    @Size(min = 6, max = 255)
+    @NotEmpty(message = "Không được để trống")
     private String conditionAsset;
     private int status;
     private long price;
@@ -74,7 +77,7 @@ public class Assets implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long asset_category_id, long group_assets_id, long supplier_id,int is_deleted,Date updatedDate,Date createDate, int cateMoney) {
+    public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long asset_category_id, long group_assets_id, long supplier_id,int is_deleted,Date updatedDate,Date createDate, int cateMoney, String codeAsset) {
         this.name = name;
         this.description = description;
         this.amount = amount;
@@ -89,8 +92,16 @@ public class Assets implements Serializable {
         this.updatedDate = updatedDate;
         this.createDate = createDate;
         this.cateMoney = cateMoney;
+        this.codeAsset = codeAsset;
     }
 
+    public String getCodeAsset() {
+        return codeAsset;
+    }
+
+    public void setCodeAsset(String codeAsset) {
+        this.codeAsset = codeAsset;
+    }
 
     public Date getModifiedDate() {
         return modifiedDate;

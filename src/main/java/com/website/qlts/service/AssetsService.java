@@ -45,7 +45,7 @@ public interface AssetsService {
 
     public List<Assets> getAssetsNoUse();
 
-    public Assets create(String name, String description, int amount, String condition, int status, long price, String position,  long cateId, long groupId, long suppId, int cateMoney);
+    public Assets create(String name, String description, int amount, String condition, int status, long price, String position,  long cateId, long groupId, long suppId, int cateMoney, String codeAsset);
 
     public Assets findById(long id);
 

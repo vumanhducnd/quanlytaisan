@@ -14,7 +14,7 @@ public class Departments implements Serializable {
     private int is_deleted;
 
     @NotEmpty(message = "Không được để trống")
-    @Size(max = 255, min = 6)
+//    @Size(max = 255, min = 6)
     private String departmentName;
 
 //    private int parentId;

@@ -48,13 +48,12 @@ public class StaffController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createPage(@ModelAttribute StaffDepartments staffDepartments,
-                             @RequestParam("departmentsId") String departmentsId,
-                             @RequestParam("dateOfBirth") String dateOfBirth, @Valid @ModelAttribute("staffDepartments") Staffs staff, BindingResult result) {
+    public String createPage( @RequestParam("departmentsId") String departmentsId,
+                             @RequestParam("dateOfBirth") String dateOfBirth, @Valid @ModelAttribute("staffDepartments") StaffDepartments staff, BindingResult result) {
         if(result.hasErrors()){
             return "pages/staffs/create";
         }
-        Staffs staffs = staffDepartments.getStaffs();
+        Staffs staffs = staff.getStaffs();
         staffService.create(new Staffs(staffs.getName(), convertStringToDate(dateOfBirth), staffs.getAddress(), staffs.getPhoneNumber(),0,Long.parseLong(departmentsId) ));
         return "redirect:/staffs/";
     }
@@ -63,7 +62,7 @@ public class StaffController {
     @RequestMapping("/delete/{id}")
     public String deletePage(@PathVariable("id") long id, Model model) {
         staffService.delete(id);
-        return "redirect:/category-assets/";
+        return "redirect:/staffs/";
     }
 
     @RequestMapping("/search")
@@ -74,9 +73,10 @@ public class StaffController {
     }
 
     public Date convertStringToDate(String dateString){
+        String dateStringFormat = dateString.replace('-','/');
         Date date = new Date();
         try {
-            date=new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
+            date=new SimpleDateFormat("yyyy/MM/dd").parse(dateStringFormat);
         }catch (Exception ex){
         }
         return date;
