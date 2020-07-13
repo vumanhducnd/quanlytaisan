@@ -8,6 +8,15 @@
         <h2 class="title-header">Thêm mới tài sản</h2>
         <form  name="my-form" th:action="@{/assets/create}" method="post" th:object="${model}">
             <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">Mã tài sản</label>
+                <div class="col-md-4">
+                    <input class="form-control form-control-user" min="6"
+                           th:field="*{assets.codeAsset}" maxlength="255">
+                    <span th:if="${#fields.hasErrors('assets.codeAsset')}" th:errors="*{assets.codeAsset}"
+                          class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Tên tài sản</label>
                 <div class="col-md-4">
                     <input class="form-control form-control-user" min="6"

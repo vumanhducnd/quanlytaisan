@@ -69,8 +69,8 @@
                         <thead>
                         <tr>
                             <th class="column-stt">STT</th>
+                            <th>Mã tài sản</th>
                             <th>Tên tài sản</th>
-                            <th>Tình trạng</th>
                             <th>Trạng thái</th>
                             <th>Giá</th>
                             <!--                            <th>Vị trí</th>-->
@@ -85,9 +85,9 @@
                         <tbody>
                         <tr th:each="empl,iterStat : ${model.assetsList}">
                             <th scope="row" th:text="${iterStat.count}"></th>
+                            <td th:text="${empl.codeAsset}"></td>
                             <td>
                                 <a th:href="@{/assets/detail/{id}(id=${empl.id})}" th:text="${empl.name}"></a>
-                            <td th:text="${empl.conditionAsset}"></td>
                             <td>
                                 <div th:switch="${empl.status}">
                                     <p th:case="1" class="text-primary">Đang sử dụng</p>

@@ -1,6 +1,6 @@
 package com.website.qlts.controller;
 
-import com.website.qlts.config.ExportExel;
+import com.website.qlts.config.ExportExcel;
 import com.website.qlts.entity.RevokeHistory;
 import com.website.qlts.repository.AssetsRepository;
 import com.website.qlts.service.RevokeHistoryService;
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -56,13 +58,6 @@ public class ReportController {
         return "/pages/report/transfer";
     }
 
-    @RequestMapping("/export-file")
-    public String export() {
-        ExportExel exportExel = new ExportExel();
-        exportExel.exportExcel(transferService.getAll());
-        return "redirect:/report-transfer";
-    }
-
     @RequestMapping("/report-revoke")
     public String reportRevoke(Model model) {
         List<RevokeHistory> revokeHistories;
@@ -73,7 +68,34 @@ public class ReportController {
 
     @RequestMapping("/report-revoke-poached")
     public String reportRevokePoached() {
-
         return "/pages/report/revoke-poached";
+    }
+
+    @RequestMapping("/export-file-transfer")
+    public String exportTransfer(HttpServletResponse httpServletResponse) throws IOException {
+        ExportExcel createDownloadFile = new ExportExcel();
+        createDownloadFile.exportExcelTransfer(httpServletResponse, transferService.getAll());
+        return "redirect:/report-transfer";
+    }
+
+    @RequestMapping("/export-file-use")
+    public String exportUse(HttpServletResponse httpServletResponse) throws IOException {
+        ExportExcel createDownloadFile = new ExportExcel();
+        createDownloadFile.exportExcelUse(httpServletResponse, transferService.getAll());
+        return "redirect:/report-transfer";
+    }
+
+    @RequestMapping("/export-file-new")
+    public String exportNew(HttpServletResponse httpServletResponse) throws IOException {
+        ExportExcel createDownloadFile = new ExportExcel();
+        createDownloadFile.exportExcelNew(httpServletResponse, transferService.getAll());
+        return "redirect:/report-new";
+    }
+
+    @RequestMapping("/export-file-revoke")
+    public String exportRevoke(HttpServletResponse httpServletResponse) throws IOException {
+        ExportExcel createDownloadFile = new ExportExcel();
+        createDownloadFile.exportExcelRevoke(httpServletResponse, transferService.getAll());
+        return "redirect:/report-revoke";
     }
 }

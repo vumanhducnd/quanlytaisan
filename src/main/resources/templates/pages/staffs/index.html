@@ -48,11 +48,11 @@
                             <td th:text="${empl.phoneNumber}"></td>
                             <td th:text="${empl.address}"></td>
                             <td th:text="${empl.departments.departmentName}"></td>
-                            <td><a th:href="@{/category-assets/edit/{id}(id=${empl.id})}"
+                            <td><a th:href="@{/staffs/edit/{id}(id=${empl.id})}"
                                    class="mr-sm-2 text-primary">
                                 Sửa<i class="fa fa-pencil"></i></a>
                             </td>
-                            <td><a th:href="@{/category-assets/delete/{id}(id=${empl.id})}" class="text-danger">
+                            <td><a th:href="@{/staffs/delete/{id}(id=${empl.id})}" class="text-danger">
                                 <i class="fa fa-trash"></i></a>
                             </td>
                         </tr>

@@ -98,7 +98,7 @@ public class AssetsController {
                 assetsView.getAssets().getPosition(),
                 Long.parseLong(categoryAssets),
                 Long.parseLong(groupAssets),
-                Long.parseLong(suppliers),  assetsView.getAssets().getCateMoney());
+                Long.parseLong(suppliers),  assetsView.getAssets().getCateMoney(), assetsView.getAssets().getCodeAsset());
         return "redirect:/assets";
     }
 
