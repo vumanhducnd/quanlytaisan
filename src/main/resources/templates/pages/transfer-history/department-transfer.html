@@ -15,32 +15,37 @@
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Danh sách tài sản</h6>
+                <div class="row">
+                    <div class="col-md-11">
+                        <h6 class="m-0 font-weight-bold text-primary">Danh sách tài sản</h6>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="col-md-1">
+                            <a th:href="@{/transfer/department/create}">
+                                <img width="25px" th:src="@{'/images/add.png'}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 row">
-                            <div id="dataTable_filter" class="dataTables_filter col-sm-12">
-                                <form th:action="@{/assets}" method="get">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <input type="search" class="form-control" placeholder="Tìm kiếm"
-                                                   id="txtSearch" name="keyWord"
-                                                   aria-controls="dataTable">
-                                        </div>
-                                        <button type="submit" class="btn-primary">Tìm kiếm</button>
-                                    </div>
+<!--                            <div id="dataTable_filter" class="dataTables_filter col-sm-12">-->
+<!--                                <form th:action="@{/assets}" method="get">-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-md-3">-->
+<!--                                            <input type="search" class="form-control" placeholder="Tìm kiếm"-->
+<!--                                                   id="txtSearch" name="keyWord"-->
+<!--                                                   aria-controls="dataTable">-->
+<!--                                        </div>-->
+<!--                                        <button type="submit" class="btn-primary">Tìm kiếm</button>-->
+<!--                                    </div>-->
 
-                                </form>
-                            </div>
-                            <div class="col-sm-2">
-                                <a th:href="@{/transfer/department/create}" class="btn btn-primary btn-user btn-block">Thêm
-                                    mới</a>
-                            </div>
-                            <div class="col-sm-2">
-                                <a th:href="@{/transfer/department/history}" class="btn btn-primary btn-user btn-block">Lịch sử điều chuyển</a>
-                            </div>
+<!--                                </form>-->
+<!--                            </div>-->
+
                         </div>
                     </div>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -91,7 +96,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="col-sm-2">
+            <a th:href="@{/transfer/department/history}" class="btn btn-primary btn-user btn-block">Lịch sử điều chuyển</a>
+        </div>
     </div>
     <!-- /.container-fluid -->
 

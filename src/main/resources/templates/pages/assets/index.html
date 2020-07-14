@@ -15,7 +15,18 @@
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Danh sách tài sản</h6>
+                <div class="row">
+                    <div class="col-md-11">
+                        <h6 class="m-0 font-weight-bold text-primary">Danh sách tài sản</h6>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="col-md-1">
+                            <a href="/assets/create">
+                                <img width="25px" th:src="@{'/images/add.png'}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -24,12 +35,12 @@
                             <div id="dataTable_filter" class="dataTables_filter col-sm-12">
                                 <form th:action="@{/assets}" method="get">
                                     <div class="row">
+<!--                                        <div class="col-md-3">-->
+<!--                                            <input type="search" class="form-control" placeholder="Tìm kiếm"-->
+<!--                                                   id="txtSearch" name="keyWord"-->
+<!--                                                   aria-controls="dataTable">-->
+<!--                                        </div>-->
                                         <div class="col-md-3">
-                                            <input type="search" class="form-control" placeholder="Tìm kiếm"
-                                                   id="txtSearch" name="keyWord"
-                                                   aria-controls="dataTable">
-                                        </div>
-                                        <div class="col-md-2">
                                             <select class="form-control" name="status">
                                                 <option value="-1">---Trạng thái---</option>
                                                 <option value="1">Đang sử dụng</option>
@@ -38,7 +49,7 @@
                                                 <option value="4">Đang sửa chưa</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             <select class="form-control" name="categoryAssets">
                                                 <option value="-1">---Loại tài sản---</option>
                                                 <option th:each="li : ${model.categoryAssetsList}"
@@ -46,7 +57,7 @@
                                                         th:text="${li.name}"/>
                                             </select>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             <select class="form-control" name="groupAssets">
                                                 <option value="-1">---Nhóm tài sản---</option>
                                                 <option th:each="li : ${model.groupAssetsList}"
@@ -54,15 +65,16 @@
                                                         th:text="${li.groupName}"/>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn-primary">Tìm kiếm</button>
+                                        <div class="col-md-3" style="margin:auto;">
+                                            <button type="submit">
+                                                <img width="16px" th:src="@{'/images/unnamed.png'}">
+                                              </button>
+                                        </div>
                                     </div>
 
                                 </form>
                             </div>
-                            <div class="col-sm-2">
-                                <a href="/assets/create" class="btn btn-primary btn-user btn-block">Thêm
-                                    mới</a>
-                            </div>
+
                         </div>
                     </div>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -104,9 +116,9 @@
                             <td th:text="${empl.groupAssets.groupName}"></td>
                             <td th:text="${empl.suppliers.name}"></td>
                             <td>
-                                <a th:onclick="'alert(\'' + ${empl.id} + '\');'">
-                                Share Page
-                            </a>
+<!--                                <a th:onclick="'alert(\'' + ${empl.id} + '\');'">-->
+<!--                                Share Page-->
+<!--                            </a>-->
                                 <a th:href="@{/assets/createQRCode/{id}(id=${empl.id})}" class="eBtn"
                                    data-target=".bd-example-modal-lg"><i class="fa fa-qrcode"></i></a>
                             </td>

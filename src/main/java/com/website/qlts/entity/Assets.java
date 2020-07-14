@@ -10,7 +10,6 @@ import java.util.Date;
 public class Assets implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotEmpty(message = "Không được để trống")
     @Size(max = 255)
     private String codeAsset;
 

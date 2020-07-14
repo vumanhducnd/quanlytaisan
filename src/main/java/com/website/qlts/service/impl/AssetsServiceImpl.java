@@ -123,9 +123,35 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
-    public Assets create(String name, String description, int amount, String condition, int status, long price, String position, long cateId, long groupId, long suppId, int cateMoney, String codeAsset) {
-        Assets assets = new Assets(name, description, amount, condition, status, price, position, cateId, groupId, suppId,0, new Date(), new Date(), cateMoney, codeAsset);
-        return assetsRepository.save(assets);
+    public void create(String name, String description, int amount, String condition, int status, long price, String position, long cateId, long groupId, long suppId, int cateMoney) {
+        Assets assets = new Assets(name.trim(), description.trim(), amount, condition.trim(), status, price, position.trim(), cateId, groupId, suppId,0, new Date(), new Date(), cateMoney, "");
+        assetsRepository.save(assets);
+        Assets assets1 = assetsRepository.getLastRecord();
+        assets1.setCodeAsset(createCode(assets1.getId() + ""));
+        assetsRepository.save(assets1);
+    }
+
+    public  String createCode(String id){
+        String strCode = "TS-";
+        if(id.length() == 1 ){
+            strCode =  "TS-00000" + id;
+        }
+        if(id.length() == 2){
+            strCode =  "TS-0000" + id;
+        }
+        if(id.length() == 3){
+            strCode =  "TS-000" + id;
+        }
+        if(id.length() == 4){
+            strCode =  "TS-00" + id;
+        }
+        if(id.length() == 5){
+            strCode =  "TS-0" + id;
+        }
+        if(id.length() == 6){
+            strCode =  "TS-" + id;
+        }
+        return strCode;
     }
 
     @Override
@@ -153,11 +179,11 @@ public class AssetsServiceImpl implements AssetsService {
     public void update(long id, AssetsView assetsView, long suppliersId, long departmentsId, long groupAssetsId, long categoryAssetsId) {
         Assets assets = assetsRepository.findById(id).orElse(null);
         if (assets != null) {
-            assets.setName(assetsView.getAssets().getName());
-            assets.setDescription(assetsView.getAssets().getDescription());
+            assets.setName(assetsView.getAssets().getName().trim());
+            assets.setDescription(assetsView.getAssets().getDescription().trim());
             assets.setAmount(assetsView.getAssets().getAmount());
-            assets.setConditionAsset(assetsView.getAssets().getConditionAsset());
-            assets.setPosition(assetsView.getAssets().getPosition());
+            assets.setConditionAsset(assetsView.getAssets().getConditionAsset().trim());
+            assets.setPosition(assetsView.getAssets().getPosition().trim());
             assets.setPrice(assetsView.getAssets().getPrice());
             assets.setStatus(assetsView.getAssets().getStatus());
             assets.setDepartment_id(departmentsId);
@@ -166,7 +192,7 @@ public class AssetsServiceImpl implements AssetsService {
             assets.setAsset_category_id(categoryAssetsId);
             assets.setUpdatedDate(new Date());
             assets.setCateMoney(assetsView.getAssets().getStatus());
-            assets.setCodeAsset(assetsView.getAssets().getCodeAsset());
+            assets.setCodeAsset(assetsView.getAssets().getCodeAsset().trim());
         }
         assetsRepository.save(assets);
     }

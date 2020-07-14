@@ -1,6 +1,5 @@
 package com.website.qlts.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.website.qlts.entity.Assets;
 import com.website.qlts.service.AssetsService;
 import com.website.qlts.service.DepartmentsService;
@@ -12,9 +11,11 @@ import com.website.qlts.view.TransferView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.jws.WebParam;
 import java.util.Date;
 
 @Controller

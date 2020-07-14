@@ -29,4 +29,9 @@ public class RevokeHistoryServiceImpl implements RevokeHistoryService {
     public List<RevokeHistory> getAll() {
         return revokeHistoryRepository.getAll();
     }
+
+    @Override
+    public List<RevokeHistory> getByDate(Date fromDate, Date toDate) {
+        return revokeHistoryRepository.getByDate(fromDate,toDate);
+    }
 }
