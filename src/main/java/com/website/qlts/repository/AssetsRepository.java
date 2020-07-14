@@ -47,4 +47,7 @@ public interface AssetsRepository extends JpaRepository<Assets, Long> {
     @Query(value = "SELECT * FROM assets as r WHERE MONTH(r.create_date) = ? AND YEAR(r.create_date) = ? AND  r.status = 2 AND r.is_deleted = 0", nativeQuery = true)
     public List<Assets> getAssetsNew(int month, int year);
 
+    @Query(value = "select  * from assets  ORDER BY ID DESC LIMIT 1", nativeQuery = true)
+    public Assets getLastRecord();
+
 }

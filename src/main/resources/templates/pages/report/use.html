@@ -18,27 +18,39 @@
                 <h6 class="m-0 font-weight-bold text-primary">Điều chuyển tài sản</h6>
             </div>
             <div class="card-body">
-                <div class="row col-md-12">
-                    <a class="btn btn-primary" th:href="@{/export-file-use}">Xuất exel</a>
-                </div>
+
                 <div class="table-responsive">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 row">
-                            <div id="dataTable_filter" class="dataTables_filter col-sm-12">
-                                <form th:action="@{/assets}" method="get">
+                            <div id="dataTable_filter" class=" col-sm-12">
+                                <form th:action="@{/report-use}" method="get">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <input type="search" class="form-control" placeholder="Tìm kiếm"
                                                    id="txtSearch" name="keyWord"
                                                    aria-controls="dataTable">
                                         </div>
-                                        <button type="submit" class="btn-primary">Tìm kiếm</button>
+                                        <div class="col-md-4 row">
+                                            <label class="col-md-4 col-form-label text-md-right">Từ ngày</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control form-control-user" name="fromDate" type="date">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 row">
+                                            <label class="col-md-4 col-form-label text-md-right">Đến ngày</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control form-control-user" name="toDate" type="date">
+                                            </div>
+                                        </div>
+                                        <button type="submit" >
+                                            <img width="22px" th:src="@{'/images/unnamed.png'}">
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>STT</th>
@@ -57,15 +69,17 @@
                             <td th:text="${empl.reason}"></td>
                             <td th:text="(${empl.status == 1} ? ${empl.departments.departmentName} :  ${empl.staffs.name})"></td>
                             <td th:text="(${empl.status == 1} ? ${empl.department.departmentName} :  ${empl.staff.name})"></td>
-                            <td th:text="${empl.startDate}"></td>
-                            <td th:text="${empl.endDate}"></td>
+                            <td th:text="${#calendars.format(empl.startDate,'dd MMMM yyyy')}"></td>
+                            <td th:text="${#calendars.format(empl.endDate,'dd MMMM yyyy')}"></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
+        <div class="row col-md-12">
+            <a class="btn btn-primary" th:href="@{/export-file-use}">Xuất exel</a>
+        </div>
     </div>
     <!-- /.container-fluid -->
 

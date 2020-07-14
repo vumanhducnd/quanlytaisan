@@ -6,6 +6,14 @@
 <div id="wrapper">
     <div class="container-fluid" layout:fragment="content">
         <h2 class="title-header">Chi tiết tài sản</h2>
+        <div class="form-group row">
+            <label class="col-md-6  text-md-right">Mã tài sản :</label>
+            <div class="col-md-4">
+                <label
+                        th:text="*{model.codeAsset}"
+                ></label>
+            </div>
+        </div>
             <div class="form-group row">
                 <label class="col-md-6  text-md-right">Tên tài sản :</label>
                 <div class="col-md-4">

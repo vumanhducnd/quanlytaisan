@@ -9,4 +9,6 @@ public interface RevokeHistoryService {
     public  void createHistory(long assetId, long staffId, long departmentId, String reason, Date revokeDate);
 
     public List<RevokeHistory> getAll();
+
+    public List<RevokeHistory> getByDate(Date fromDate, Date toDate);
 }

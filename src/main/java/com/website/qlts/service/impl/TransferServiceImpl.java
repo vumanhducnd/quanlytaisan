@@ -6,6 +6,7 @@ import com.website.qlts.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,27 @@ public class TransferServiceImpl implements TransferService {
     @Override
     public TransferHistory getById(long id) {
         return transferRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<TransferHistory> getByDate(String fromDate, String toDate) {
+        return transferRepository.getAllByDate(convertStringToDate(fromDate),convertStringToDate(toDate));
+    }
+
+    @Override
+    public List<TransferHistory> getByName(String name) {
+        return transferRepository.getByName(name);
+    }
+
+    @Override
+    public Date convertStringToDate(String dateString) {
+        String dateStringFormat = dateString.replace('-','/');
+        Date date = new Date();
+        try {
+            date=new SimpleDateFormat("yyyy/MM/dd").parse(dateStringFormat);
+        }catch (Exception ex){
+        }
+        return date;
     }
 
     @Override

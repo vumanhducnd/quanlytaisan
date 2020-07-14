@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -29,7 +30,7 @@ public class ReportController {
     RevokeHistoryService revokeHistoryService;
 
     @RequestMapping("/report-statement")
-    public String reportStatement(Model model) {
+    public String reportStatement(Model model,String toDate, String fromDate,String keyWord) {
         List<RevokeHistory> revokeHistories;
         revokeHistories = revokeHistoryService.getAll();
         model.addAttribute("model", revokeHistories);
@@ -37,8 +38,17 @@ public class ReportController {
     }
 
     @RequestMapping("/report-use")
-    public String reportUse(Model model) {
-        model.addAttribute("model", transferService.getAll());
+    public String reportUse(Model model, String toDate, String fromDate,String keyWord) {
+        if(keyWord != null && keyWord !=""){
+            model.addAttribute("model", transferService.getByName(keyWord));
+        }
+        if(toDate != null && fromDate != null && toDate != "" && fromDate != ""){
+            model.addAttribute("model", transferService.getByDate(fromDate,toDate));
+        }
+        else {
+            model.addAttribute("model", transferService.getAll());
+        }
+
         return "/pages/report/use";
     }
 
@@ -53,16 +63,30 @@ public class ReportController {
     }
 
     @RequestMapping("/report-transfer")
-    public String reportSTransfer(Model model) {
-        model.addAttribute("model", transferService.getAll());
+    public String reportSTransfer(Model model,String toDate, String fromDate,String keyWord) {
+        if(keyWord != null && keyWord !=""){
+            model.addAttribute("model", transferService.getByName(keyWord));
+        }
+        if(toDate != null && fromDate != null && toDate != "" && fromDate != ""){
+            model.addAttribute("model", transferService.getByDate(fromDate,toDate));
+        }
+        else{
+            model.addAttribute("model", transferService.getAll());
+        }
         return "/pages/report/transfer";
     }
 
     @RequestMapping("/report-revoke")
-    public String reportRevoke(Model model) {
-        List<RevokeHistory> revokeHistories;
-        revokeHistories = revokeHistoryService.getAll();
-        model.addAttribute("model", revokeHistories);
+    public String reportRevoke(Model model,String toDate, String fromDate,String keyWord) {
+        if(keyWord != null && keyWord !=""){
+            model.addAttribute("model", transferService.getByName(keyWord));
+        }
+        if(toDate != null && fromDate != null && toDate != "" && fromDate != ""){
+            model.addAttribute("model", revokeHistoryService.getByDate(convertStringToDate(fromDate),convertStringToDate(toDate)));
+        }
+        else{
+            model.addAttribute("model", revokeHistoryService.getAll());
+        }
         return "/pages/report/revoke";
     }
 
@@ -97,5 +121,15 @@ public class ReportController {
         ExportExcel createDownloadFile = new ExportExcel();
         createDownloadFile.exportExcelRevoke(httpServletResponse, transferService.getAll());
         return "redirect:/report-revoke";
+    }
+
+    public Date convertStringToDate(String dateString) {
+        String dateStringFormat = dateString.replace('-','/');
+        Date date = new Date();
+        try {
+            date=new SimpleDateFormat("yyyy/MM/dd").parse(dateStringFormat);
+        }catch (Exception ex){
+        }
+        return date;
     }
 }

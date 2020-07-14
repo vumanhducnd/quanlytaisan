@@ -93,12 +93,16 @@ public class AssetsController {
         if(result.hasErrors()){
             return "pages/assets/create";
         }
-        assetsService.create(assetsView.getAssets().getName(), assetsView.getAssets().getDescription(), assetsView.getAssets().getAmount(),
-                assetsView.getAssets().getConditionAsset(), assetsView.getAssets().getStatus(), assetsView.getAssets().getPrice(),
-                assetsView.getAssets().getPosition(),
-                Long.parseLong(categoryAssets),
-                Long.parseLong(groupAssets),
-                Long.parseLong(suppliers),  assetsView.getAssets().getCateMoney(), assetsView.getAssets().getCodeAsset());
+        int i = 0;
+        while (i < assetsView.getAssets().getAmount()){
+            assetsService.create(assetsView.getAssets().getName(), assetsView.getAssets().getDescription(), 1,
+                    assetsView.getAssets().getConditionAsset(), assetsView.getAssets().getStatus(), assetsView.getAssets().getPrice(),
+                    assetsView.getAssets().getPosition(),
+                    Long.parseLong(categoryAssets),
+                    Long.parseLong(groupAssets),
+                    Long.parseLong(suppliers),  assetsView.getAssets().getCateMoney());
+            i++;
+        }
         return "redirect:/assets";
     }
 
