@@ -1,7 +1,9 @@
 package com.website.qlts.controller;
 
+import com.website.qlts.config.FileStoragePropertiesAvatar;
 import com.website.qlts.entity.Staffs;
 import com.website.qlts.service.DepartmentsService;
+import com.website.qlts.service.FileStorageService;
 import com.website.qlts.service.StaffService;
 import com.website.qlts.view.StaffDepartments;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/staffs")
 public class StaffController {
-//    @Autowired
-//    private StorageService storageService;
+    @Autowired
+    private FileStoragePropertiesAvatar storagePropertiesAvatar;
+    @Autowired
+    private FileStorageService storageService;
 
     @Autowired
     private StaffService staffService;
@@ -61,9 +65,10 @@ public class StaffController {
         if (file.isEmpty()) {
             return "pages/staffs/create";
         } else {
-            String path = staffService.uploadFile(file);
+            String fileName = storageService.storeFile(file);
+            String fileDownloadUri = storagePropertiesAvatar.getUrl() + "/avatar/" + fileName;
             Staffs staffs = staff.getStaffs();
-            staffService.create(new Staffs(staffs.getName(), convertStringToDate(dateOfBirth), staffs.getAddress(), staffs.getPhoneNumber(), 0, Long.parseLong(departmentsId), path));
+            staffService.create(new Staffs(staffs.getName(), convertStringToDate(dateOfBirth), staffs.getAddress(), staffs.getPhoneNumber(), 0, Long.parseLong(departmentsId), fileDownloadUri));
         }
 
         return "redirect:/staffs/";

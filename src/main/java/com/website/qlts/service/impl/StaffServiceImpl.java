@@ -42,7 +42,8 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public  void delete(long id){
         Staffs staffs = staffRepository.findById(id).orElse(null);
-        staffRepository.delete(staffs);
+        staffs.setIs_deleted(1);
+        staffRepository.save(staffs);
     }
 
     @Override

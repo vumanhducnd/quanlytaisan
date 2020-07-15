@@ -1,5 +1,6 @@
 package com.website.qlts.controller;
 
+import com.website.qlts.config.FileStoragePropertiesQRCode;
 import com.website.qlts.entity.Assets;
 import com.website.qlts.entity.RepairHistory;
 import com.website.qlts.entity.RevokeHistory;
@@ -49,6 +50,9 @@ public class AssetsController {
 
     @Autowired
     TransferService transferService;
+
+    @Autowired
+    FileStoragePropertiesQRCode fileStoragePropertiesQRCode;
 
     @RequestMapping(value = "")
     public String assetsPage(Model model, String keyWord, String status, String categoryAssets, String groupAssets) {
@@ -144,7 +148,8 @@ public class AssetsController {
     @RequestMapping(value = "/createQRCode/{id}", method = RequestMethod.GET)
     public String createQRCode(Model model, HttpServletRequest request, @PathVariable("id") long id) {
         String a = request.getRequestURL().toString();
-        assetsService.makeUrl(request.getRequestURL().toString(), id);
+        String uri = fileStoragePropertiesQRCode.getUploadDir();
+        assetsService.makeUrl(uri,request.getRequestURL().toString(), id);
         model.addAttribute("model", assetsService.findById(id));
         return "pages/assets/qr-code";
     }
