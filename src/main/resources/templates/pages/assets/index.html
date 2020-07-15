@@ -3,6 +3,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/main-layout.html}"
 >
+<style>
+    #dataTable_filter{    display: none !important;}
+</style>
 <div id="wrapper">
     <div class="container-fluid" layout:fragment="content">
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -21,7 +24,7 @@
                     </div>
                     <div class="col-md-1">
                         <div class="col-md-1">
-                            <a href="/assets/create">
+                            <a href="/assets/create" title="Thêm mới">
                                 <img width="25px" th:src="@{'/images/add.png'}">
                             </a>
                         </div>
@@ -34,7 +37,7 @@
                         <div class="col-sm-12 col-md-12 row">
                             <div id="dataTable_filter" class="dataTables_filter col-sm-12">
                                 <form th:action="@{/assets}" method="get">
-                                    <div class="row">
+                                    <div class="row" style="margin: 10px;">
 <!--                                        <div class="col-md-3">-->
 <!--                                            <input type="search" class="form-control" placeholder="Tìm kiếm"-->
 <!--                                                   id="txtSearch" name="keyWord"-->
@@ -66,8 +69,9 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3" style="margin:auto;">
-                                            <button type="submit">
-                                                <img width="16px" th:src="@{'/images/unnamed.png'}">
+                                            <button type="submit" style="border: #6e707e 1px solid;">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+<!--                                                <img width="16px" th:src="@{'/images/unnamed.png'}">-->
                                               </button>
                                         </div>
                                     </div>

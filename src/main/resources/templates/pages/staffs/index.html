@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-md-1">
                         <div class="col-md-1">
-                            <a href="/staffs/create">
+                            <a href="/staffs/create" title="Thêm mới">
                                 <img width="25px" th:src="@{'/images/add.png'}">
                             </a>
                         </div>
@@ -50,7 +50,9 @@
                         <tbody>
                         <tr th:each="empl,iterStat : ${staffs}">
                             <th scope="row" th:text="${iterStat.count}"></th>
-                            <td th:text="${empl.name}"></td>
+                            <td>
+                                <a th:href="@{/staffs/detail/{id}(id=${empl.id})}" th:text="${empl.name}"></a>
+                            </td>
                             <td th:text="${#calendars.format(empl.dateOfBirth,'dd MMMM yyyy')}"></td>
 
                             <td th:text="${empl.phoneNumber}"></td>

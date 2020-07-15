@@ -24,4 +24,7 @@ public interface TransferRepository  extends JpaRepository<TransferHistory,Long>
 
     @Query(value = "SELECT * FROM transfer_history c WHERE  c.is_deleted = 0 AND c.start_date >= ? AND c.end_date <= ?", nativeQuery = true)
     public List<TransferHistory> getByName(String name);
+
+    @Query(value = "SELECT * FROM transfer_history c WHERE  c.is_deleted = 0 AND c.asset_id = ?", nativeQuery = true)
+    public List<TransferHistory> getListById(long id);
 }

@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 @Controller
 @RequestMapping("/assets")
 public class AssetsController {
@@ -41,21 +42,23 @@ public class AssetsController {
     RevokeHistoryService revokeHistoryService;
 
     @Autowired
-    RepairsHistoryService repairsHistoryService ;
+    RepairsHistoryService repairsHistoryService;
 
     @Autowired
     SellAssetService sellAssetService;
 
     @Autowired
     TransferService transferService;
+
     @RequestMapping(value = "")
     public String assetsPage(Model model, String keyWord, String status, String categoryAssets, String groupAssets) {
         AssetsView assets;
         if (keyWord == null && status == null && categoryAssets == null && groupAssets == null) {
             assets = setAssetView(new Assets());
             model.addAttribute("model", assets);
-        } else {
-            if (keyWord != null) {
+        }
+        else {
+            if (keyWord != null && keyWord != "") {
                 assets = setAssetView(new Assets());
                 assets.setAssetsList(assetsService.getByName(keyWord));
                 model.addAttribute("model", assets);
@@ -77,6 +80,9 @@ public class AssetsController {
             }
         }
 
+//        else {
+//
+//        }
         return "pages/assets/index";
     }
 
@@ -88,19 +94,19 @@ public class AssetsController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createPage( @RequestParam("suppliers") String suppliers, @RequestParam("groupAssets") String groupAssets,
+    public String createPage(@RequestParam("suppliers") String suppliers, @RequestParam("groupAssets") String groupAssets,
                              @RequestParam("categoryAssets") String categoryAssets, @Valid @ModelAttribute("model") AssetsView assetsView, BindingResult result) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "pages/assets/create";
         }
         int i = 0;
-        while (i < assetsView.getAssets().getAmount()){
+        while (i < assetsView.getAssets().getAmount()) {
             assetsService.create(assetsView.getAssets().getName(), assetsView.getAssets().getDescription(), 1,
                     assetsView.getAssets().getConditionAsset(), assetsView.getAssets().getStatus(), assetsView.getAssets().getPrice(),
                     assetsView.getAssets().getPosition(),
                     Long.parseLong(categoryAssets),
                     Long.parseLong(groupAssets),
-                    Long.parseLong(suppliers),  assetsView.getAssets().getCateMoney());
+                    Long.parseLong(suppliers), assetsView.getAssets().getCateMoney());
             i++;
         }
         return "redirect:/assets";
@@ -146,31 +152,31 @@ public class AssetsController {
     @RequestMapping("/repair/{id}")
     public String repair(Model model, @PathVariable("id") long id) {
         Assets assets = assetsService.findById(id);
-        model.addAttribute("model",assets);
+        model.addAttribute("model", assets);
         return "pages/assets/repair";
     }
 
-    @RequestMapping(value ="/repair/{id}", method = RequestMethod.POST)
-    public String repair( Model model, @PathVariable("id") long id,
-                          @RequestParam("startAt") String startAt,
-                          @RequestParam("endAt") String endAt,
-                          @RequestParam("description") String description) {
+    @RequestMapping(value = "/repair/{id}", method = RequestMethod.POST)
+    public String repair(Model model, @PathVariable("id") long id,
+                         @RequestParam("startAt") String startAt,
+                         @RequestParam("endAt") String endAt,
+                         @RequestParam("description") String description) {
         RepairHistory repairHistory = new RepairHistory();
         Assets assets = assetsService.findById(id);
-            repairHistory.setAssetId(id);
-            repairHistory.setDepartmentId(assets.getDepartment_id());
-            repairHistory.setStaffId(assets.getStaff_id());
-            repairHistory.setStartAt(convertStringToDate(startAt));
-            repairHistory.setEndAt(convertStringToDate(endAt));
-            repairHistory.setDescription(description);
-            repairsHistoryService.save(repairHistory);
-            assetsService.updateRepair(id);
+        repairHistory.setAssetId(id);
+        repairHistory.setDepartmentId(assets.getDepartment_id());
+        repairHistory.setStaffId(assets.getStaff_id());
+        repairHistory.setStartAt(convertStringToDate(startAt));
+        repairHistory.setEndAt(convertStringToDate(endAt));
+        repairHistory.setDescription(description);
+        repairsHistoryService.save(repairHistory);
+        assetsService.updateRepair(id);
         return "redirect:/assets";
     }
 
     @RequestMapping("/repair/history")
-    public String repairHistory(Model model){
-        model.addAttribute("model",repairsHistoryService.getAll());
+    public String repairHistory(Model model) {
+        model.addAttribute("model", repairsHistoryService.getAll());
         return "pages/assets/repair-history";
     }
 
@@ -207,7 +213,7 @@ public class AssetsController {
     }
 
     @RequestMapping(value = "/sell/{id}", method = RequestMethod.POST)
-    public String sell(@PathVariable("id") long id,@RequestParam("newPrice") String newPrice, @RequestParam("note") String note,
+    public String sell(@PathVariable("id") long id, @RequestParam("newPrice") String newPrice, @RequestParam("note") String note,
                        @RequestParam("person") String person, @RequestParam("phoneNumber") String phoneNumber) {
         SellAsset sellAsset = new SellAsset();
         sellAsset.setAssetId(id);
@@ -222,7 +228,7 @@ public class AssetsController {
     }
 
     @RequestMapping("/revoke/history")
-    public String revokePage(Model model){
+    public String revokePage(Model model) {
         List<RevokeHistory> revokeHistories;
         revokeHistories = revokeHistoryService.getAll();
         model.addAttribute("model", revokeHistories);
@@ -230,8 +236,8 @@ public class AssetsController {
     }
 
     @RequestMapping("/sell/history")
-    public String assetSellPage(Model model){
-        model.addAttribute("model",sellAssetService.getAll());
+    public String assetSellPage(Model model) {
+        model.addAttribute("model", sellAssetService.getAll());
         return "pages/assets/sell-history";
     }
 
@@ -243,7 +249,7 @@ public class AssetsController {
 
     @RequestMapping("/used-history")
     public String history(Model model) {
-        model.addAttribute("model",transferService.getAll());
+        model.addAttribute("model", transferService.getAll());
         return "pages/assets/used-history";
     }
 
@@ -262,11 +268,11 @@ public class AssetsController {
         return assetsView;
     }
 
-    public Date convertStringToDate(String dateString){
+    public Date convertStringToDate(String dateString) {
         Date date = new Date();
         try {
-            date=new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
-        }catch (Exception ex){
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
+        } catch (Exception ex) {
         }
         return date;
     }

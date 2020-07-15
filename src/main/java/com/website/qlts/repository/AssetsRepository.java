@@ -32,10 +32,10 @@ public interface AssetsRepository extends JpaRepository<Assets, Long> {
     @Query(value = "SELECT * FROM assets c WHERE c.name like %:name% AND c.is_deleted = 0", nativeQuery = true)
     public List<Assets> getByName(@Param("name")String name);
 
-    @Query(value = "SELECT * FROM assets c WHERE c.staff_id = 0 AND c.department_id != 0 AND c.status != 4 AND c.is_deleted = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM assets c WHERE c.staff_id = 0 AND c.department_id != 0 AND c.status = 1 AND c.is_deleted = 0", nativeQuery = true)
     public List<Assets> getAllWithDepart();
 
-    @Query(value = "SELECT * FROM assets c WHERE c.department_id = 0 AND c.staff_id != 0 AND c.status != 4 AND c.is_deleted = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM assets c WHERE c.department_id = 0 AND c.staff_id != 0 AND c.status = 1 AND c.is_deleted = 0", nativeQuery = true)
     public List<Assets> getAllWithStaff();
 
     @Query(value = "SELECT * FROM assets c WHERE  c.status = 2 AND c.is_deleted = 0", nativeQuery = true)
@@ -49,5 +49,8 @@ public interface AssetsRepository extends JpaRepository<Assets, Long> {
 
     @Query(value = "select  * from assets  ORDER BY ID DESC LIMIT 1", nativeQuery = true)
     public Assets getLastRecord();
+
+    @Query(value = "SELECT ID FROM assets c WHERE c.name like %:name% AND c.is_deleted = 0", nativeQuery = true)
+    public List<Long> getListIdByName(@Param("name")String name);
 
 }

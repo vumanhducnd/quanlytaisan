@@ -17,4 +17,7 @@ public interface StaffRepository extends JpaRepository<Staffs,Long> {
 
     @Query(value = "SELECT * FROM Staffs c WHERE  c.is_deleted = 0", nativeQuery = true)
     public List<Staffs> getAll();
+
+    @Query(value = "SELECT * FROM Staffs c WHERE  c.is_deleted = 0 AND c.id = ?", nativeQuery = true)
+    public Staffs getById(long id);
 }

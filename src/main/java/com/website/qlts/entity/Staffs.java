@@ -34,20 +34,32 @@ public class Staffs implements Serializable {
     @JoinColumn(name = "department_id", updatable = false, insertable = false, unique = false)
     private Departments departments;
 
+
+    private String pathImage;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public Staffs(String name, Date dateOfBirth, String address, String phoneNumber, int is_deleted, long departmentId) {
+    public Staffs(String name, Date dateOfBirth, String address, String phoneNumber, int is_deleted, long departmentId, String pathImage) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.is_deleted = is_deleted;
         this.departmentId = departmentId;
+        this.pathImage = pathImage;
     }
 
     public Staffs() {
+    }
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
     }
 
     public int getIs_deleted() {

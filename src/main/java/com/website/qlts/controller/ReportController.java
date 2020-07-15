@@ -2,6 +2,7 @@ package com.website.qlts.controller;
 
 import com.website.qlts.config.ExportExcel;
 import com.website.qlts.entity.RevokeHistory;
+import com.website.qlts.entity.TransferHistory;
 import com.website.qlts.repository.AssetsRepository;
 import com.website.qlts.service.RevokeHistoryService;
 import com.website.qlts.service.TransferService;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,9 +42,9 @@ public class ReportController {
     @RequestMapping("/report-use")
     public String reportUse(Model model, String toDate, String fromDate,String keyWord) {
         if(keyWord != null && keyWord !=""){
-            model.addAttribute("model", transferService.getByName(keyWord));
+            model.addAttribute("model", getUsedHistoryByName(keyWord));
         }
-        if(toDate != null && fromDate != null && toDate != "" && fromDate != ""){
+        else if(toDate != null && fromDate != null && toDate != "" && fromDate != ""){
             model.addAttribute("model", transferService.getByDate(fromDate,toDate));
         }
         else {
@@ -65,9 +67,9 @@ public class ReportController {
     @RequestMapping("/report-transfer")
     public String reportSTransfer(Model model,String toDate, String fromDate,String keyWord) {
         if(keyWord != null && keyWord !=""){
-            model.addAttribute("model", transferService.getByName(keyWord));
+            model.addAttribute("model", getTransferHistoryByName(keyWord));
         }
-        if(toDate != null && fromDate != null && toDate != "" && fromDate != ""){
+        else if(toDate != null && fromDate != null && toDate != "" && fromDate != ""){
             model.addAttribute("model", transferService.getByDate(fromDate,toDate));
         }
         else{
@@ -79,9 +81,9 @@ public class ReportController {
     @RequestMapping("/report-revoke")
     public String reportRevoke(Model model,String toDate, String fromDate,String keyWord) {
         if(keyWord != null && keyWord !=""){
-            model.addAttribute("model", transferService.getByName(keyWord));
+            model.addAttribute("model",getRevokeHistoryByName(keyWord));
         }
-        if(toDate != null && fromDate != null && toDate != "" && fromDate != ""){
+        else if(toDate != null && fromDate != null && toDate != "" && fromDate != ""){
             model.addAttribute("model", revokeHistoryService.getByDate(convertStringToDate(fromDate),convertStringToDate(toDate)));
         }
         else{
@@ -131,5 +133,33 @@ public class ReportController {
         }catch (Exception ex){
         }
         return date;
+    }
+
+    public List<Long> listId(String name){
+        return assetsRepository.getListIdByName(name);
+    }
+
+    public  List<RevokeHistory> getRevokeHistoryByName(String name){
+        List<RevokeHistory> revokeHistories =  new ArrayList<>();
+        for (long i : listId(name)){
+            revokeHistories.addAll(revokeHistoryService.getById(i));
+        }
+        return  revokeHistories;
+    }
+
+    public  List<TransferHistory> getTransferHistoryByName(String name){
+        List<TransferHistory> transferHistories =  new ArrayList<>();
+        for (long i : listId(name)){
+            transferHistories.addAll(transferService.getListById(i));
+        }
+        return  transferHistories;
+    }
+
+    public  List<TransferHistory> getUsedHistoryByName(String name){
+        List<TransferHistory> usedHistory =  new ArrayList<>();
+        for (long i : listId(name)){
+            usedHistory.addAll(transferService.getListById(i));
+        }
+        return  usedHistory;
     }
 }

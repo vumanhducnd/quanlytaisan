@@ -46,6 +46,11 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
+    public List<TransferHistory> getListById(long id) {
+        return transferRepository.getListById(id);
+    }
+
+    @Override
     public Date convertStringToDate(String dateString) {
         String dateStringFormat = dateString.replace('-','/');
         Date date = new Date();

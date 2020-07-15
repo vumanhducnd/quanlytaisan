@@ -19,6 +19,28 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input type="search" class="form-control" placeholder="Tìm kiếm"
+                                   id="txtSearch" name="keyWord"
+                                   aria-controls="dataTable">
+                        </div>
+                        <div class="col-md-4 row">
+                            <label class="col-md-4 col-form-label text-md-right">Từ ngày</label>
+                            <div class="col-md-8">
+                                <input class="form-control form-control-user" name="fromDate" type="date">
+                            </div>
+                        </div>
+                        <div class="col-md-4 row">
+                            <label class="col-md-4 col-form-label text-md-right">Đến ngày</label>
+                            <div class="col-md-8">
+                                <input class="form-control form-control-user" name="toDate" type="date">
+                            </div>
+                        </div>
+                        <button type="submit" >
+                            <img width="22px" th:src="@{'/images/unnamed.png'}">
+                        </button>
+                    </div>
 <!--                    <div class="row">-->
 <!--                        <div class="col-sm-12 col-md-12 row">-->
 <!--                            <div id="dataTable_filter" class="dataTables_filter col-sm-12">-->
@@ -65,7 +87,7 @@
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                    </div>-->
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>STT</th>
@@ -101,10 +123,11 @@
                         </tbody>
                     </table>
                 </div>
+                <iframe id="txtArea1" style="display:none"></iframe>
             </div>
         </div>
 
-
+        <button id="btnExport" th:onclick="fnExcelReport();"> EXPORT </button>
         <div class="row col-md-12">
             <a class="btn btn-primary" th:href="@{/export-file}">Xuất exel</a>
         </div>
@@ -116,4 +139,39 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
+<script type="text/javascript" th:inline="javascript">
+    function fnExcelReport()
+{
+    var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+    var textRange; var j=0;
+    tab = document.getElementById('headerTable'); // id of table
+
+    for(j = 0 ; j < tab.rows.length ; j++)
+    {
+        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+        //tab_text=tab_text+"</tr>";
+    }
+
+    tab_text=tab_text+"</table>";
+    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    {
+        txtArea1.document.open("txt/html","replace");
+        txtArea1.document.write(tab_text);
+        txtArea1.document.close();
+        txtArea1.focus();
+        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+    }
+    else                 //other browser not tested on IE 11
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+    return (sa);
+}
+</script>
 </html>
