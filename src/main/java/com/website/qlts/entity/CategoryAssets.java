@@ -18,7 +18,7 @@ public class CategoryAssets implements Serializable {
 
     private int is_deleted;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public CategoryAssets(String name, int is_deleted) {

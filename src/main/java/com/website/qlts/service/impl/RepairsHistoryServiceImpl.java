@@ -1,6 +1,6 @@
 package com.website.qlts.service.impl;
 
-import com.website.qlts.entity.RepairHistory;
+import com.website.qlts.entity.RepairHistories;
 import com.website.qlts.repository.RepairsHistoryRepository;
 import com.website.qlts.service.RepairsHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +15,12 @@ public class RepairsHistoryServiceImpl implements RepairsHistoryService {
     private RepairsHistoryRepository repairsHistoryRepository;
 
     @Override
-    public void save(RepairHistory repairsHistory){
+    public void save(RepairHistories repairsHistory){
         repairsHistoryRepository.save(repairsHistory);
     }
 
     @Override
-    public List<RepairHistory> getAll(){
+    public List<RepairHistories> getAll(){
         return repairsHistoryRepository.getAll();
     }
 }

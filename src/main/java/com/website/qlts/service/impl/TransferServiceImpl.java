@@ -1,6 +1,6 @@
 package com.website.qlts.service.impl;
 
-import com.website.qlts.entity.TransferHistory;
+import com.website.qlts.entity.TransferHistories;
 import com.website.qlts.repository.TransferRepository;
 import com.website.qlts.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,37 +16,37 @@ public class TransferServiceImpl implements TransferService {
     TransferRepository transferRepository;
 
     @Override
-    public List<TransferHistory> getAll() {
+    public List<TransferHistories> getAll() {
         return transferRepository.getAll();
     }
 
     @Override
-    public List<TransferHistory> getAllByDepartment() {
+    public List<TransferHistories> getAllByDepartment() {
         return transferRepository.getAllByDepartment();
     }
 
     @Override
-    public List<TransferHistory> getAllByStaff() {
+    public List<TransferHistories> getAllByStaff() {
         return transferRepository.getAllByStaff();
     }
 
     @Override
-    public TransferHistory getById(long id) {
+    public TransferHistories getById(long id) {
         return transferRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List<TransferHistory> getByDate(String fromDate, String toDate) {
+    public List<TransferHistories> getByDate(String fromDate, String toDate) {
         return transferRepository.getAllByDate(convertStringToDate(fromDate),convertStringToDate(toDate));
     }
 
     @Override
-    public List<TransferHistory> getByName(String name) {
+    public List<TransferHistories> getByName(String name) {
         return transferRepository.getByName(name);
     }
 
     @Override
-    public List<TransferHistory> getListById(long id) {
+    public List<TransferHistories> getListById(long id) {
         return transferRepository.getListById(id);
     }
 
@@ -63,27 +63,27 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public void createAndUpdate(String reason,long assetId, long oldDepartmentId, long newDepartmentId, Date startDate, Date endDate, int status) {
-        TransferHistory transferHistory = new TransferHistory();
-        transferHistory.setAssetId(assetId);
-        transferHistory.setDepartmentIdOld(oldDepartmentId);
-        transferHistory.setDepartmentIdNew(newDepartmentId);
-        transferHistory.setStartDate(startDate);
-        transferHistory.setEndDate(endDate);
-        transferHistory.setStatus(status);
-        transferHistory.setReason(reason);
-        transferRepository.save(transferHistory);
+        TransferHistories transferHistories = new TransferHistories();
+        transferHistories.setAssetId(assetId);
+        transferHistories.setDepartmentIdOld(oldDepartmentId);
+        transferHistories.setDepartmentIdNew(newDepartmentId);
+        transferHistories.setStartDate(startDate);
+        transferHistories.setEndDate(endDate);
+        transferHistories.setStatus(status);
+        transferHistories.setReason(reason);
+        transferRepository.save(transferHistories);
     }
 
     @Override
     public void createAndUpdateWithStaff(String reason, long assetId, long oldStaff, long newStaff, Date startDate, Date endDate, int status) {
-        TransferHistory transferHistory = new TransferHistory();
-        transferHistory.setAssetId(assetId);
-        transferHistory.setStaffIdOld(oldStaff);
-        transferHistory.setStaffIdNew(newStaff);
-        transferHistory.setStartDate(startDate);
-        transferHistory.setEndDate(endDate);
-        transferHistory.setStatus(status);
-        transferHistory.setReason(reason);
-        transferRepository.save(transferHistory);
+        TransferHistories transferHistories = new TransferHistories();
+        transferHistories.setAssetId(assetId);
+        transferHistories.setStaffIdOld(oldStaff);
+        transferHistories.setStaffIdNew(newStaff);
+        transferHistories.setStartDate(startDate);
+        transferHistories.setEndDate(endDate);
+        transferHistories.setStatus(status);
+        transferHistories.setReason(reason);
+        transferRepository.save(transferHistories);
     }
 }

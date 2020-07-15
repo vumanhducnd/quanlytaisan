@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class TransferHistory implements Serializable {
+public class TransferHistories implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "asset_id", unique = false)
     private long assetId;
@@ -48,13 +48,13 @@ public class TransferHistory implements Serializable {
     private Date endDate;
     private int is_deleted;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public TransferHistory() {
+    public TransferHistories() {
     }
 
-    public TransferHistory(long assetId, long staffIdOld, long staffIdNew, long departmentIdOld, long departmentIdNew, String reason, int status, Date startDate, Date endDate, int is_deleted) {
+    public TransferHistories(long assetId, long staffIdOld, long staffIdNew, long departmentIdOld, long departmentIdNew, String reason, int status, Date startDate, Date endDate, int is_deleted) {
         this.assetId = assetId;
         this.staffIdOld = staffIdOld;
         this.staffIdNew = staffIdNew;

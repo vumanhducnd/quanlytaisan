@@ -18,7 +18,7 @@ public class GroupAssets implements Serializable {
 
     private int is_deleted;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public GroupAssets(String groupName, int is_deleted) {

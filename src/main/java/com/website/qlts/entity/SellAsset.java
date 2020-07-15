@@ -8,7 +8,7 @@ import java.util.Date;
 @Entity
 public class SellAsset {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "asset_id", unique = false)
     private long assetId;

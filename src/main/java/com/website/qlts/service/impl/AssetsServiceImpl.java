@@ -129,6 +129,7 @@ public class AssetsServiceImpl implements AssetsService {
         Assets assets1 = assetsRepository.getLastRecord();
         assets1.setCodeAsset(createCode(assets1.getId() + ""));
         assetsRepository.save(assets1);
+
     }
 
     public  String createCode(String id){
@@ -192,7 +193,7 @@ public class AssetsServiceImpl implements AssetsService {
             assets.setAsset_category_id(categoryAssetsId);
             assets.setUpdatedDate(new Date());
             assets.setCateMoney(assetsView.getAssets().getStatus());
-            assets.setCodeAsset(assetsView.getAssets().getCodeAsset().trim());
+//            assets.setCodeAsset(assetsView.getAssets().getCodeAsset().trim());
         }
         assetsRepository.save(assets);
     }

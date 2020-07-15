@@ -2,8 +2,8 @@ package com.website.qlts.controller;
 
 import com.website.qlts.config.FileStoragePropertiesQRCode;
 import com.website.qlts.entity.Assets;
-import com.website.qlts.entity.RepairHistory;
-import com.website.qlts.entity.RevokeHistory;
+import com.website.qlts.entity.RepairHistories;
+import com.website.qlts.entity.RevokeHistories;
 import com.website.qlts.entity.SellAsset;
 import com.website.qlts.service.*;
 import com.website.qlts.view.AssetRevoke;
@@ -166,7 +166,7 @@ public class AssetsController {
                          @RequestParam("startAt") String startAt,
                          @RequestParam("endAt") String endAt,
                          @RequestParam("description") String description) {
-        RepairHistory repairHistory = new RepairHistory();
+        RepairHistories repairHistory = new RepairHistories();
         Assets assets = assetsService.findById(id);
         repairHistory.setAssetId(id);
         repairHistory.setDepartmentId(assets.getDepartment_id());
@@ -190,7 +190,7 @@ public class AssetsController {
         Assets assets = assetsService.findById(id);
         AssetRevoke assetRevoke = new AssetRevoke();
         assetRevoke.setAssets(assets);
-        assetRevoke.setRevokeHistory(new RevokeHistory());
+        assetRevoke.setRevokeHistories(new RevokeHistories());
         model.addAttribute("model", assetRevoke);
         return "pages/assets/revoke";
     }
@@ -234,7 +234,7 @@ public class AssetsController {
 
     @RequestMapping("/revoke/history")
     public String revokePage(Model model) {
-        List<RevokeHistory> revokeHistories;
+        List<RevokeHistories> revokeHistories;
         revokeHistories = revokeHistoryService.getAll();
         model.addAttribute("model", revokeHistories);
         return "pages/assets/revoke-history";

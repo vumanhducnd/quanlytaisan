@@ -25,11 +25,12 @@ public class DepartmentsServiceImpl implements DepartmentsService {
     public List<Departments> getAll() {
         List<Departments> departmentsList = new ArrayList<>();
         List<Departments> listDad = departmentsRepository.getParentId(0);
-        departmentsList.addAll(listDad);
+
         for (Departments dad : listDad){
+            departmentsList.add(dad);
             List<Departments> listChildren = departmentsRepository.getParentId(dad.getId());
             for (Departments children : listChildren){
-                children.setDepartmentName("  "+children.getDepartmentName());
+                children.setDepartmentName("------"+children.getDepartmentName());
                 departmentsList.add(children);
             }
         }

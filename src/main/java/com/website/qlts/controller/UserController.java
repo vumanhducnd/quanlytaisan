@@ -1,6 +1,6 @@
 package com.website.qlts.controller;
 
-import com.website.qlts.entity.User;
+import com.website.qlts.entity.Users;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,7 +17,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new Users());
         return "pages/user/login";
     }
 
@@ -28,16 +28,16 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerPage(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new Users());
         return "pages/user/register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerPage(@ModelAttribute("user") User user, Model model, BindingResult result) {
+    public String registerPage(@ModelAttribute("user") Users user, Model model, BindingResult result) {
         if(result.hasErrors()){
             return "pages/user/register";
         }
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new Users());
         return "pages/user/login";
     }
 

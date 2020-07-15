@@ -1,6 +1,6 @@
 package com.website.qlts.service;
 
-import com.website.qlts.entity.CategoriesSupplier;
+import com.website.qlts.entity.CategoriesSuppliers;
 import com.website.qlts.entity.Suppliers;
 
 import java.util.List;
@@ -9,7 +9,7 @@ public interface SuppliersService {
 
     public List<Suppliers> getByName(String name);
 
-    public List<CategoriesSupplier> getCate();
+    public List<CategoriesSuppliers> getCate();
 
     public Suppliers create(String name, String address, String phoneNumber, long id);
 

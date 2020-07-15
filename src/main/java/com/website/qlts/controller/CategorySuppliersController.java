@@ -1,7 +1,6 @@
 package com.website.qlts.controller;
 
-import com.website.qlts.entity.CategoriesSupplier;
-import com.website.qlts.entity.CategoryAssets;
+import com.website.qlts.entity.CategoriesSuppliers;
 import com.website.qlts.service.CategorySuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ public class CategorySuppliersController {
 
     @RequestMapping("")
     public String indexPage(Model model, String keyWord) {
-        List<CategoriesSupplier> listAssets;
+        List<CategoriesSuppliers> listAssets;
         if (keyWord != null) {
             listAssets = categorySuppliersService.getByName(keyWord);
         } else {
@@ -33,12 +32,12 @@ public class CategorySuppliersController {
 
     @RequestMapping("/create")
     public String createPage(Model model) {
-        model.addAttribute("cate", new CategoriesSupplier());
+        model.addAttribute("cate", new CategoriesSuppliers());
         return "pages/category-suppliers/create";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createPage(Model model, @Valid @ModelAttribute("cate") CategoriesSupplier categoriesSupplier, BindingResult bindingResult) {
+    public String createPage(Model model, @Valid @ModelAttribute("cate") CategoriesSuppliers categoriesSupplier, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return "pages/category-suppliers/create";
         }
@@ -49,13 +48,13 @@ public class CategorySuppliersController {
 
     @RequestMapping("/edit/{id}")
     public String editPage(@PathVariable("id") long id, Model model) {
-        CategoriesSupplier assets = categorySuppliersService.getById(id);
+        CategoriesSuppliers assets = categorySuppliersService.getById(id);
         model.addAttribute("cate", assets);
         return "pages/category-suppliers/edit";
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String editPage(@RequestParam String name, @PathVariable("id") long id, Model model, @Valid @ModelAttribute("cate") CategoriesSupplier categoriesSupplier, BindingResult bindingResult) {
+    public String editPage(@RequestParam String name, @PathVariable("id") long id, Model model, @Valid @ModelAttribute("cate") CategoriesSuppliers categoriesSupplier, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return "pages/category-suppliers/edit";
         }

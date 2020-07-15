@@ -22,7 +22,7 @@ public class Departments implements Serializable {
 //    private int chilId;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
 

@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-public class User implements Serializable {
+public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @NotEmpty(message = "Không được để trống")
     @Size(max = 255)
@@ -33,10 +33,10 @@ public class User implements Serializable {
     private int is_deleted;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public User(String userName, String passWord, String rePassword, long staffId, String role, int status, String permission, int is_deleted) {
+    public Users(String userName, String passWord, String rePassword, long staffId, String role, int status, String permission, int is_deleted) {
         this.userName = userName;
         this.passWord = passWord;
         this.rePassword = rePassword;
@@ -47,7 +47,7 @@ public class User implements Serializable {
         this.is_deleted = is_deleted;
     }
 
-    public User() {
+    public Users() {
     }
 
     public int getIs_deleted() {

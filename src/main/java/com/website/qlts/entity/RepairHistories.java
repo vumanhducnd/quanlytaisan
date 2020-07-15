@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class RepairHistory implements Serializable {
+public class RepairHistories implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "asset_id", unique = false)
@@ -41,7 +41,7 @@ public class RepairHistory implements Serializable {
     @Column(name = "isDeleted")
     private int is_deleted;
 
-    public RepairHistory(long assetId, Assets assets, long departmentId, Departments departments, long staffId, Staffs staffs, Date endAt, Date startAt) {
+    public RepairHistories(long assetId, Assets assets, long departmentId, Departments departments, long staffId, Staffs staffs, Date endAt, Date startAt) {
         this.assetId = assetId;
         this.assets = assets;
         this.departmentId = departmentId;
@@ -52,7 +52,7 @@ public class RepairHistory implements Serializable {
         this.startAt = startAt;
     }
 
-    public RepairHistory() {
+    public RepairHistories() {
     }
 
     public Date getEndAt() {

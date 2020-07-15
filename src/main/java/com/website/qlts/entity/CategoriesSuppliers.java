@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class CategoriesSupplier implements Serializable {
+public class CategoriesSuppliers implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotEmpty(message = "Không được để trống")
@@ -17,18 +17,18 @@ public class CategoriesSupplier implements Serializable {
     private int is_deleted;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 //    @OneToMany(mappedBy = "categoriesSupplier", targetEntity = Suppliers.class)
 //    private List<Suppliers> suppliersList;
 
 
-    public CategoriesSupplier(String name, int is_deleted) {
+    public CategoriesSuppliers(String name, int is_deleted) {
         this.name = name;
         this.is_deleted = is_deleted;
     }
 
-    public CategoriesSupplier() {
+    public CategoriesSuppliers() {
     }
 
     public int getIs_deleted() {

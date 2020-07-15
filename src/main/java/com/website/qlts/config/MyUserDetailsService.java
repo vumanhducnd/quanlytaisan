@@ -1,6 +1,6 @@
 package com.website.qlts.config;
 
-import com.website.qlts.entity.User;
+import com.website.qlts.entity.Users;
 import com.website.qlts.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +17,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> optionalUser = userRepository.getByUserName(username);
+        Optional<Users> optionalUser = userRepository.getByUserName(username);
         optionalUser.orElseThrow(() -> new UsernameNotFoundException("Not found" + username));
         return optionalUser.map(MyUserDetails::new).get();
     }
