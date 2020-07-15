@@ -15,4 +15,7 @@ public interface DepartmentsRepository extends JpaRepository<Departments, Long> 
 
     @Query(value = "SELECT * FROM departments c WHERE  c.is_deleted = 0", nativeQuery = true)
     public List<Departments> getAll();
+
+    @Query(value = "SELECT * FROM 'departments' WHERE  parentId = ?1", nativeQuery = true)
+    public List<Departments> getParentId(long parentId);
 }

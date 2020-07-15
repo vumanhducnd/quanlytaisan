@@ -17,7 +17,7 @@ public class Departments implements Serializable {
 //    @Size(max = 255, min = 6)
     private String departmentName;
 
-//    private int parentId;
+    private long parentId;
 //
 //    private int chilId;
 
@@ -58,14 +58,14 @@ public class Departments implements Serializable {
         this.id = id;
     }
 
-//    public int getParentId() {
-//        return parentId;
-//    }
-//
-//    public void setParentId(int parentId) {
-//        this.parentId = parentId;
-//    }
-//
+    public long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(long parentId) {
+        this.parentId = parentId;
+    }
+
 //    public int getChilId() {
 //        return chilId;
 //    }
