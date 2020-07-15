@@ -30,8 +30,8 @@ public class Assets implements Serializable {
     private long price;
 
 
-    @NotEmpty(message = "Không được để trống")
-    @Size(max = 255)
+//    @NotEmpty(message = "Không được để trống")
+//    @Size(max = 255)
     private String position;
 
     @Column(name = "department_id", unique = false)

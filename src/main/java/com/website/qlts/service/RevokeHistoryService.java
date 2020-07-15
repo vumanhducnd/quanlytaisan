@@ -11,4 +11,6 @@ public interface RevokeHistoryService {
     public List<RevokeHistory> getAll();
 
     public List<RevokeHistory> getByDate(Date fromDate, Date toDate);
+
+    public List<RevokeHistory> getById(long id);
 }

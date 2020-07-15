@@ -34,4 +34,9 @@ public class RevokeHistoryServiceImpl implements RevokeHistoryService {
     public List<RevokeHistory> getByDate(Date fromDate, Date toDate) {
         return revokeHistoryRepository.getByDate(fromDate,toDate);
     }
+
+    @Override
+    public List<RevokeHistory> getById(long id) {
+        return revokeHistoryRepository.getById(id);
+    }
 }

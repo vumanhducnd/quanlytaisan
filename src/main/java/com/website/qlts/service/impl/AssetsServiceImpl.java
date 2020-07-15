@@ -202,6 +202,7 @@ public class AssetsServiceImpl implements AssetsService {
         Assets assets = assetsRepository.findById(id).orElse(null);
         assets.setDepartment_id(departmentId);
         assets.setUpdatedDate(date);
+        assets.setStatus(1);
         assetsRepository.save(assets);
     }
 
@@ -210,6 +211,7 @@ public class AssetsServiceImpl implements AssetsService {
         Assets assets = assetsRepository.findById(id).orElse(null);
         assets.setStaff_id(staffId);
         assets.setUpdatedDate(date);
+        assets.setStatus(1);
         assetsRepository.save(assets);
     }
 

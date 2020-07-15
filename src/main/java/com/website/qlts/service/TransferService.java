@@ -19,6 +19,8 @@ public interface TransferService {
 
     public List<TransferHistory> getByName(String name);
 
+    public List<TransferHistory> getListById(long id);
+
     public Date convertStringToDate(String dateString);
     public void createAndUpdate(String reason,long assetId, long oldDepartmentId, long newDepartmentId, Date startDate, Date endDate, int status);
 
