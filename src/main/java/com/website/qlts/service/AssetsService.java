@@ -49,7 +49,7 @@ public interface AssetsService {
 
     public Assets findById(long id);
 
-    public String makeUrl(String uri, String url, long id);
+    public void makeUrl(String uri, String url, long id);
 
     public void delete(long id);
 

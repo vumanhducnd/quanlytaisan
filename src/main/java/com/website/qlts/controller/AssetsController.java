@@ -1,5 +1,6 @@
 package com.website.qlts.controller;
 
+import com.website.qlts.config.CreateQRCodeConfig;
 import com.website.qlts.config.FileStoragePropertiesAvatar;
 import com.website.qlts.config.FileStoragePropertiesQRCode;
 import com.website.qlts.entity.Assets;
@@ -16,8 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -109,6 +113,7 @@ public class AssetsController {
         if (result.hasErrors()) {
             return "pages/assets/create";
         }
+        CreateQRCodeConfig createQRCodeConfig  = new CreateQRCodeConfig();
         int i = 0;
         while (i < assetsView.getAssets().getAmount()) {
             assetsService.create(assetsView.getAssets().getName(), assetsView.getAssets().getDescription(), 1,
@@ -118,6 +123,7 @@ public class AssetsController {
                     Long.parseLong(groupAssets),
                     Long.parseLong(suppliers), assetsView.getAssets().getCateMoney(),storagePropertiesAvatar.getUploadDir(),request.getRequestURL().toString());
             i++;
+            createQRCodeConfig.createQrCodeAssets(null, request.getRequestURL().toString(), 100);
         }
         return "redirect:/assets";
     }
@@ -152,10 +158,16 @@ public class AssetsController {
     }
 
     @RequestMapping(value = "/createQRCode/{id}", method = RequestMethod.GET)
-    public String createQRCode(Model model, HttpServletRequest request, @PathVariable("id") long id) {
+    public String createQRCode(Model model, HttpServletRequest request, @PathVariable("id") long id){
 //        String a = request.getRequestURL().toString();
 //        String uri = fileStoragePropertiesQRCode.getUploadDir();
 //        assetsService.makeUrl(uri,request.getRequestURL().toString(), id);
+//        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/uploads/91.png"));
+//        image.
+        CreateQRCodeConfig createQRCodeConfig = new CreateQRCodeConfig();
+//        createQRCodeConfig.createQrCodeAssets(null, request.getRequestURL().toString(), id);
+        createQRCodeConfig.qrCode(request.getRequestURL().toString(), id);
+        assetsService.makeUrl(null, request.getRequestURL().toString(), id);
         Assets assets = assetsService.findById(id);
         model.addAttribute("model", assetsService.findById(id));
         return "pages/assets/qr-code";
