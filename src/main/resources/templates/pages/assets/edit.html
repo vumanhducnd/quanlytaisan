@@ -17,14 +17,14 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Tên tài sản</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user" maxlength="255" minlength="6"
+                    <input class="form-control form-control-user" maxlength="255" minlength="6"  required autofocus="autofocus"
                            th:field="*{assets.name}">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Chi tiết</label>
                 <div class="col-md-4">
-                    <textarea class=" form-control" th:field="*{assets.description}" minlength="6" rows="3">
+                    <textarea class=" form-control"  required autofocus="autofocus" th:field="*{assets.description}" minlength="6" rows="3">
                     </textarea>
                 </div>
             </div>
@@ -38,7 +38,7 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Tình trạng</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user" maxlength="255" minlength="6"
+                    <input class="form-control form-control-user" maxlength="255" minlength="6"  required autofocus="autofocus"
                            th:field="*{assets.conditionAsset}" >
                 </div>
             </div>
@@ -55,7 +55,7 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Giá</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user" minlength="1"
+                    <input class="form-control form-control-user" minlength="1"  required autofocus="autofocus"
                            th:field="*{assets.price}"
                            >
                 </div>

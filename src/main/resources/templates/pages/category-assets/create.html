@@ -11,7 +11,7 @@
             <div class="form-group row">
                 <label  class="col-md-4 col-form-label text-md-right">Tên danh mục</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user" maxlength="255" minlength="1"
+                    <input class="form-control form-control-user" maxlength="255" minlength="1"  required autofocus="autofocus"
                            th:field="*{name}">
                     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
                           class="text-danger"></span>

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface DepartmentsService  {
-    public Departments create(String name);
+    public Departments create(String name, long departmentParentId);
 
     public List<Departments> getAll();
 
@@ -18,5 +18,7 @@ public interface DepartmentsService  {
     public void delete(long id);
 
     public List<Departments> getByName(String name);
+
+    public List<Departments> getDepartmentParentDaddy();
 
 }

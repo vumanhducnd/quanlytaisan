@@ -10,7 +10,7 @@
             <div class="form-group row">
                 <label  class="col-md-4 col-form-label text-md-right">Tên nhóm tài sản</label>
                 <div class="col-md-4">
-                    <input type="text" id="full_name" min="1" maxlength="255" th:field="*{groupName}" class="form-control" name="full-name">
+                    <input type="text" id="full_name" min="1" maxlength="255" th:field="*{groupName}"  required autofocus="autofocus" class="form-control" name="full-name">
                     <span th:if="${#fields.hasErrors('groupName')}" th:errors="*{groupName}"
                           class="text-danger"></span>
                 </div>

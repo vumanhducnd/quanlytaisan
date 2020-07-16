@@ -15,9 +15,10 @@ public class DepartmentsServiceImpl implements DepartmentsService {
     DepartmentsRepository departmentsRepository;
 
     @Override
-    public Departments create(String name) {
+    public Departments create(String name, long departmentParentId) {
         Departments departments = new Departments();
         departments.setDepartmentName(name);
+        departments.setParentId(departmentParentId);
         return departmentsRepository.save(departments);
     }
 
@@ -59,6 +60,11 @@ public class DepartmentsServiceImpl implements DepartmentsService {
     @Override
     public List<Departments> getByName(String name) {
         return null;
+    }
+
+    @Override
+    public List<Departments> getDepartmentParentDaddy() {
+        return departmentsRepository.getParentId(0);
     }
 }
 

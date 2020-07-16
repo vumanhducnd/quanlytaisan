@@ -2,6 +2,7 @@ package com.website.qlts.controller;
 
 import com.website.qlts.entity.Departments;
 import com.website.qlts.service.DepartmentsService;
+import com.website.qlts.view.DepartmentView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,16 +27,19 @@ public class DeparmentsController {
 
     @RequestMapping("/create")
     public String create(Model model) {
-        model.addAttribute("model", new Departments());
+        DepartmentView departmentView = new DepartmentView();
+        departmentView.setDepartments(new Departments());
+        departmentView.setDepartmentsList(departmentsService.getDepartmentParentDaddy());
+        model.addAttribute("model",departmentView);
         return "pages/departments/create";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@RequestParam("departmentName") String departmentName, @Valid @ModelAttribute("model") Departments departments, BindingResult bindingResult) {
+    public String create(@RequestParam("departmentParentId") long departmentParentId, @Valid @ModelAttribute("model") DepartmentView departments, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return "pages/departments/create";
         }
-        departmentsService.create(departmentName);
+        departmentsService.create(departments.getDepartments().getDepartmentName(), departmentParentId);
         return "redirect:/departments";
     }
 

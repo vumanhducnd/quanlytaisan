@@ -33,24 +33,24 @@
                                 </div>
                                 <form class="user" th:action="@{/login}" method="post" >
                                     <div class="form-group">
-                                        <input class="form-control form-control-user" name="userName"
-
+                                        <input class="form-control form-control-user" name="userName" required
+                                                autofocus="autofocus"
                                                placeholder="Tên đăng nhập">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" name="password"
+                                        <input type="password" class="form-control form-control-user" name="password" required autofocus="autofocus"
                                                 placeholder="Mật khẩu">
                                     </div>
-<!--                                    <div class="form-group" th:if="${param.error}">-->
-<!--                                        Tên đăng nhập hoặc mật khẩu không đúng-->
-<!--                                    </div>-->
+                                    <div class="form-group text-danger" th:if="${param.error}" >
+                                        Tên đăng nhập hoặc mật khẩu không đúng
+                                    </div>
+                                    <div class="form-group text-success" th:if="${param.logout}">
+                                        Bạn đã đăng xuất
+                                    </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Đăng nhập
                                     </button>
                                 </form>
-<!--                                <div class="text-center">-->
-<!--                                    <a class="small" href="forgot-password.html">Forgot Password?</a>-->
-<!--                                </div>-->
                                 <div class="text-center">
                                     <a class="small" href="/register">Tạo tài khoản!</a>
                                 </div>

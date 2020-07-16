@@ -11,12 +11,22 @@
             <div class="form-group row">
                 <label  class="col-md-4 col-form-label text-md-right">Tên phòng ban</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user" th:field="*{departmentName}" minlength="6"  maxlength="255"  name="departmentName">
-                    <span th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"
+                    <input class="form-control form-control-user"  required autofocus="autofocus" th:field="*{departments.departmentName}" minlength="6"  maxlength="255"  name="departmentName">
+                    <span th:if="${#fields.hasErrors('departments.departmentName')}" th:errors="*{departments.departmentName}"
                             class="text-danger"></span>
                 </div>
             </div>
-
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">Phòng ban chính</label>
+                <div class="col-md-4">
+                    <select class="form-control" name="departmentParentId">
+                        <option value="0">Không chọn</option>
+                        <option th:each="li : ${model.departmentsList}"
+                                th:value="${li.id}"
+                                th:text="${li.departmentName}"/>
+                    </select>
+                </div>
+            </div>
             <div class="col-md-6 offset-md-4">
                 <button type="submit" class="btn btn-primary">
                     Tạo phòng ban

@@ -1,5 +1,6 @@
 package com.website.qlts.controller;
 
+import com.website.qlts.config.CreateQRCodeConfig;
 import com.website.qlts.config.FileStoragePropertiesAvatar;
 import com.website.qlts.config.FileStoragePropertiesQRCode;
 import com.website.qlts.entity.Assets;
@@ -16,8 +17,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -151,14 +157,13 @@ public class AssetsController {
         return "pages/assets/detail";
     }
 
-    @RequestMapping(value = "/createQRCode/{id}", method = RequestMethod.GET)
-    public String createQRCode(Model model, HttpServletRequest request, @PathVariable("id") long id) {
-//        String a = request.getRequestURL().toString();
-//        String uri = fileStoragePropertiesQRCode.getUploadDir();
-//        assetsService.makeUrl(uri,request.getRequestURL().toString(), id);
-        Assets assets = assetsService.findById(id);
-        model.addAttribute("model", assetsService.findById(id));
-        return "pages/assets/qr-code";
+    @RequestMapping(value = "/qrcode/{id}", method = RequestMethod.GET)
+    public void createQRCode( HttpServletRequest request, HttpServletResponse response, @PathVariable("id") long id) throws Exception {
+        response.setContentType("image/png");
+        OutputStream outputStream = response.getOutputStream();
+        outputStream.write(CreateQRCodeConfig.getQRCodeImage(assetsService.makeUrl(null, request.getRequestURL().toString(), id)));
+        outputStream.flush();
+        outputStream.close();
     }
 
     @RequestMapping("/repair/{id}")
