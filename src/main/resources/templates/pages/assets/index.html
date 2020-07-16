@@ -38,11 +38,6 @@
                             <div id="dataTable_filter" class="dataTables_filter col-sm-12">
                                 <form th:action="@{/assets}" method="get">
                                     <div class="row" style="margin: 10px;">
-<!--                                        <div class="col-md-3">-->
-<!--                                            <input type="search" class="form-control" placeholder="Tìm kiếm"-->
-<!--                                                   id="txtSearch" name="keyWord"-->
-<!--                                                   aria-controls="dataTable">-->
-<!--                                        </div>-->
                                         <div class="col-md-3">
                                             <select class="form-control" name="status">
                                                 <option value="-1">---Trạng thái---</option>
@@ -71,7 +66,6 @@
                                         <div class="col-md-3" style="margin:auto;">
                                             <button type="submit" style="border: #6e707e 1px solid;">
                                                 <i class="fa fa-search" aria-hidden="true"></i>
-<!--                                                <img width="16px" th:src="@{'/images/unnamed.png'}">-->
                                               </button>
                                         </div>
                                     </div>
@@ -89,7 +83,6 @@
                             <th>Tên tài sản</th>
                             <th>Trạng thái</th>
                             <th>Giá</th>
-                            <!--                            <th>Vị trí</th>-->
                             <th>Loại tài sản</th>
                             <th>Nhóm tài sản</th>
                             <th>Nhà sản xuất</th>
@@ -119,19 +112,14 @@
                             <td th:text="${empl.categoryAssets.name}"></td>
                             <td th:text="${empl.groupAssets.groupName}"></td>
                             <td th:text="${empl.suppliers.name}"></td>
-                            <td>
-<!--                                <a th:onclick="'alert(\'' + ${empl.id} + '\');'">-->
-<!--                                Share Page-->
-<!--                            </a>-->
-                                <a th:href="@{/assets/createQRCode/{id}(id=${empl.id})}" class="eBtn"
-                                   data-target=".bd-example-modal-lg"><i class="fa fa-qrcode"></i></a>
-                            </td>
+                            <td> <img th:src="@{/assets/qrcode/{id}(id=${empl.id})}" width="100" height="100"></td>
                             <td><a th:href="@{/assets/edit/{id}(id=${empl.id})}"
                                    class="mr-sm-2 text-primary">Sửa</a>
                             </td>
                             <td><a th:href="@{/assets/delete/{id}(id=${empl.id})}" class="text-danger">
                                 <i class="fa fa-trash"></i></a>
                             </td>
+
                         </tr>
                         </tbody>
                     </table>

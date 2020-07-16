@@ -163,11 +163,9 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
-    public void makeUrl(String uri, String url, long id) {
-//        String[] listUrl = url.split("/assets/create/", url.length() - 1);
-        String listUrl = url.substring(0, url.length()- 14);
-        CreateQRCodeConfig createQRCodeConfig = new CreateQRCodeConfig();
-        createQRCodeConfig.createQrCodeAssets(uri,listUrl + "/assets/detail/" + id, id);
+    public String makeUrl(String uri, String url, long id) {
+        String[] listUrl = url.split("/assets/qrcode/" + id, url.length() - 1);
+        return  listUrl[0] + "/assets/detail/" + id;
     }
 
     @Override
