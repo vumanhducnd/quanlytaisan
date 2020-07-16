@@ -123,12 +123,15 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
-    public void create(String name, String description, int amount, String condition, int status, long price, String position, long cateId, long groupId, long suppId, int cateMoney) {
-        Assets assets = new Assets(name.trim(), description.trim(), amount, condition.trim(), status, price, position.trim(), cateId, groupId, suppId,0, new Date(), new Date(), cateMoney, "");
+    public void create(String name, String description, int amount, String condition, int status, long price, String position, long cateId, long groupId, long suppId, int cateMoney,String uri, String url) {
+        Assets assets = new Assets(name.trim(), description.trim(), amount, condition.trim(), status, price,"", cateId, groupId, suppId,0, new Date(), new Date(), cateMoney, "");
         assetsRepository.save(assets);
         Assets assets1 = assetsRepository.getLastRecord();
         assets1.setCodeAsset(createCode(assets1.getId() + ""));
+        assets1.setPathImage(makeUrl(uri,url, assets1.getId()));
         assetsRepository.save(assets1);
+
+
     }
 
     public  String createCode(String id){
@@ -160,10 +163,10 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
-    public void makeUrl(String url, long id) {
+    public String makeUrl(String uri, String url, long id) {
         String[] listUrl = url.split("/assets/createQRCode/", url.length() - 1);
         CreateQRCodeConfig createQRCodeConfig = new CreateQRCodeConfig();
-        createQRCodeConfig.createQrCodeAssets(listUrl[0] + "/assets/detail/" + id, id);
+        return createQRCodeConfig.createQrCodeAssets(uri,listUrl[0] + "/assets/detail/" + id, id);
     }
 
     @Override
@@ -183,7 +186,7 @@ public class AssetsServiceImpl implements AssetsService {
             assets.setDescription(assetsView.getAssets().getDescription().trim());
             assets.setAmount(assetsView.getAssets().getAmount());
             assets.setConditionAsset(assetsView.getAssets().getConditionAsset().trim());
-            assets.setPosition(assetsView.getAssets().getPosition().trim());
+            assets.setPosition("");
             assets.setPrice(assetsView.getAssets().getPrice());
             assets.setStatus(assetsView.getAssets().getStatus());
             assets.setDepartment_id(departmentsId);
@@ -192,7 +195,7 @@ public class AssetsServiceImpl implements AssetsService {
             assets.setAsset_category_id(categoryAssetsId);
             assets.setUpdatedDate(new Date());
             assets.setCateMoney(assetsView.getAssets().getStatus());
-            assets.setCodeAsset(assetsView.getAssets().getCodeAsset().trim());
+//            assets.setCodeAsset(assetsView.getAssets().getCodeAsset().trim());
         }
         assetsRepository.save(assets);
     }

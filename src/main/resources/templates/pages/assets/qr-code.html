@@ -9,7 +9,7 @@
         <div class="form-group row">
             <label class="col-md-4  text-md-right" th:text="*{'Mã QRCode của ' + model.name}">Mã QRCode của</label>
             <div class="col-md-4">
-                <img th:src="@{'/images/MyQRCode' + *{model.id} + '.png'}" height="400px" width="400px">
+                <img th:src="@{*{model.pathImage}}" height="200px" width="200px">
             </div>
         </div>
 

@@ -6,6 +6,7 @@ import com.website.qlts.service.DepartmentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,7 +23,18 @@ public class DepartmentsServiceImpl implements DepartmentsService {
 
     @Override
     public List<Departments> getAll() {
-        return departmentsRepository.getAll();
+        List<Departments> departmentsList = new ArrayList<>();
+        List<Departments> listDad = departmentsRepository.getParentId(0);
+
+        for (Departments dad : listDad){
+            departmentsList.add(dad);
+            List<Departments> listChildren = departmentsRepository.getParentId(dad.getId());
+            for (Departments children : listChildren){
+                children.setDepartmentName("------"+children.getDepartmentName());
+                departmentsList.add(children);
+            }
+        }
+        return departmentsList;
     }
 
     @Override

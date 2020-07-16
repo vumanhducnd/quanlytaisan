@@ -22,13 +22,13 @@ public class Suppliers implements Serializable {
     private String phoneNumber;
     //    private long supplier_category_id;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "supplier_category_id", unique = false)
     private long supplier_category_id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_category_id", updatable = false, insertable = false, unique = false)
-    private CategoriesSupplier categoriesSupplier;
+    private CategoriesSuppliers categoriesSupplier;
     private int is_deleted;
 
     public Suppliers() {
@@ -90,11 +90,11 @@ public class Suppliers implements Serializable {
         this.id = id;
     }
 
-    public CategoriesSupplier getCategoriesSupplier() {
+    public CategoriesSuppliers getCategoriesSupplier() {
         return categoriesSupplier;
     }
 
-    public void setCategoriesSupplier(CategoriesSupplier categoriesSupplier) {
+    public void setCategoriesSupplier(CategoriesSuppliers categoriesSupplier) {
         this.categoriesSupplier = categoriesSupplier;
     }
 

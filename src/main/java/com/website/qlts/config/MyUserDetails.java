@@ -1,7 +1,7 @@
 package com.website.qlts.config;
 
 
-import com.website.qlts.entity.User;
+import com.website.qlts.entity.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +16,8 @@ public class MyUserDetails implements UserDetails {
     private String password;
     private int status;
     private List<GrantedAuthority> grantedAuthorities;
-    private User user;
-    public MyUserDetails(User user) {
+    private Users user;
+    public MyUserDetails(Users user) {
         this.userName = user.getUserName();
         this.password = user.getPassWord();
         this.status = user.getStatus();

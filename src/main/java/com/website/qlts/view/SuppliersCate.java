@@ -1,15 +1,15 @@
 package com.website.qlts.view;
 
-import com.website.qlts.entity.CategoriesSupplier;
+import com.website.qlts.entity.CategoriesSuppliers;
 import com.website.qlts.entity.Suppliers;
 
 import java.util.List;
 
 public class SuppliersCate {
     private Suppliers suppliers;
-    private List<CategoriesSupplier> list;
+    private List<CategoriesSuppliers> list;
 
-    public SuppliersCate(Suppliers suppliers, List<CategoriesSupplier> list) {
+    public SuppliersCate(Suppliers suppliers, List<CategoriesSuppliers> list) {
         this.suppliers = suppliers;
         this.list = list;
     }
@@ -25,11 +25,11 @@ public class SuppliersCate {
         this.suppliers = suppliers;
     }
 
-    public List<CategoriesSupplier> getList() {
+    public List<CategoriesSuppliers> getList() {
         return list;
     }
 
-    public void setList(List<CategoriesSupplier> list) {
+    public void setList(List<CategoriesSuppliers> list) {
         this.list = list;
     }
 }

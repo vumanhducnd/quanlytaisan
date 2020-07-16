@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class RevokeHistory implements Serializable {
+public class RevokeHistories implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "asset_id", unique = false)
     private long assetId;
@@ -26,10 +26,10 @@ public class RevokeHistory implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", updatable = false, insertable = false, unique = false)
     private Departments departments;
-    public RevokeHistory() {
+    public RevokeHistories() {
     }
 
-    public RevokeHistory(long assetId, long staffId, long departmentId, String reason, int status, Date revokeDate, int is_deleted) {
+    public RevokeHistories(long assetId, long staffId, long departmentId, String reason, int status, Date revokeDate, int is_deleted) {
         this.assetId = assetId;
         this.staffId = staffId;
         this.departmentId = departmentId;
@@ -47,7 +47,7 @@ public class RevokeHistory implements Serializable {
     private int is_deleted;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public Date getRevokeDate() {

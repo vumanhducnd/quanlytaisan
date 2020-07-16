@@ -1,8 +1,10 @@
 package com.website.qlts.controller;
 
+import com.website.qlts.config.FileStoragePropertiesAvatar;
+import com.website.qlts.config.FileStoragePropertiesQRCode;
 import com.website.qlts.entity.Assets;
-import com.website.qlts.entity.RepairHistory;
-import com.website.qlts.entity.RevokeHistory;
+import com.website.qlts.entity.RepairHistories;
+import com.website.qlts.entity.RevokeHistories;
 import com.website.qlts.entity.SellAsset;
 import com.website.qlts.service.*;
 import com.website.qlts.view.AssetRevoke;
@@ -50,6 +52,14 @@ public class AssetsController {
     @Autowired
     TransferService transferService;
 
+    @Autowired
+    FileStoragePropertiesQRCode fileStoragePropertiesQRCode;
+
+    @Autowired
+    FileStorageService storageService;
+
+    @Autowired
+    FileStoragePropertiesAvatar storagePropertiesAvatar;
     @RequestMapping(value = "")
     public String assetsPage(Model model, String keyWord, String status, String categoryAssets, String groupAssets) {
         AssetsView assets;
@@ -94,7 +104,7 @@ public class AssetsController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createPage(@RequestParam("suppliers") String suppliers, @RequestParam("groupAssets") String groupAssets,
+    public String createPage(@RequestParam("suppliers") String suppliers, @RequestParam("groupAssets") String groupAssets, HttpServletRequest request,
                              @RequestParam("categoryAssets") String categoryAssets, @Valid @ModelAttribute("model") AssetsView assetsView, BindingResult result) {
         if (result.hasErrors()) {
             return "pages/assets/create";
@@ -106,7 +116,7 @@ public class AssetsController {
                     assetsView.getAssets().getPosition(),
                     Long.parseLong(categoryAssets),
                     Long.parseLong(groupAssets),
-                    Long.parseLong(suppliers), assetsView.getAssets().getCateMoney());
+                    Long.parseLong(suppliers), assetsView.getAssets().getCateMoney(),storagePropertiesAvatar.getUploadDir(),request.getRequestURL().toString());
             i++;
         }
         return "redirect:/assets";
@@ -143,8 +153,10 @@ public class AssetsController {
 
     @RequestMapping(value = "/createQRCode/{id}", method = RequestMethod.GET)
     public String createQRCode(Model model, HttpServletRequest request, @PathVariable("id") long id) {
-        String a = request.getRequestURL().toString();
-        assetsService.makeUrl(request.getRequestURL().toString(), id);
+//        String a = request.getRequestURL().toString();
+//        String uri = fileStoragePropertiesQRCode.getUploadDir();
+//        assetsService.makeUrl(uri,request.getRequestURL().toString(), id);
+        Assets assets = assetsService.findById(id);
         model.addAttribute("model", assetsService.findById(id));
         return "pages/assets/qr-code";
     }
@@ -161,7 +173,7 @@ public class AssetsController {
                          @RequestParam("startAt") String startAt,
                          @RequestParam("endAt") String endAt,
                          @RequestParam("description") String description) {
-        RepairHistory repairHistory = new RepairHistory();
+        RepairHistories repairHistory = new RepairHistories();
         Assets assets = assetsService.findById(id);
         repairHistory.setAssetId(id);
         repairHistory.setDepartmentId(assets.getDepartment_id());
@@ -185,7 +197,7 @@ public class AssetsController {
         Assets assets = assetsService.findById(id);
         AssetRevoke assetRevoke = new AssetRevoke();
         assetRevoke.setAssets(assets);
-        assetRevoke.setRevokeHistory(new RevokeHistory());
+        assetRevoke.setRevokeHistories(new RevokeHistories());
         model.addAttribute("model", assetRevoke);
         return "pages/assets/revoke";
     }
@@ -229,7 +241,7 @@ public class AssetsController {
 
     @RequestMapping("/revoke/history")
     public String revokePage(Model model) {
-        List<RevokeHistory> revokeHistories;
+        List<RevokeHistories> revokeHistories;
         revokeHistories = revokeHistoryService.getAll();
         model.addAttribute("model", revokeHistories);
         return "pages/assets/revoke-history";

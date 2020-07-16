@@ -1,6 +1,6 @@
 package com.website.qlts.service.impl;
 
-import com.website.qlts.entity.CategoriesSupplier;
+import com.website.qlts.entity.CategoriesSuppliers;
 import com.website.qlts.entity.Suppliers;
 import com.website.qlts.repository.SuppliersReposiotory;
 import com.website.qlts.service.SuppliersService;
@@ -23,8 +23,8 @@ public class SuppliersServiceImpl implements SuppliersService {
         return assetsList;
     }
 
-    public List<CategoriesSupplier> getCate() {
-        List<CategoriesSupplier> categoriesSuppliers = suppliersReposiotory.getCate();
+    public List<CategoriesSuppliers> getCate() {
+        List<CategoriesSuppliers> categoriesSuppliers = suppliersReposiotory.getCate();
         return categoriesSuppliers;
     }
 

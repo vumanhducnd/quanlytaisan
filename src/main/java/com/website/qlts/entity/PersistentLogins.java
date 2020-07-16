@@ -22,7 +22,7 @@ public class PersistentLogins implements Serializable {
     private String lastUsed;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public PersistentLogins(String userName, String series, String token, String lastUsed) {

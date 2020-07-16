@@ -1,8 +1,8 @@
 package com.website.qlts.controller;
 
 import com.website.qlts.config.ExportExcel;
-import com.website.qlts.entity.RevokeHistory;
-import com.website.qlts.entity.TransferHistory;
+import com.website.qlts.entity.RevokeHistories;
+import com.website.qlts.entity.TransferHistories;
 import com.website.qlts.repository.AssetsRepository;
 import com.website.qlts.service.RevokeHistoryService;
 import com.website.qlts.service.TransferService;
@@ -33,7 +33,7 @@ public class ReportController {
 
     @RequestMapping("/report-statement")
     public String reportStatement(Model model,String toDate, String fromDate,String keyWord) {
-        List<RevokeHistory> revokeHistories;
+        List<RevokeHistories> revokeHistories;
         revokeHistories = revokeHistoryService.getAll();
         model.addAttribute("model", revokeHistories);
         return "/pages/report/statement";
@@ -139,24 +139,24 @@ public class ReportController {
         return assetsRepository.getListIdByName(name);
     }
 
-    public  List<RevokeHistory> getRevokeHistoryByName(String name){
-        List<RevokeHistory> revokeHistories =  new ArrayList<>();
+    public  List<RevokeHistories> getRevokeHistoryByName(String name){
+        List<RevokeHistories> revokeHistories =  new ArrayList<>();
         for (long i : listId(name)){
             revokeHistories.addAll(revokeHistoryService.getById(i));
         }
         return  revokeHistories;
     }
 
-    public  List<TransferHistory> getTransferHistoryByName(String name){
-        List<TransferHistory> transferHistories =  new ArrayList<>();
+    public  List<TransferHistories> getTransferHistoryByName(String name){
+        List<TransferHistories> transferHistories =  new ArrayList<>();
         for (long i : listId(name)){
             transferHistories.addAll(transferService.getListById(i));
         }
         return  transferHistories;
     }
 
-    public  List<TransferHistory> getUsedHistoryByName(String name){
-        List<TransferHistory> usedHistory =  new ArrayList<>();
+    public  List<TransferHistories> getUsedHistoryByName(String name){
+        List<TransferHistories> usedHistory =  new ArrayList<>();
         for (long i : listId(name)){
             usedHistory.addAll(transferService.getListById(i));
         }

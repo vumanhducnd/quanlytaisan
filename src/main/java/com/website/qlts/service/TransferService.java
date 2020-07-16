@@ -1,25 +1,24 @@
 package com.website.qlts.service;
 
-import com.website.qlts.entity.TransferHistory;
+import com.website.qlts.entity.TransferHistories;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public interface TransferService {
-    public List<TransferHistory> getAll();
+    public List<TransferHistories> getAll();
 
-    public List<TransferHistory> getAllByDepartment();
+    public List<TransferHistories> getAllByDepartment();
 
-    public List<TransferHistory> getAllByStaff();
+    public List<TransferHistories> getAllByStaff();
 
-    public TransferHistory getById(long id);
+    public TransferHistories getById(long id);
 
-    public List<TransferHistory> getByDate(String fromDate, String toDate);
+    public List<TransferHistories> getByDate(String fromDate, String toDate);
 
-    public List<TransferHistory> getByName(String name);
+    public List<TransferHistories> getByName(String name);
 
-    public List<TransferHistory> getListById(long id);
+    public List<TransferHistories> getListById(long id);
 
     public Date convertStringToDate(String dateString);
     public void createAndUpdate(String reason,long assetId, long oldDepartmentId, long newDepartmentId, Date startDate, Date endDate, int status);

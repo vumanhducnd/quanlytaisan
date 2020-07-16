@@ -38,7 +38,7 @@ public class Staffs implements Serializable {
     private String pathImage;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public Staffs(String name, Date dateOfBirth, String address, String phoneNumber, int is_deleted, long departmentId, String pathImage) {

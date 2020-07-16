@@ -1,10 +1,10 @@
 package com.website.qlts.service;
 
-import com.website.qlts.entity.RepairHistory;
+import com.website.qlts.entity.RepairHistories;
 
 import java.util.List;
 
 public interface RepairsHistoryService {
-    void save(RepairHistory repairsHistory);
-    List<RepairHistory> getAll();
+    void save(RepairHistories repairsHistory);
+    List<RepairHistories> getAll();
 }

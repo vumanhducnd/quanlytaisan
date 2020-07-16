@@ -1,6 +1,6 @@
 package com.website.qlts.service.impl;
 
-import com.website.qlts.entity.RevokeHistory;
+import com.website.qlts.entity.RevokeHistories;
 import com.website.qlts.repository.RevokeHistoryRepository;
 import com.website.qlts.service.RevokeHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +16,27 @@ public class RevokeHistoryServiceImpl implements RevokeHistoryService {
 
     @Override
     public void createHistory(long assetId, long staffId, long departmentId, String reason, Date revokeDate) {
-        RevokeHistory revokeHistory = new RevokeHistory();
-        revokeHistory.setAssetId(assetId);
-        revokeHistory.setStaffId(staffId);
-        revokeHistory.setDepartmentId(departmentId);
-        revokeHistory.setReason(reason);
-        revokeHistory.setRevokeDate(revokeDate);
-        revokeHistoryRepository.save(revokeHistory);
+        RevokeHistories revokeHistories = new RevokeHistories();
+        revokeHistories.setAssetId(assetId);
+        revokeHistories.setStaffId(staffId);
+        revokeHistories.setDepartmentId(departmentId);
+        revokeHistories.setReason(reason);
+        revokeHistories.setRevokeDate(revokeDate);
+        revokeHistoryRepository.save(revokeHistories);
     }
 
     @Override
-    public List<RevokeHistory> getAll() {
+    public List<RevokeHistories> getAll() {
         return revokeHistoryRepository.getAll();
     }
 
     @Override
-    public List<RevokeHistory> getByDate(Date fromDate, Date toDate) {
+    public List<RevokeHistories> getByDate(Date fromDate, Date toDate) {
         return revokeHistoryRepository.getByDate(fromDate,toDate);
     }
 
     @Override
-    public List<RevokeHistory> getById(long id) {
+    public List<RevokeHistories> getById(long id) {
         return revokeHistoryRepository.getById(id);
     }
 }

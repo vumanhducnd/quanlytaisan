@@ -28,7 +28,7 @@ public class Assets implements Serializable {
     private String conditionAsset;
     private int status;
     private long price;
-
+    private String pathImage;
 
 //    @NotEmpty(message = "Không được để trống")
 //    @Size(max = 255)
@@ -73,7 +73,7 @@ public class Assets implements Serializable {
     private Date modifiedDate;
     private Date createDate;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public Assets(String name, String description, int amount, String conditionAsset, int status, long price, String position, long asset_category_id, long group_assets_id, long supplier_id,int is_deleted,Date updatedDate,Date createDate, int cateMoney, String codeAsset) {
@@ -92,6 +92,14 @@ public class Assets implements Serializable {
         this.createDate = createDate;
         this.cateMoney = cateMoney;
         this.codeAsset = codeAsset;
+    }
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
     }
 
     public String getCodeAsset() {

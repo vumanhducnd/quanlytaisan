@@ -1,6 +1,6 @@
 package com.website.qlts.controller;
 
-import com.website.qlts.entity.CategoriesSupplier;
+import com.website.qlts.entity.CategoriesSuppliers;
 import com.website.qlts.entity.Suppliers;
 import com.website.qlts.view.SuppliersCate;
 import com.website.qlts.service.CategorySuppliersService;
@@ -37,7 +37,7 @@ public class SuppliersController {
 
     @RequestMapping("/create")
     public String createPage(Model model) {
-        List<CategoriesSupplier> listAssets;
+        List<CategoriesSuppliers> listAssets;
         listAssets = categorySuppliersService.getAll();
         SuppliersCate suppliersCate = new SuppliersCate();
         suppliersCate.setList(listAssets);
@@ -59,7 +59,7 @@ public class SuppliersController {
     @RequestMapping(value = "/edit/{id}")
     public String editPage(@PathVariable("id") long id, Model model) {
         Suppliers suppliers = suppliersService.getById(id);
-        List<CategoriesSupplier> listAssets;
+        List<CategoriesSuppliers> listAssets;
         listAssets = categorySuppliersService.getAll();
         SuppliersCate suppliersCate = new SuppliersCate();
         suppliersCate.setList(listAssets);

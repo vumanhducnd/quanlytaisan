@@ -50,7 +50,7 @@ public class TransferController {
     public String action(Model model, @PathVariable("id") long id) {
         TransferView transferView = new TransferView();
         transferView.setAssets(assetsService.findById(id));
-        transferView.setTransferHistory(transferService.getById(id));
+        transferView.setTransferHistories(transferService.getById(id));
         transferView.setDepartmentsListOld(departmentsService.getAll());
         transferView.setDepartmentsListNew(departmentsService.getAll());
         model.addAttribute("model", transferView);
@@ -75,7 +75,7 @@ public class TransferController {
     @RequestMapping("/staff-action/{id}")
     public String staffAction(Model model, @PathVariable("id") long id) {
         TransferView transferView = new TransferView();
-        transferView.setTransferHistory(transferService.getById(id));
+        transferView.setTransferHistories(transferService.getById(id));
         transferView.setStaffsListOld(staffService.getAll());
         transferView.setStaffsListNew(staffService.getAll());
         model.addAttribute("model", transferView);

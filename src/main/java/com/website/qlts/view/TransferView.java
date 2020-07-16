@@ -3,13 +3,13 @@ package com.website.qlts.view;
 import com.website.qlts.entity.Assets;
 import com.website.qlts.entity.Departments;
 import com.website.qlts.entity.Staffs;
-import com.website.qlts.entity.TransferHistory;
+import com.website.qlts.entity.TransferHistories;
 
 import java.util.List;
 
 public class TransferView {
     private Assets assets;
-    private TransferHistory transferHistory;
+    private TransferHistories transferHistories;
     private List<Staffs> staffsListOld;
     private List<Assets> assetsListOld;
     private List<Staffs> staffsListNew;
@@ -17,12 +17,12 @@ public class TransferView {
     private List<Departments> departmentsListOld;
     private List<Departments> departmentsListNew;
 
-    public TransferHistory getTransferHistory() {
-        return transferHistory;
+    public TransferHistories getTransferHistories() {
+        return transferHistories;
     }
 
-    public void setTransferHistory(TransferHistory transferHistory) {
-        this.transferHistory = transferHistory;
+    public void setTransferHistories(TransferHistories transferHistories) {
+        this.transferHistories = transferHistories;
     }
 
     public Assets getAssets() {

@@ -2,12 +2,12 @@ package com.website.qlts.view;
 
 import com.website.qlts.entity.Assets;
 import com.website.qlts.entity.Departments;
-import com.website.qlts.entity.RevokeHistory;
+import com.website.qlts.entity.RevokeHistories;
 import com.website.qlts.entity.Staffs;
 
 public class AssetRevoke {
     private Assets assets;
-    private RevokeHistory revokeHistory;
+    private RevokeHistories revokeHistories;
     private Staffs staffs;
     private Departments departments;
 
@@ -35,11 +35,11 @@ public class AssetRevoke {
         this.assets = assets;
     }
 
-    public RevokeHistory getRevokeHistory() {
-        return revokeHistory;
+    public RevokeHistories getRevokeHistories() {
+        return revokeHistories;
     }
 
-    public void setRevokeHistory(RevokeHistory revokeHistory) {
-        this.revokeHistory = revokeHistory;
+    public void setRevokeHistories(RevokeHistories revokeHistories) {
+        this.revokeHistories = revokeHistories;
     }
 }

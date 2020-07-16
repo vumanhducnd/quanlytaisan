@@ -1,6 +1,6 @@
 package com.website.qlts.config;
 
-import com.website.qlts.entity.TransferHistory;
+import com.website.qlts.entity.TransferHistories;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -25,11 +25,11 @@ public class ExportExcel {
 
     private static String[] columns = {"STT", "Tên", "Lý do", "Người dùng trước", "Người sau sau", "Thời gian từ", "Đến"};
 
-    public void exportExcelTransfer(HttpServletResponse response, List<TransferHistory> transferHistories) {
+    public void exportExcelTransfer(HttpServletResponse response, List<TransferHistories> transferHistories) {
         int time = new Date().getHours() + new Date().getDay() + new Date().getMonth() + new Date().getYear();
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Baocao" + time);
-        List<TransferHistory> list = transferHistories;
+        List<TransferHistories> list = transferHistories;
         int rownum = 1;
         Font headerFont = workbook.createFont();
         headerFont.setBold(true);
@@ -44,7 +44,7 @@ public class ExportExcel {
             cells.setCellStyle(headerCellStyle);
         }
         int rowNum = 1;
-        for (TransferHistory emp : list) {
+        for (TransferHistories emp : list) {
             Row row = sheet.createRow(rownum++);
             row.createCell(0).setCellValue(rowNum++);
             row.createCell(1).setCellValue(emp.getAssets().getName());
@@ -84,11 +84,11 @@ public class ExportExcel {
         }
     }
 
-    public void exportExcelUse(HttpServletResponse response, List<TransferHistory> transferHistories) {
+    public void exportExcelUse(HttpServletResponse response, List<TransferHistories> transferHistories) {
         int time = new Date().getHours() + new Date().getDay() + new Date().getMonth() + new Date().getYear();
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Baocao" + time);
-        List<TransferHistory> list = transferHistories;
+        List<TransferHistories> list = transferHistories;
         int rownum = 1;
         Font headerFont = workbook.createFont();
         headerFont.setBold(true);
@@ -103,7 +103,7 @@ public class ExportExcel {
             cells.setCellStyle(headerCellStyle);
         }
         int rowNum = 1;
-        for (TransferHistory emp : list) {
+        for (TransferHistories emp : list) {
             Row row = sheet.createRow(rownum++);
             row.createCell(0).setCellValue(rowNum++);
             row.createCell(1).setCellValue(emp.getAssets().getName());
@@ -143,11 +143,11 @@ public class ExportExcel {
         }
     }
 
-    public void exportExcelNew(HttpServletResponse response, List<TransferHistory> transferHistories) {
+    public void exportExcelNew(HttpServletResponse response, List<TransferHistories> transferHistories) {
         int time = new Date().getHours() + new Date().getDay() + new Date().getMonth() + new Date().getYear();
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Baocao" + time);
-        List<TransferHistory> list = transferHistories;
+        List<TransferHistories> list = transferHistories;
         int rownum = 1;
         Font headerFont = workbook.createFont();
         headerFont.setBold(true);
@@ -162,7 +162,7 @@ public class ExportExcel {
             cells.setCellStyle(headerCellStyle);
         }
         int rowNum = 1;
-        for (TransferHistory emp : list) {
+        for (TransferHistories emp : list) {
             Row row = sheet.createRow(rownum++);
             row.createCell(0).setCellValue(rowNum++);
             row.createCell(1).setCellValue(emp.getAssets().getName());
@@ -202,11 +202,11 @@ public class ExportExcel {
         }
     }
 
-    public void exportExcelRevoke(HttpServletResponse response, List<TransferHistory> transferHistories) {
+    public void exportExcelRevoke(HttpServletResponse response, List<TransferHistories> transferHistories) {
         int time = new Date().getHours() + new Date().getDay() + new Date().getMonth() + new Date().getYear();
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Baocao" + time);
-        List<TransferHistory> list = transferHistories;
+        List<TransferHistories> list = transferHistories;
         int rownum = 1;
         Font headerFont = workbook.createFont();
         headerFont.setBold(true);
@@ -221,7 +221,7 @@ public class ExportExcel {
             cells.setCellStyle(headerCellStyle);
         }
         int rowNum = 1;
-        for (TransferHistory emp : list) {
+        for (TransferHistories emp : list) {
             Row row = sheet.createRow(rownum++);
             row.createCell(0).setCellValue(rowNum++);
             row.createCell(1).setCellValue(emp.getAssets().getName());
