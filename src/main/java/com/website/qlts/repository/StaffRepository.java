@@ -12,12 +12,12 @@ import java.util.List;
 @Repository
 @EnableJpaRepositories
 public interface StaffRepository extends JpaRepository<Staffs,Long> {
-    @Query(value = "SELECT * FROM Staffs c WHERE c.name LIKE %:name%",nativeQuery=true)
+    @Query(value = "SELECT * FROM staffs c WHERE c.name LIKE %:name%",nativeQuery=true)
     public List<Staffs> getByName(@Param("name") String name);
 
-    @Query(value = "SELECT * FROM Staffs c WHERE  c.is_deleted = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM staffs c WHERE  c.is_deleted = 0", nativeQuery = true)
     public List<Staffs> getAll();
 
-    @Query(value = "SELECT * FROM Staffs c WHERE  c.is_deleted = 0 AND c.id = ?", nativeQuery = true)
+    @Query(value = "SELECT * FROM staffs c WHERE  c.is_deleted = 0 AND c.id = ?", nativeQuery = true)
     public Staffs getById(long id);
 }

@@ -5,6 +5,7 @@
 >
 <div id="wrapper">
     <div class="container-fluid" layout:fragment="content">
+        <h6 class="title-header">Chỉnh sửa loại tài sản</h6>
         <form class="user" th:action="@{/category-assets/update/{id}(id=${cate.id})}" method="post" th:object="${cate}">
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">ID</label>
@@ -22,7 +23,7 @@
             </div>
             <div class="col-md-6 offset-md-4">
                 <button type="submit" class="btn btn-primary">
-                    Cập nhật danh mục
+                    Cập nhật
                 </button>
             </div>
         </form>

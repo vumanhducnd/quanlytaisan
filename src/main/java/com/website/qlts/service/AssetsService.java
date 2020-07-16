@@ -45,11 +45,11 @@ public interface AssetsService {
 
     public List<Assets> getAssetsNoUse();
 
-    public void create(String name, String description, int amount, String condition, int status, long price, String position,  long cateId, long groupId, long suppId, int cateMoney);
+    public void create(String name, String description, int amount, String condition, int status, long price, String position,  long cateId, long groupId, long suppId, int cateMoney,String uri, String url);
 
     public Assets findById(long id);
 
-    public void makeUrl(String uri, String url, long id);
+    public String makeUrl(String uri, String url, long id);
 
     public void delete(long id);
 

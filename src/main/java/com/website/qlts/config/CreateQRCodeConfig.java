@@ -16,18 +16,25 @@ import java.nio.file.Path;
 
 public class CreateQRCodeConfig {
 
-    public void createQrCodeAssets(String uri,String url,long id)  {
+    @Autowired
+    FileStorageService storageService;
+
+    public String createQrCodeAssets(String uri,String url,long id)  {
+        String filePath = "";
         try {
             File directory = new File("");
-            File file = new File(uri + id +".png");
-            String filePath =  uri + id +".png";
+            File file = new File(  uri + id +".png");
+             filePath =  uri + id +".png";
+//            String fileName = storageService.storeFile(file);
 //            String fileDownloadUri = fileStoragePropertiesQRCode.getUrl() + "/avatar/" + id + ".png";
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(url, BarcodeFormat.QR_CODE, 600, 600);
             Path path = FileSystems.getDefault().getPath(filePath);
             MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+            return filePath;
         }catch (IOException | WriterException e){
 
         }
+        return filePath;
     }
 }

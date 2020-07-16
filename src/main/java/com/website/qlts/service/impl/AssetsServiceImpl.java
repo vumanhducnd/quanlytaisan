@@ -123,12 +123,14 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
-    public void create(String name, String description, int amount, String condition, int status, long price, String position, long cateId, long groupId, long suppId, int cateMoney) {
+    public void create(String name, String description, int amount, String condition, int status, long price, String position, long cateId, long groupId, long suppId, int cateMoney,String uri, String url) {
         Assets assets = new Assets(name.trim(), description.trim(), amount, condition.trim(), status, price,"", cateId, groupId, suppId,0, new Date(), new Date(), cateMoney, "");
         assetsRepository.save(assets);
         Assets assets1 = assetsRepository.getLastRecord();
         assets1.setCodeAsset(createCode(assets1.getId() + ""));
+        assets1.setPathImage(makeUrl(uri,url, assets1.getId()));
         assetsRepository.save(assets1);
+
 
     }
 
@@ -161,10 +163,10 @@ public class AssetsServiceImpl implements AssetsService {
     }
 
     @Override
-    public void makeUrl(String uri, String url, long id) {
+    public String makeUrl(String uri, String url, long id) {
         String[] listUrl = url.split("/assets/createQRCode/", url.length() - 1);
         CreateQRCodeConfig createQRCodeConfig = new CreateQRCodeConfig();
-        createQRCodeConfig.createQrCodeAssets(uri,listUrl[0] + "/assets/detail/" + id, id);
+        return createQRCodeConfig.createQrCodeAssets(uri,listUrl[0] + "/assets/detail/" + id, id);
     }
 
     @Override

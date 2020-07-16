@@ -5,6 +5,7 @@
 >
 <div id="wrapper">
     <div class="container-fluid" layout:fragment="content">
+        <h6 class="title-header">Chỉnh sửa phòng ban</h6>
         <form class="user" th:action="@{/departments/edit/{id}(id=${model.id})}" method="post" th:object="${model}">
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">ID</label>
