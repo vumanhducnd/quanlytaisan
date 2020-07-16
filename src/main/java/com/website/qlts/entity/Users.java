@@ -4,10 +4,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "userName"))
 public class Users implements Serializable {
-    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @NotEmpty(message = "Không được để trống")
     @Size(max = 255)
     private String userName;
@@ -16,46 +20,32 @@ public class Users implements Serializable {
     @Size(max = 255)
     private String passWord;
 
-    @NotEmpty(message = "Không được để trống")
-    @Size(max = 255)
-    private String rePassword;
-    private long staffId;
-
-    @NotEmpty(message = "Không được để trống")
-    @Size(max = 255)
-    private String role;
-    private int status;
-
-    @NotEmpty(message = "Không được để trống")
-    @Size(max = 255)
-    private String permission;
-
-    private int is_deleted;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    public Users(String userName, String passWord, String rePassword, long staffId, String role, int status, String permission, int is_deleted) {
-        this.userName = userName;
-        this.passWord = passWord;
-        this.rePassword = rePassword;
-        this.staffId = staffId;
-        this.role = role;
-        this.status = status;
-        this.permission = permission;
-        this.is_deleted = is_deleted;
-    }
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     public Users() {
     }
 
-    public int getIs_deleted() {
-        return is_deleted;
+    public Users(@NotEmpty(message = "Không được để trống") @Size(max = 255) String userName, @NotEmpty(message = "Không được để trống") @Size(max = 255) String passWord, Collection<Role> roles) {
+
+        this.userName = userName;
+        this.passWord = passWord;
+        this.roles = roles;
     }
 
-    public void setIs_deleted(int is_deleted) {
-        this.is_deleted = is_deleted;
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -74,51 +64,11 @@ public class Users implements Serializable {
         this.passWord = passWord;
     }
 
-    public long getStaffId() {
-        return staffId;
+    public Collection<Role> getRoles() {
+        return roles;
     }
 
-    public void setStaffId(long staffId) {
-        this.staffId = staffId;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getPermission() {
-        return permission;
-    }
-
-    public void setPermission(String permission) {
-        this.permission = permission;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getRePassword() {
-        return rePassword;
-    }
-
-    public void setRePassword(String rePassword) {
-        this.rePassword = rePassword;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 }

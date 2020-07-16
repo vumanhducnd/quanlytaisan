@@ -12,6 +12,8 @@ public interface UserRepository extends JpaRepository<Users,Long> {
     @Query(value = "SELECT * FROM users WHERE user_name = :userName", nativeQuery = true)
     Optional<Users> getByUserName(@Param("userName") String userName);
 
+    @Query(value = "SELECT * FROM users WHERE user_name = ?", nativeQuery = true)
+    Optional<Users> findByName(String name);
 //    @Modifying
 //    @Query(value = "UPDATE users r SET r.passWord = ?2 WHERE r.userName = ?1")
 //    void updatePasswordByUsername(String userName, String passWord);

@@ -10,14 +10,14 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Ảnh đại diện</label>
                 <div class="col-md-4">
-                    <input name="file" type="file" >
+                    <input name="file" type="file"  required autofocus="autofocus" >
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Tên nhân viên</label>
                 <div class="col-md-4">
                     <input class="form-control form-control-user"
-                           th:field="*{staffs.name}"
+                           th:field="*{staffs.name}"  required autofocus="autofocus"
                            placeholder="">
                     <span th:if="${#fields.hasErrors('staffs.name')}" th:errors="*{staffs.name}"
                           class="text-danger"></span>
@@ -26,14 +26,14 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Ngày sinh</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user" name="dateOfBirth" type="date"
+                    <input class="form-control form-control-user"  required autofocus="autofocus" name="dateOfBirth" type="date"
                            placeholder="">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Địa chỉ</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user"
+                    <input class="form-control form-control-user"  required autofocus="autofocus"
                            th:field="*{staffs.address}"
                            placeholder="">
                 </div>
@@ -41,7 +41,7 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Số điện thoại</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user"
+                    <input class="form-control form-control-user"  required autofocus="autofocus"
                            th:field="*{staffs.phoneNumber}"
                            placeholder="">
                 </div>
