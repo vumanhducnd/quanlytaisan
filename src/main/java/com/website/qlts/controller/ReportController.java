@@ -4,6 +4,7 @@ import com.website.qlts.config.ExportExcel;
 import com.website.qlts.entity.RevokeHistories;
 import com.website.qlts.entity.TransferHistories;
 import com.website.qlts.repository.AssetsRepository;
+import com.website.qlts.service.AssetsService;
 import com.website.qlts.service.RevokeHistoryService;
 import com.website.qlts.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,11 @@ public class ReportController {
     TransferService transferService;
 
     @Autowired
-    AssetsRepository assetsRepository;
+    AssetsService assetsService;
 
     @Autowired
     RevokeHistoryService revokeHistoryService;
+
 
     @RequestMapping("/report-statement")
     public String reportStatement(Model model,String toDate, String fromDate,String keyWord) {
@@ -60,7 +62,7 @@ public class ReportController {
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int month = localDate.getMonthValue();
         int year = localDate.getYear();
-        model.addAttribute("model", assetsRepository.getAssetsNew(month, year));
+        model.addAttribute("model", assetsService.getAssetsNew(month, year));
         return "/pages/report/new";
     }
 
@@ -114,14 +116,14 @@ public class ReportController {
     @RequestMapping("/export-file-new")
     public String exportNew(HttpServletResponse httpServletResponse) throws IOException {
         ExportExcel createDownloadFile = new ExportExcel();
-        createDownloadFile.exportExcelNew(httpServletResponse, transferService.getAll());
+        createDownloadFile.exportExcelNew(httpServletResponse, assetsService.getAll());
         return "redirect:/report-new";
     }
 
     @RequestMapping("/export-file-revoke")
     public String exportRevoke(HttpServletResponse httpServletResponse) throws IOException {
         ExportExcel createDownloadFile = new ExportExcel();
-        createDownloadFile.exportExcelRevoke(httpServletResponse, transferService.getAll());
+        createDownloadFile.exportExcelRevoke(httpServletResponse, revokeHistoryService.getAll());
         return "redirect:/report-revoke";
     }
 
@@ -136,7 +138,7 @@ public class ReportController {
     }
 
     public List<Long> listId(String name){
-        return assetsRepository.getListIdByName(name);
+        return assetsService.getListIdByName(name);
     }
 
     public  List<RevokeHistories> getRevokeHistoryByName(String name){

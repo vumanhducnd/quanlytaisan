@@ -217,5 +217,10 @@ public class AssetsServiceImpl implements AssetsService {
         assetsRepository.save(assets);
     }
 
+    @Override
+    public List<Long> getListIdByName(String name) {
+        return assetsRepository.getListIdByName(name);
+    }
+
 
 }
