@@ -14,14 +14,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
+
     private UserRepository userRepository;
 
     @Autowired
@@ -34,17 +33,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users save(UserRegistrationDto userRegistrationDto) {
-        Users users = new Users(userRegistrationDto.getUserName(), bCryptPasswordEncoder.encode(userRegistrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+        Users users = new Users(userRegistrationDto.getUserName(), bCryptPasswordEncoder.encode(userRegistrationDto.getPassword()), Arrays.asList(new Role("USER")));
         return userRepository.save(users);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users users = userRepository.findByName(username).orElse(null);
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        Users users = userRepository.findByName("admin2").orElse(null);
         if (users == null) {
             throw new UsernameNotFoundException("Invalid username or password");
         }
-        return new User(users.getUserName(), bCryptPasswordEncoder.encode(users.getPassWord()), grantedAuthorities(users.getRoles()));
+        return new User(users.getUserName(), users.getPassWord(), grantedAuthorities(users.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> grantedAuthorities(Collection<Role> roles) {

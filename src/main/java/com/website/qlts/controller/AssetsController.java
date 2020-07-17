@@ -59,12 +59,6 @@ public class AssetsController {
     TransferService transferService;
 
     @Autowired
-    FileStoragePropertiesQRCode fileStoragePropertiesQRCode;
-
-    @Autowired
-    FileStorageService storageService;
-
-    @Autowired
     FileStoragePropertiesAvatar storagePropertiesAvatar;
     @RequestMapping(value = "")
     public String assetsPage(Model model, String keyWord, String status, String categoryAssets, String groupAssets) {
