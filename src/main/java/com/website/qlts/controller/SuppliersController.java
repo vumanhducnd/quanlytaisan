@@ -19,9 +19,9 @@ import java.util.List;
 @RequestMapping("/suppliers")
 public class SuppliersController {
     @Autowired
-    SuppliersService suppliersService;
+    private   SuppliersService suppliersService;
     @Autowired
-    CategorySuppliersService categorySuppliersService;
+    private CategorySuppliersService categorySuppliersService;
 
     @RequestMapping("")
     public String indexPage(Model model, String keyWord) {

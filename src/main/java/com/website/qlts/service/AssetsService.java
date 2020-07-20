@@ -59,5 +59,7 @@ public interface AssetsService {
 
     public void updateTransferStaff(long id,long staffId, Date date);
 
+    public List<Long> getListIdByName(String name);
+
 
 }

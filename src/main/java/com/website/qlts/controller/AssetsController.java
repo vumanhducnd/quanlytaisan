@@ -32,34 +32,35 @@ import java.util.List;
 @RequestMapping("/assets")
 public class AssetsController {
     @Autowired
-    AssetsService assetsService;
+    private AssetsService assetsService;
 
     @Autowired
-    CategoryAssetsService categoryAssetsService;
+    private CategoryAssetsService categoryAssetsService;
 
     @Autowired
-    DepartmentsService departmentsService;
+    private DepartmentsService departmentsService;
 
     @Autowired
-    SuppliersService suppliersService;
+    private SuppliersService suppliersService;
 
     @Autowired
-    GroupAssetsService groupAssetsService;
+    private GroupAssetsService groupAssetsService;
 
     @Autowired
-    RevokeHistoryService revokeHistoryService;
+    private RevokeHistoryService revokeHistoryService;
 
     @Autowired
-    RepairsHistoryService repairsHistoryService;
+    private RepairsHistoryService repairsHistoryService;
 
     @Autowired
-    SellAssetService sellAssetService;
+    private SellAssetService sellAssetService;
 
     @Autowired
-    TransferService transferService;
+    private TransferService transferService;
 
     @Autowired
-    FileStoragePropertiesAvatar storagePropertiesAvatar;
+    private FileStoragePropertiesAvatar storagePropertiesAvatar;
+
     @RequestMapping(value = "")
     public String assetsPage(Model model, String keyWord, String status, String categoryAssets, String groupAssets) {
         AssetsView assets;

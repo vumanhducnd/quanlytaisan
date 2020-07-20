@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/category-assets")
 public class CategoryAssetsController {
     @Autowired
-    CategoryAssetsService categoryAssetsService;
+    private  CategoryAssetsService categoryAssetsService;
 
     @RequestMapping("")
     public String indexPage(Model model, String keyWord) {

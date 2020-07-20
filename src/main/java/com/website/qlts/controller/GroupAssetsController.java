@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/group-assets")
 public class GroupAssetsController {
     @Autowired
-    GroupAssetsService groupAssetsService;
+    private   GroupAssetsService groupAssetsService;
 
     @RequestMapping("")
     public String indexPage(Model model, String keyWord) {
