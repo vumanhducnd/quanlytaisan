@@ -3,19 +3,28 @@ package com.website.qlts.config;
 import com.website.qlts.entity.Assets;
 import com.website.qlts.entity.RevokeHistories;
 import com.website.qlts.entity.TransferHistories;
+import org.apache.commons.io.IOUtils;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
 public class ExportExcel {
+
+    @Autowired
+    ResourceLoader resourceLoader;
 
     private static HSSFCellStyle createStyleForTitle(HSSFWorkbook workbook) {
         HSSFFont font = workbook.createFont();
@@ -244,8 +253,8 @@ public class ExportExcel {
             }
         }
         File directory = new File("");
-        File file = new File(directory.getAbsolutePath() + "\\src\\main\\resources\\static\\file\\BaoCaoThuHoi" + time + ".xls");
-        String filePath = directory.getAbsolutePath() + "\\src\\main\\resources\\static\\file\\\\BaoCaoThuHoi" + time + ".xls";
+        File file = new File(directory.getAbsolutePath() + "\\src\\main\\resources\\static\\file\\BaoCaoThuHoi"  + ".xls");
+        String filePath = directory.getAbsolutePath() + "\\src\\main\\resources\\static\\file\\\\BaoCaoThuHoi"  + ".xls";
         file.getParentFile().mkdirs();
 
         try {

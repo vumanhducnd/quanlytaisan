@@ -219,12 +219,12 @@
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" th:href="@{/report-statement}">Báo cáo sao kê</a>
-                    <a class="collapse-item" th:href="@{/report-use}">Báo cáo tình hình sử dụng</a>
-                    <a class="collapse-item" th:href="@{/report-new}">DSTSCĐ đăng ký mới</a>
-                    <a class="collapse-item" th:href="@{/report-transfer}">Lịch sử điều chuyển tài sản</a>
-                    <a class="collapse-item" th:href="@{/report-revoke}">Lịch sử thu hồi tài sản</a>
-                    <a class="collapse-item" th:href="@{/report-revoke-poached}"> DM thu hồi vào kho</a>
+                    <a class="collapse-item" th:href="@{/report/report-statement}">Báo cáo sao kê</a>
+                    <a class="collapse-item" th:href="@{/report/report-use}">Báo cáo tình hình sử dụng</a>
+                    <a class="collapse-item" th:href="@{/report/report-new}">DSTSCĐ đăng ký mới</a>
+                    <a class="collapse-item" th:href="@{/report/report-transfer}">Lịch sử điều chuyển tài sản</a>
+                    <a class="collapse-item" th:href="@{/report/report-revoke}">Lịch sử thu hồi tài sản</a>
+                    <a class="collapse-item" th:href="@{/report/report-revoke-poached}"> DM thu hồi vào kho</a>
                 </div>
             </div>
         </li>
@@ -259,10 +259,10 @@
                 <!-- Topbar Search -->
                 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" th:action="@{/searchAll}" method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..." name="keyWord"
                                aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
+                            <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search fa-sm"></i>
                             </button>
                         </div>

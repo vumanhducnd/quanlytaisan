@@ -16,23 +16,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    AssetsService assetsService;
-
-
-    @Autowired
-    CategoryAssetsService categoryAssetsService;
+    private AssetsService assetsService;
 
     @Autowired
-    DepartmentsService departmentsService;
+    private CategoryAssetsService categoryAssetsService;
 
     @Autowired
-    SuppliersService suppliersService;
+    private DepartmentsService departmentsService;
 
     @Autowired
-    GroupAssetsService groupAssetsService;
+    private SuppliersService suppliersService;
+
+    @Autowired
+    private GroupAssetsService groupAssetsService;
 
     @RequestMapping(value = "/")
     public String home(Model model, String keyWord, String status, String categoryAssets, String groupAssets) {
@@ -93,6 +92,7 @@ public class UserController {
         userService.save(userRegistrationDto);
         return "redirect:/register?success";
     }
+
     public AssetsView setAssetView(Assets assets) {
         AssetsView assetsView = new AssetsView();
         if (assets != null) {

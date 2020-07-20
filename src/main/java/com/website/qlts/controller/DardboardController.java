@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class DardboardController {
     @Autowired
-    AssetsService assetsService;
+    private  AssetsService assetsService;
     @RequestMapping("")
     public String dardBoard(Model model){
         model.addAttribute("model",assetsService.getAll());

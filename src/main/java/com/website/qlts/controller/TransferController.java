@@ -22,16 +22,16 @@ import java.util.Date;
 @RequestMapping("/transfer")
 public class TransferController {
     @Autowired
-    StaffService staffService;
+    private   StaffService staffService;
 
     @Autowired
-    DepartmentsService departmentsService;
+    private   DepartmentsService departmentsService;
 
     @Autowired
-    TransferService transferService;
+    private    TransferService transferService;
 
     @Autowired
-    AssetsService assetsService;
+    private     AssetsService assetsService;
 
     @RequestMapping("")
     public String index(Model model) {

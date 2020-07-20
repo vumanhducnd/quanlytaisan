@@ -17,7 +17,7 @@ import javax.validation.constraints.NotBlank;
 public class DeparmentsController {
 
     @Autowired
-    DepartmentsService departmentsService;
+    private  DepartmentsService departmentsService;
 
     @RequestMapping("")
     public String index(Model model) {
