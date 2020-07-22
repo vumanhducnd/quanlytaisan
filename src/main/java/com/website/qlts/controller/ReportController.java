@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ReportController {
     @Autowired
     private FileStoragePropertiesAvatar storagePropertiesAvatar;
+
     @Autowired
     private FileStorageService storageService;
 
@@ -26,6 +27,16 @@ public class ReportController {
     @RequestMapping("/report-transfer")
     public String indexPage(Model model, String keyWord) {
         return "pages/report/revoke-poached";
+    }
+
+    @RequestMapping("/report-statement")
+    public String statementPage(Model model, String keyWord) {
+        return "pages/report/statement";
+    }
+
+    @RequestMapping("/report-revoke-poached")
+    public String poachedPage(Model model, String keyWord) {
+        return "pages/report/statement";
     }
 
     @RequestMapping("/report-revoke")
