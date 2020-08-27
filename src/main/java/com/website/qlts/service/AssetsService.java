@@ -29,6 +29,9 @@ public interface AssetsService {
 
     public List<Assets> getByDeparment(long id);
 
+    public List<Assets> getByrangeprice(long from,long to);
+    public List<Assets> getbyfilter(Integer status, Long departmentid,Long staffid,Long pricefrom,Long priceto,Date datefrom,Date dateto);
+
     public List<Assets> getByGroupAsset(long id);
 
     public List<Assets> getByCateAsset(long id);
@@ -60,6 +63,8 @@ public interface AssetsService {
     public void updateTransferStaff(long id,long staffId, Date date);
 
     public List<Long> getListIdByName(String name);
+
+
 
 
 }

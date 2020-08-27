@@ -4,14 +4,209 @@
       layout:decorate="~{layouts/main-layout.html}"
 >
 <div id="wrapper">
-    <div class="container-fluid" layout:fragment="content">
-        <h2>Coming soon</h2>
+  <div class="container-fluid" layout:fragment="content">
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          ...
+        </div>
+      </div>
     </div>
-    <!-- /.container-fluid -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <div class="row">
+          <div class="col-md-11">
+            <h6 class="m-0 font-weight-bold text-primary">Báo cáo sao kê</h6>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 row">
+              <div id="dataTable_filter" class="dataTables_filter col-sm-12">
+                <form th:action="@{/report/report-statement}" method="get">
+                  <div class="row" style="margin: 10px;">
+                    <div class="col-md-3">
+                      <select class="form-control" name="status">
+                        <option value="">---Trạng thái---</option>
+                        <option value="1">Đang sử dụng</option>
+                        <option value="2">Chưa sử dụng</option>
+                        <option value="3">Đã thu hồi</option>
+                        <option value="4">Đang sửa chưa</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <select class="form-control" name="departmentid">
+                        <option value="">---Phòng ban---</option>
+                        <option th:each="li : ${model.departmentsList}"
+                                th:value="${li.id}"
+                                th:text="${li.departmentName}"/>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <select class="form-control" name="staffid">
+                        <option value="">---Nhân viên---</option>
+                        <option th:each="li : ${model.staffsList}"
+                                th:value="${li.id}"
+                                th:text="${li.name}"/>
+                      </select>
+                    </div>
 
+                    <div class="col-md-3 " style="margin:auto;">
+                      <button type="submit" style="border: #6e707e 1px solid;">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <div class="col-md-3" id="pricerange" style="margin-top:10px;">
+                    <span>Giá trị từ:</span>
+                      <input class="form-control" type="number"name="pricefrom" min="0" max="500000000">
+                      <span>Đến:</span>
+                      <input class="form-control" type="number"name="priceto" min="0" max="500000000">
+                    <select class="form-control" id="price"  style="width: 125px">
+                      <option value="0">Tùy chọn</option>
+                      <option value="1">Dưới 1 triệu</option>
+                      <option value="2">Dưới 3 triệu</option>
+                      <option value="3">Dưới 5 triệu</option>
+                      <option value="4">Dưới 10 triệu</option>
+                      <option value="5">Dưới 20 triệu</option>
+                      <option value="6">Trên 20 triệu</option>
+                    </select>
+                  </div>
+
+                    <div class="col-md-3" style="margin-top:10px;">
+                      <div id="datefilter">
+                        <span>Lọc từ ngày:</span>
+                        <input class="form-control" type="date" name="datefrom">
+                        <span>Đến ngày:</span>
+                        <input class="form-control" type="date" name="dateto">
+                        <div class="form-control" id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 125px">
+                          <i class="fa fa-calendar"></i>&nbsp;
+                          <span>Tùy chọn</span> <i class="fa fa-caret-down"></i>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <script type="text/javascript">
+$(function() {
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#datefilter [name="datefrom"]').val(start.format('YYYY-MM-DD'));
+        $('#datefilter [name="dateto"]').val(end.format('YYYY-MM-DD'));
+    }
+    function setprice(from, to){
+    $('#pricerange [name="pricefrom"]').val(from);
+    $('#pricerange [name="priceto"]').val(to);
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+
+    $('#price').on('change', function () {
+     var selectVal = $("#price option:selected").val();
+     console.log(selectVal);
+
+     switch(selectVal){
+     case '0':
+     setprice();
+     break;
+          case '1':
+          setprice(0,1000000);
+          break;
+          case '2':
+          setprice(1000000,3000000);
+          break;
+          case '3':
+          setprice(3000000,5000000);
+          break;
+          case '4':
+          setprice(5000000,10000000);
+          break;
+          case '5':
+          setprice(10000000,20000000);
+          break;
+          case '6':
+          setprice(20000000);
+          break; }
+     });
+
+});
+</script>
+                </form>
+              </div>
+
+            </div>
+          </div>
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+              <th class="column-stt">STT</th>
+              <th>Mã tài sản</th>
+              <th>Tên tài sản</th>
+              <th>Trạng thái</th>
+              <th>Giá</th>
+              <th>Ngày nhập mới</th>
+              <th>Người sở hữu</th>
+              <th>Phòng ban</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="empl,iterStat : ${model.assetsList}">
+              <th scope="row" th:text="${iterStat.count}"></th>
+              <td th:text="${empl.codeAsset}"></td>
+              <td>
+                <a th:href="@{/assets/detail/{id}(id=${empl.id})}" th:text="${empl.name}"></a>
+              <td>
+                <div th:switch="${empl.status}">
+                  <p th:case="1" class="text-primary">Đang sử dụng</p>
+                  <p th:case="2" class="text-success">Chưa sử dụng</p>
+                  <p th:case="3" class="text-danger">Đã thu hồi</p>
+                  <p th:case="5" class="text-danger">Đang sửa chữa</p>
+                </div>
+              </td>
+              <td>
+                <span th:text="${#numbers.formatDecimal(empl.price, 0, 'DEFAULT', 0, 'DEFAULT')}"></span>
+                <span th:text="(${empl.cateMoney == 1} ? 'VNĐ':  'USD')"></span>
+              </td>
+              <td th:text="${#calendars.format(empl.createDate,'dd/MM/yyyy hh:mm')}"></td>
+              <td>
+                <div th:switch="${empl.staff_id}">
+                  <th:text th:case="0">---</th:text>
+                  <a th:case="*" th:href="@{/staffs/detail/{id}(id=${empl.staff_id})}" th:text="${empl.staffs.name}+'-'+${empl.staffs.departments.departmentName}"></a>
+                </div>
+              </td>
+              <!--                            <td th:text="${empl.staff_id} == 0 ? '-&#45;&#45;': (${empl.staffs.name}+'-'+${empl.staffs.departments.departmentName})"></td>-->
+              <td th:text="${empl.department_id} == 0 ? '---': ${empl.departments.departmentName} "></td>
+
+
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 </div>
 <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
+  <i class="fas fa-angle-up"></i>
 </a>
 </html>

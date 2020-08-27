@@ -1,13 +1,20 @@
 package com.website.qlts.controller;
 
 import com.website.qlts.config.FileStoragePropertiesAvatar;
-import com.website.qlts.service.DepartmentsService;
-import com.website.qlts.service.FileStorageService;
-import com.website.qlts.service.StaffService;
+import com.website.qlts.entity.Assets;
+import com.website.qlts.entity.Staffs;
+import com.website.qlts.service.*;
+import com.website.qlts.util.DateUltil;
+import com.website.qlts.view.AssetsView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/report")
@@ -24,13 +31,34 @@ public class ReportController {
     @Autowired
     private DepartmentsService departmentsService;
 
+    @Autowired
+    private AssetsService assetsService;
+
+    @Autowired
+    private SuppliersService suppliersService;
+
+    @Autowired
+    private GroupAssetsService groupAssetsService;
+
+    @Autowired
+    private CategoryAssetsService categoryAssetsService;
+
+
     @RequestMapping("/report-transfer")
     public String indexPage(Model model, String keyWord) {
         return "pages/report/revoke-poached";
     }
 
     @RequestMapping("/report-statement")
-    public String statementPage(Model model, String keyWord) {
+    public String statementPage(Model model, Integer status, Long departmentid, Long staffid, Long pricefrom, Long priceto, @DateTimeFormat(pattern = "yyyy-MM-dd")Date datefrom,@DateTimeFormat(pattern = "yyyy-MM-dd")Date dateto) {
+    AssetsView assets= InitAssetView(new Assets());
+
+    List<Assets> assetsList = assetsService.getbyfilter(status,departmentid,staffid,pricefrom,priceto,datefrom,dateto);
+
+    assets.setAssetsList(assetsList);
+    model.addAttribute("model",assets);
+
+
         return "pages/report/statement";
     }
 
@@ -220,4 +248,19 @@ public class ReportController {
 //        }
 //        return  usedHistory;
 //    }
+
+    public AssetsView InitAssetView(Assets assets) {
+        AssetsView assetsView = new AssetsView();
+        if (assets != null) {
+            assetsView.setAssets(assets);
+        } else {
+            assetsView.setAssets(new Assets());
+        }
+        assetsView.setStaffsList(staffService.getAll());
+        assetsView.setAssetsList(assetsService.getAll());
+        assetsView.setCategoryAssetsList(categoryAssetsService.getAll());
+        assetsView.setDepartmentsList(departmentsService.getAll());
+        return assetsView;
+    }
+
 }

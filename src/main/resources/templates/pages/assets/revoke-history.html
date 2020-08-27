@@ -40,7 +40,8 @@
                         <tr>
                             <th>STT</th>
                             <th>Tên tài sản</th>
-                            <th>Phòng ban/Nhân viên</th>
+                            <th>Phòng ban</th>
+                            <th>Nhân viên</th>
                             <th>Ghi chú</th>
                             <th>Ngày thu hồi</th>
                         </tr>
@@ -49,8 +50,8 @@
                         <tr th:each="empl,iterStat : ${model}">
                             <th scope="row" th:text="${iterStat.count}"></th>
                             <td th:text="${empl.assets.name}"></td>
-                            <td th:text="(${empl.status == 1} ? ${empl.departments.departmentName} :  ${empl.staffs.name})">
-                            </td>
+                            <td th:text="(${empl.departmentId} == 0 ? 'Chưa có' : ${empl.departments.departmentName} )"></td>
+                            <td th:text="(${empl.staffId} == 0 ? 'Chưa có' : ${empl.staffs.name} )"></td>
                             <td th:text="${empl.reason}"></td>
                             <td th:text="${#calendars.format(empl.revokeDate,'dd MMMM yyyy')}"></td>
                         </tr>

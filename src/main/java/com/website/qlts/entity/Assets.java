@@ -9,7 +9,6 @@ import java.util.Date;
 @Entity
 public class Assets implements Serializable {
     private static final long serialVersionUID = 1L;
-
     @Size(max = 255)
     private String codeAsset;
 

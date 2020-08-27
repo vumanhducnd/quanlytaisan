@@ -2,7 +2,6 @@ package com.website.qlts.service;
 
 import com.website.qlts.entity.Departments;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

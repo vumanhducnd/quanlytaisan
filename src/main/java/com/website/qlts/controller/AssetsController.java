@@ -63,37 +63,25 @@ public class AssetsController {
 
     @RequestMapping(value = "")
     public String assetsPage(Model model, String keyWord, String status, String categoryAssets, String groupAssets) {
-        AssetsView assets;
+        AssetsView assets= setAssetView(new Assets());
         if (keyWord == null && status == null && categoryAssets == null && groupAssets == null) {
-            assets = setAssetView(new Assets());
             model.addAttribute("model", assets);
         }
         else {
             if (keyWord != null && keyWord != "") {
-                assets = setAssetView(new Assets());
                 assets.setAssetsList(assetsService.getByName(keyWord));
-                model.addAttribute("model", assets);
             }
             if (!status.contains("-1")) {
-                assets = setAssetView(new Assets());
                 assets.setAssetsList(assetsService.getByStatus(Integer.parseInt(status)));
-                model.addAttribute("model", assets);
             }
             if (!categoryAssets.contains("-1")) {
-                assets = setAssetView(new Assets());
                 assets.setAssetsList(assetsService.getByCateAsset(Integer.parseInt(categoryAssets)));
-                model.addAttribute("model", assets);
             }
             if (!groupAssets.contains("-1")) {
-                assets = setAssetView(new Assets());
                 assets.setAssetsList(assetsService.getByGroupAsset(Integer.parseInt(groupAssets)));
-                model.addAttribute("model", assets);
             }
         }
-
-//        else {
-//
-//        }
+        model.addAttribute("model", assets);
         return "pages/assets/index";
     }
 

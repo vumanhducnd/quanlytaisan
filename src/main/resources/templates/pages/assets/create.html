@@ -6,7 +6,7 @@
 <div id="wrapper">
     <div class="container-fluid" layout:fragment="content">
         <h2 class="title-header">Thêm mới tài sản</h2>
-        <form  name="my-form" th:action="@{/assets/create}" method="post" th:object="${model}">
+        <form class="needs-validation" novalidate name="my-form" th:action="@{/assets/create}" method="post" th:object="${model}">
 <!--            <div class="form-group row">-->
 <!--                <label class="col-md-4 col-form-label text-md-right">Mã tài sản</label>-->
 <!--                <div class="col-md-4">-->
@@ -23,6 +23,10 @@
                            th:field="*{assets.name}" maxlength="255">
                     <span th:if="${#fields.hasErrors('assets.name')}" th:errors="*{assets.name}"
                           class="text-danger"></span>
+                    <span class="invalid-feedback">
+                        Nhập tên tài sản.
+                    </span>
+
                 </div>
             </div>
             <div class="form-group row">
@@ -36,8 +40,8 @@
                 <label class="col-md-4 col-form-label text-md-right">Số lượng</label>
                 <div class="col-md-4">
                     <input class="form-control form-control-user" type="number"  required autofocus="autofocus"
-                           th:field="*{assets.amount}"
-                           placeholder="">
+                           th:field="*{assets.amount}" placeholder="" min="1">
+
                 </div>
             </div>
             <div class="form-group row">
@@ -61,7 +65,7 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Giá</label>
                 <div class="col-md-4">
-                    <input class="form-control form-control-user" minlength="1"  required autofocus="autofocus"
+                    <input class="form-control form-control-user" minlength="1"  required autofocus="autofocus" type="number"
                            th:field="*{assets.price}"
                            placeholder="">
                 </div>
@@ -69,7 +73,7 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Loại tiền tệ</label>
                 <div class="col-md-4">
-                    <select class="form-control" th:field="*{assets.cateMoney}">
+                    <select class="form-control" th:field="*{assets.cateMoney}" required>
                         <option value="1">VNĐ</option>
                         <option value="2">USD</option>
                     </select>
@@ -86,7 +90,7 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Loại tài sản</label>
                 <div class="col-md-4">
-                    <select class="form-control" name="categoryAssets" >
+                    <select class="form-control" name="categoryAssets" required>
                         <option th:each="li : ${model.categoryAssetsList}"
                                 th:value="${li.id}"
                                 th:text="${li.name}"/>
@@ -96,7 +100,7 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Nhóm tài sản</label>
                 <div class="col-md-4">
-                    <select class="form-control" name="groupAssets" >
+                    <select class="form-control" name="groupAssets" required>
                         <option th:each="li : ${model.groupAssetsList}"
                                 th:value="${li.id}"
                                 th:text="${li.groupName}"/>
@@ -106,7 +110,7 @@
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">Nhà cung cấp</label>
                 <div class="col-md-4">
-                    <select class="form-control" name="suppliers">
+                    <select class="form-control" name="suppliers" required>
                         <option th:each="li : ${model.suppliersList}"
                                 th:value="${li.id}"
                                 th:text="${li.name}"/>

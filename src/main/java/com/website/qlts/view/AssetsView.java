@@ -11,6 +11,7 @@ public class AssetsView {
     private List<CategoryAssets> categoryAssetsList;
     private List<Departments> departmentsList;
     private List<Suppliers> suppliersList;
+    private List<Staffs> staffsList;
 
     public AssetsView(Assets assets, List<GroupAssets> groupAssetsList, List<CategoryAssets> categoryAssetsList, List<Departments> departmentsList, List<Suppliers> suppliersList) {
         this.assets = assets;
@@ -69,5 +70,12 @@ public class AssetsView {
 
     public void setAssetsList(List<Assets> assetsList) {
         this.assetsList = assetsList;
+    }
+    public List<Staffs> getStaffsList() {
+        return staffsList;
+    }
+
+    public void setStaffsList(List<Staffs> staffsList) {
+        this.staffsList = staffsList;
     }
 }

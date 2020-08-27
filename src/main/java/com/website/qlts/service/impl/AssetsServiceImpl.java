@@ -1,6 +1,5 @@
 package com.website.qlts.service.impl;
 
-import com.website.qlts.config.CreateQRCodeConfig;
 import com.website.qlts.entity.Assets;
 import com.website.qlts.repository.AssetsRepository;
 import com.website.qlts.service.AssetsService;
@@ -64,6 +63,19 @@ public class AssetsServiceImpl implements AssetsService {
     @Override
     public List<Assets> getByDeparment(long id) {
         return assetsRepository.getByDepartmentsId(id);
+    }
+
+    @Override
+    public List<Assets> getByrangeprice(long from, long to) {
+        return assetsRepository.getAssetsbyRangeprice(from,to);
+    }
+
+    @Override
+    public List<Assets> getbyfilter(Integer status, Long departmentid, Long staffid, Long pricefrom, Long priceto, Date datefrom, Date dateto) {
+        if(datefrom!=null&&dateto!=null&&datefrom.compareTo(dateto)==0){
+            dateto=null;
+        }
+        return assetsRepository.getByMultilFilter(status,departmentid,staffid,pricefrom,priceto,datefrom,dateto);
     }
 
     @Override
